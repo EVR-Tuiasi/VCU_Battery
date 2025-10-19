@@ -1,0 +1,7 @@
+Charger - https://evshop.eu/en/no-longer-manufactured/223-8438-tc-charger-33kw-can-144v-50-198v-23a.html#/171-can_protocol_speed-can998_250_kbs
+Thermistors - 
+Diodes - 
+BMS info - https://wiki.analog.com/resources/eval/user-guides/ad-cellpackbm-sl
+BMS kit - https://ro.mouser.com/ProductDetail/Analog-Devices/EVAL-ADBMS6830BMSW?qs=dbcCsuKDzFUZ8cUvQUQoDA%3D%3D
+Andrei's bms repo - https://github.com/AndreiOp235/monitor
+IMD - https://www.bender.de/en/products/insulation-monitoring/isometer-iso175/
