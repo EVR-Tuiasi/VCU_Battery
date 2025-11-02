@@ -1,15 +1,26 @@
 # VCU_Battery
 
-This repo contains the code for the Battery VCU of our car.
-This ECU is placed inside the TSAC alongside
-  2 ADBMS2950B BMS modules
-  1 ADBMS6830B HV measuring and current shunt
-  1 SPI to iso-SPI transceiver
+Acest repo conține codul pentru VCU-ul (Vehicle Control Unit) de baterie al mașinii noastre.
 
-As of the 2024-2025 we have in working order
-  Cell voltage measurement
-  OW detection on the cells
-  HV packet measurement
-  Pack current data
-  AMS signal in case of failure
-  Communication with a CAN charger
+---
+
+## Hardware
+
+Acest ECU (Electronic Control Unit) este plasat în interiorul TSAC (Tractive System Accumulator Container) alături de:
+
+* 2 x module BMS ADBMS2950B
+* 1 x modul de măsurare HV și șunt de curent ADBMS6830B
+* 1 x transceiver SPI la iso-SPI
+
+---
+
+## Funcționalități (Stadiul 2024-2025)
+
+Începând cu sezonul 2024-2025, avem în stare de funcționare:
+
+* Măsurarea tensiunii celulelor
+* Detecție OW (Open Wire) pe celule
+* Măsurarea pachetului HV
+* Date despre curentul pachetului
+* Semnal AMS (Accumulator Management System) în caz de defecțiune
+* Comunicație cu un încărcător CAN
