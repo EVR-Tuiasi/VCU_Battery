@@ -295,7 +295,8 @@ void ADCV()
 void readBieMieSe()
 {
 	volatile int delayul=1000000;
-    for (int i = 0; i <= 3; i++) {
+    for(int i=0;i<=3;i++)
+    {
         delayul = MARELE_DELAY;
         while (delayul--) {
             // wait
@@ -314,53 +315,9 @@ void readBieMieSe()
         	icBaterie.cellVoltage[j*12+1+i*3]=15 * (buffPrimire[7+8*j] * 256 + buffPrimire[6+8*j]) + 150000;
         	icBaterie.cellVoltage[j*12+2+i*3]=15 * (buffPrimire[9+8*j] * 256 + buffPrimire[8+8*j]) + 150000;
 
-        	/*if(icBaterie.cellVoltage[j*12+0+i*3]>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+0+i*3]=0;
-        		//sendEroareUnitate(j);
-        	}
-        	if(icBaterie.cellVoltage[j*12+1+i*3]>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+1+i*3]=0;
-        		//sendEroareUnitate(j);
-        	}
-        	if(icBaterie.cellVoltage[j*12+2+i*3]>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+2+i*3]=0;
-        		//sendEroareUnitate(j);
-        	}*/
 		}
-
-
-        if (i == 0) {
-            icBaterie.packCurrent = ((buffPrimire[5+4+8*NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4+4+8*NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3+4+8*NUMARUL_DE_MONITOARE]))*5;
-            if(icBaterie.packCurrent>CURENT_STUPID || icBaterie.packCurrent < 0)
-            {
-            	icBaterie.packCurrent=0;
-            	//sendEroareUnitate(NUMARUL_DE_MONITOARE);
-            }
-
-
-        }
-        else if (i == 1) {
-        	icBaterie.packVoltage = (buffPrimire[2+4+8*NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1+4+8*NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4+8*NUMARUL_DE_MONITOARE];
-            if (icBaterie.packVoltage & 0x800000) {
-            	icBaterie.packVoltage |= 0xFF000000;  // Set upper 8 bits to 1
-            } else {
-            	icBaterie.packVoltage &= 0x00FFFFFF;  // Clear upper 8 bits
-            }
-
-            if(icBaterie.packVoltage>TENSIUNE_STUPID || icBaterie.packVoltage<10)
-            {
-            	icBaterie.packVoltage=0;
-            	icBaterie.packCurrent=0;
-            	//sendEroareUnitate(NUMARUL_DE_MONITOARE);
-            }
-
-
-        }
-
     }
+
 }
 
 void readBieMieSeOW()
@@ -519,11 +476,11 @@ void sendErori(void)
 	buffer[3]=CRC_calculate(4);
 	Uart_SyncSend(0, buffer, 4, 10000000);
 
-	buffer[0]=100;
+	/*buffer[0]=100;
 	buffer[1]=0x09;
 	buffer[2]=icBaterie.stateBMS[1];
 	buffer[3]=CRC_calculate(4);
-	Uart_SyncSend(0, buffer, 4, 10000000);
+	Uart_SyncSend(0, buffer, 4, 10000000);*/
 
 
 }
