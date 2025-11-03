@@ -188,11 +188,36 @@ int main(void)
         bmsInit();
     	readBieMieSe();
 
-    	populeazaCMD(0x04,0x11);
-    	transmisieCMD();     //ADAX
-    	populeazaCMD(0x00,0x1C);
+    	populeazaCMD(0x04,0x10);
+    	transmisieCMD();         //ADAX
+    	populeazaCMD(0x00,0x19); //RDAUXA
     	transmisieCMD();
     	buffPrimire[0]=0;
+
+
+    	v1=((buffPrimire[5]<<8)+buffPrimire[4])*150+1500000;
+    	v2=((buffPrimire[7]<<8)+buffPrimire[6])*150+1500000;
+
+    	buffer[0] = 10;
+    	buffer[1] = 0;
+    	buffer[2] = 0;
+    	buffer[3] = (v1>>24) % 256;
+    	buffer[4] = (v1 >> 16) % 256;
+    	buffer[5] = (v1 >> 8)  % 256;
+    	buffer[6] = v1 % 256;
+    	buffer[7] = CRC_calculate(8);
+    	Uart_SyncSend(0, buffer, 8, 10000000);
+    	//trimite set celula
+
+    	buffer[0] = 10;
+    	buffer[1] = 0;
+    	buffer[2] = 1;
+    	buffer[3] = (v2>>24) % 256;
+    	buffer[4] = (v2 >> 16) % 256;
+    	buffer[5] = (v2 >> 8)  % 256;
+    	buffer[6] = v2 % 256;
+    	buffer[7] = CRC_calculate(8);
+    	Uart_SyncSend(0, buffer, 8, 10000000);
 
 
 
