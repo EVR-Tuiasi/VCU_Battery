@@ -132,16 +132,6 @@ extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_6_VS_0;
 */
 extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_7_VS_0;
 
-/**
-* @brief          ADC Ipw Group 8 Config VS_0.
-*/
-extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_8_VS_0;
-
-/**
-* @brief          ADC Ipw Group 9 Config VS_0.
-*/
-extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_9_VS_0;
-
 
 #define ADC_STOP_SEC_CONFIG_DATA_UNSPECIFIED
 #include "Adc_MemMap.h"

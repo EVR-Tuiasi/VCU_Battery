@@ -96,7 +96,7 @@ extern "C" {
 /** 
 * @brief This constant used for other modules to check if CAN_43_FLEXCAN is present in the project.   
 */
-#define USE_CAN_43_FLEXCAN_MODULE              (STD_ON)
+#define USE_CAN_43_FLEXCAN_MODULE              (STD_OFF)
 
 /** 
 * @brief This constant used for other modules to check if CAN_43_CANEXCEL is present in the project.   
@@ -231,7 +231,7 @@ extern "C" {
 /** 
 * @brief This constant used for other modules to check if SPI is present in the project.   
 */
-#define USE_SPI_MODULE              (STD_ON)
+#define USE_SPI_MODULE              (STD_OFF)
 
 /** 
 * @brief This constant used for other modules to check if WDG is present in the project.   

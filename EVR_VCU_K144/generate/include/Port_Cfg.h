@@ -670,7 +670,7 @@ PORT_CONFIG_VS_0_PB \
 *
 * @implements
 */
-#define PORT_RESET_PIN_MODE_API               (STD_ON)
+#define PORT_RESET_PIN_MODE_API               (STD_OFF)
 
 /**
 * @brief Enable/Disable Port_SetPinMode function updating the output level of the pins configured at runtime as GPIO
@@ -704,38 +704,25 @@ PORT_CONFIG_VS_0_PB \
 #define PortConf_PortPin_uart_transmit 1
 #define PortConf_PortPin_PortPin_1 2
 #define PortConf_PortPin_PortPin_2 3
-#define PortConf_PortPin_SDA 4
-#define PortConf_PortPin_SCL 5
-#define PortConf_PortPin_BMS_SCK 6
-#define PortConf_PortPin_BMS_SIN 7
-#define PortConf_PortPin_BMS_SOUT 8
-#define PortConf_PortPin_BMS_CS 9
-#define PortConf_PortPin_ADC_term_0 10
-#define PortConf_PortPin_ADC_term_1 11
-#define PortConf_PortPin_ADC_term_2 12
-#define PortConf_PortPin_ADC_term_3 13
-#define PortConf_PortPin_ADC_term_4 14
-#define PortConf_PortPin_ADC_term_5 15
-#define PortConf_PortPin_ADC_term_6 16
-#define PortConf_PortPin_ADC_term_7 17
-#define PortConf_PortPin_thermGPIO_0 18
-#define PortConf_PortPin_thermGPIO_1 19
-#define PortConf_PortPin_thermGPIO_2 20
-#define PortConf_PortPin_thermGPIO_3 21
-#define PortConf_PortPin_thermGPIO_4 22
-#define PortConf_PortPin_thermGPIO_5 23
-#define PortConf_PortPin_thermGPIO_6 24
-#define PortConf_PortPin_thermGPIO_7 25
-#define PortConf_PortPin_thermGPIO_8 26
-#define PortConf_PortPin_thermGPIO_9 27
-#define PortConf_PortPin_thermGPIO_10 28
-#define PortConf_PortPin_thermGPIO_11 29
-#define PortConf_PortPin_thermGPIO_12 30
-#define PortConf_PortPin_thermGPIO_13 31
-#define PortConf_PortPin_thermGPIO_14 32
-#define PortConf_PortPin_thermGPIO_15 33
-#define PortConf_PortPin_PortPin_CAN 34
-#define PortConf_PortPin_PortPin_1C 35
+#define PortConf_PortPin_PTA6 4
+#define PortConf_PortPin_PTB3 5
+#define PortConf_PortPin_PTC14 9
+#define PortConf_PortPin_PTB17 6
+#define PortConf_PortPin_PTB14 7
+#define PortConf_PortPin_PTB15 8
+#define PortConf_PortPin_PTB16 10
+#define PortConf_PortPin_PTA15 11
+#define PortConf_PortPin_PTA16 12
+#define PortConf_PortPin_PTA7 13
+#define PortConf_PortPin_PTB13 14
+#define PortConf_PortPin_PTE16 15
+#define PortConf_PortPin_PTE15 16
+#define PortConf_PortPin_PTE14 17
+#define PortConf_PortPin_PTE13 18
+#define PortConf_PortPin_PTE1 19
+#define PortConf_PortPin_PTD7 20
+#define PortConf_PortPin_PTD6 21
+#define PortConf_PortPin_PTC15 22
 
 /**
 * @brief Number of available pad modes options
@@ -755,12 +742,12 @@ PORT_CONFIG_VS_0_PB \
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)36)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)23)
 
 /**
  * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (48U)
+#define PORT_MAX_UNUSED_PADS_U16    (61U)
 
 /**
 * @brief Port driver Pre-Compile configuration switch

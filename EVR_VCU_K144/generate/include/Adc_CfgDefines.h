@@ -272,7 +272,7 @@ extern "C"{
 /**
 * @brief           max number of groups configured across all configset.
 */
-#define ADC_MAX_GROUPS                      (10U)
+#define ADC_MAX_GROUPS                      (8U)
 
 /**
 * @brief           Invalid Hardware group ID to determine there is no ongoing hardware group
@@ -283,7 +283,7 @@ extern "C"{
 /**
 * @brief           Maximum number of channels across all hardware units.
 */
-#define ADC_MAX_CHANNEL_PER_HW_UNIT         (8U)
+#define ADC_MAX_CHANNEL_PER_HW_UNIT         (4U)
 
 #endif /* ADC_DMA_SUPPORTED */
 
@@ -301,7 +301,7 @@ extern "C"{
 /**
 * @brief          Development error detection enabled/disabled ((STD_ON)/(STD_OFF)).
 */
-#define ADC_DEV_ERROR_DETECT                      (STD_ON)
+#define ADC_DEV_ERROR_DETECT                      (STD_OFF)
 
 /**
 * @brief          Add/remove ((STD_ON)/(STD_OFF)) the service Adc_GetVersionInfo() from the code.
@@ -385,12 +385,10 @@ extern "C"{
 #define AdcChannel_1                       (0x1U)
 #define AdcChannel_2                       (0x2U)
 #define AdcChannel_3                       (0x3U)
-#define AdcChannel_4                       (0x4U)
-#define AdcChannel_5                       (0x5U)
-#define AdcChannel_6                       (0x6U)
-#define AdcChannel_7                       (0x7U)
-#define AdcChannel_8                       (0x1000U)
-#define AdcChannel_9                       (0x1001U)
+#define AdcChannel_4                       (0x1000U)
+#define AdcChannel_5                       (0x1001U)
+#define AdcChannel_6                       (0x1002U)
+#define AdcChannel_7                       (0x1003U)
 
 /**
 * @brief          Definitions used for extracting the ADC Logical Unit Id and logical id of channels in each unit from equivalent channel symbolic name
@@ -413,8 +411,6 @@ extern "C"{
 #define AdcGroup_5                                (5U)
 #define AdcGroup_6                                (6U)
 #define AdcGroup_7                                (7U)
-#define AdcGroup_8                                (8U)
-#define AdcGroup_9                                (9U)
 
 /**
 * @brief           Symbolic names of groups - ecuc 2108 compliant.
@@ -428,8 +424,6 @@ extern "C"{
 #define AdcConf_AdcGroup_AdcGroup_5               (5U)
 #define AdcConf_AdcGroup_AdcGroup_6               (6U)
 #define AdcConf_AdcGroup_AdcGroup_7               (7U)
-#define AdcConf_AdcGroup_AdcGroup_8               (8U)
-#define AdcConf_AdcGroup_AdcGroup_9               (9U)
 
 /**
 * @brief          ADC Global Validation.

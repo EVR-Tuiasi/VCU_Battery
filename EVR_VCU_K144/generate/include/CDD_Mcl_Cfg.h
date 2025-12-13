@@ -185,7 +185,7 @@ extern "C"{
 /-----------------------------------------------*/
 #define MCL_DEM_IS_AVAILABLE                       STD_OFF
 
-#define MCL_DET_IS_AVAILABLE                       STD_ON
+#define MCL_DET_IS_AVAILABLE                       STD_OFF
 /*-----------------------------------------------/
 /  DMA                                           /
 /-----------------------------------------------*/

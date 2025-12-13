@@ -9,27 +9,18 @@ extern "C" {
 * 2) needed interfaces from external units
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
-
+#include "Adc.h"
+#include "Mcl.h"
 #include "CDD_I2c.h"
 #include "Dio.h"
 #include "Icu.h"
 #include "Mcu.h"
-#include "Mcl.h"
 #include "Platform.h"
 #include "Port.h"
-#include "Spi.h"
-#include "bms.h"
-#include "uart_datasend.h"
-#include "uart_error_handling.h"
 #include "CDD_Uart.h"
 #include "7-segment-display.h"
-#include "bms_cosa.h"
 #include "thermistor_mux.h"
-#include "Can_GeneralTypes.h"
-#include "Can_43_FLEXCAN.h"
-#include "CanIf.h"
-#include "SchM_Can_43_FLEXCAN.h"
-#include "invertor.h"
+
 
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
@@ -51,60 +42,28 @@ extern "C" {
 ==================================================================================================*/
 
 
-
 /*==================================================================================================
 *                                      GLOBAL CONSTANTS
 ==================================================================================================*/
 
 
-
 /*==================================================================================================
 *                                      GLOBAL VARIABLES
 ==================================================================================================*/
+
+uint8 DigitNumar1[2] = {0x01, 0x0f};
+uint8 DigitNumar2[2] = {0x02, 0x0f};
+uint8 DigitNumar3[2] = {0x03, 0x0f};
+uint8 DigitNumar4[2] = {0x04, 0x0f};// numarul care va fi afisat pe digit
+uint8 test_data[2] = {0x0f, 1}; // comanda test optic
+
+I2c_RequestType test = {0, false, false, false, false, 2, I2C_SEND_DATA, test_data};
+I2c_RequestType numarpedigit4 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar4};
+I2c_RequestType numarpedigit3 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar3};
+I2c_RequestType numarpedigit2 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar2};
+I2c_RequestType numarpedigit1 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar1};
+
 volatile uint8 ok = 0;
-
-
-
-volatile int delei;
-int curent1,curent2;
-volatile int i1,i2;
-volatile int v1,v2;
-volatile int32_t value24;
-bool flag=true;
-int bomba=0;
-
-uint16 dpec;
-
-extern struct biemese icBaterie;
-
-int numarulDeDispozitive = NUMARUL_DE_MONITOARE + NUMARUL_DE_SUNTURI;
-
-uint8 buffTrimitere[64] = {0x00, 0x2C, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-uint8 buffPrimire[64] = {0};
-
-uint8 buffer[10];
-int j=0;
-
-uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
-uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
-
-extern Thermistors Thermistors_Data;
-
-void CAN0_Wake_Up_IRQHandler(void) {
-    // Handle CAN0 wakeup interrupt
-	buffer[0]=1;
-}
-
-void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
-{
-	buffer[0]=Controller+ControllerMode;
-}
-void CanIf_ControllerBusOff(uint8_t Controller)
-{
-	buffer[0]=Controller;
-}
-
-
 
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
@@ -114,6 +73,12 @@ void CanIf_ControllerBusOff(uint8_t Controller)
 /*==================================================================================================
 *                                       LOCAL FUNCTIONS
 ==================================================================================================*/
+
+
+/*==================================================================================================
+*                                       GLOBAL FUNCTIONS
+==================================================================================================*/
+
 void IntrerupereBTN(void){
 	ok = 1;
 	Dio_WriteChannel(96, 1);
@@ -124,27 +89,25 @@ void IntrerupereBTN(void){
 void I2c_Callback(uint8 Event, uint8 Channel){
 	Dio_WriteChannel(96, 0);
 	Dio_WriteChannel(111, 1);
-	(void) Event;
-	(void) Channel;
+
+	(void)Event;
+	(void)Channel;
 }
 
 void I2c_ErrorCallback(uint8 Event, uint8 Channel){
 	Dio_WriteChannel(111, 0);
 	Dio_WriteChannel(96, 1);
 	ok = 1;
-	(void) Event;
-	(void) Channel;
+
+	(void)Event;
+	(void)Channel;
 }
 
-
-/*==================================================================================================
-*                                       GLOBAL FUNCTIONS
-==================================================================================================*/
-
+#define PIN_BUF_SIZE 3
+#define ADC_COUNT 2
 
 int main(void)
 {
-
 
     /* Initialize the Mcu driver */
 #if (MCU_PRECOMPILE_SUPPORT == STD_ON)
@@ -168,66 +131,75 @@ int main(void)
     /* Initialize all pins using the Port driver */
     Mcl_Init(NULL_PTR);
     Port_Init(NULL_PTR);
-
     Platform_Init(NULL_PTR);
-    Uart_Init(NULL_PTR);
-    Spi_Init(NULL_PTR);
     Adc_Init(NULL_PTR);
-    USBInit(0);
+    Uart_Init(NULL_PTR);
+    I2c_Init(NULL_PTR);
+    Icu_Init(NULL_PTR);
+    Icu_EnableNotification(0);
+    //USBInit(0);
+    //USBInit(0);
+    //SevenSegmentInit();
+    //SevSegGrTest(0);
+    //ErrorsSet(BMS_VOLTAGE, BMS_NO_RESPONSE);
+    //ErrorsSet(SEVEN_SEGMENT, SEVEN_SEG_NO_RESPONSE);
+    //ErrorsSet(SEVEN_SEGMENT, SEVEN_SEG_NUMBER_TOO_LARGE);
+    //ErrorsSet(BRAKE_PEDAL, ACCELERATOR_PEDALS_DIFFERENT_OUTPUT);
+    //ErrorsSet(BMS_CURRENT, BMS_NO_RESPONSE);
 
-    volatile int pauza=100000;  //3*8000000; //3sec
-    while(pauza--);
+   // uint16 rezultat_buffer[PIN_BUF_SIZE][ADC_COUNT];
+	//uint16 grounds[PIN_BUF_SIZE * 2] = {6, 7, 8, 67, 2, 3};
+//
+	/*for(int i = 0; i < PIN_BUF_SIZE; i++)
+		Port_SetPinDirection(grounds[i], PORT_PIN_HIGH_Z);
 
-    bmsInit();
-    RDCFGA();
-    RDCFGB();
+	for(int i = 0; i < ADC_COUNT; i++){
+		for(int k = 0; k < PIN_BUF_SIZE; k++){
+			Port_SetPinDirection(grounds[k], PORT_PIN_OUT);
+			Dio_WriteChannel(grounds[k + PIN_BUF_SIZE], STD_LOW);
 
+			Adc_SetupResultBuffer(i, &rezultat_buffer[k][i]);
+			Adc_StartGroupConversion(i);
 
-    while (1) {
-        //if(!CFGAok()) //check RAW
-        bmsInit();
-    	readBieMieSe();
+			while(Adc_GetGroupStatus(i) != ADC_STREAM_COMPLETED);
 
-    	populeazaCMD(0x04,0x10);
-    	transmisieCMD();         //ADAX
-    	populeazaCMD(0x00,0x19); //RDAUXA
-    	transmisieCMD();
-    	buffPrimire[0]=0;
+			Adc_ReadGroup(i, &rezultat_buffer[k][i]);
 
+			rezultat_buffer[k][i] = (rezultat_buffer[k][i] * 500) / 4095;
+			Port_SetPinDirection(grounds[k], PORT_PIN_HIGH_Z);
+		}
+	}
 
-    	v1=((buffPrimire[5]<<8)+buffPrimire[4])*150+1500000;
-    	v2=((buffPrimire[7]<<8)+buffPrimire[6])*150+1500000;
+	while(1){
+		;
+	}
+*/
 
-    	buffer[0] = 10;
-    	buffer[1] = 0;
-    	buffer[2] = 0;
-    	buffer[3] = (v1>>24) % 256;
-    	buffer[4] = (v1 >> 16) % 256;
-    	buffer[5] = (v1 >> 8)  % 256;
-    	buffer[6] = v1 % 256;
-    	buffer[7] = CRC_calculate(8);
-    	Uart_SyncSend(0, buffer, 8, 10000000);
-    	//trimite set celula
+    TempSensorInit();
+    uint16 cnt;
+    volatile int babuinus;
+    while(1)
+    {
 
-    	buffer[0] = 10;
-    	buffer[1] = 0;
-    	buffer[2] = 1;
-    	buffer[3] = (v2>>24) % 256;
-    	buffer[4] = (v2 >> 16) % 256;
-    	buffer[5] = (v2 >> 8)  % 256;
-    	buffer[6] = v2 % 256;
-    	buffer[7] = CRC_calculate(8);
-    	Uart_SyncSend(0, buffer, 8, 10000000);
+    	for(cnt = 0; cnt < THERMISTOR_BANKS; cnt++)
+    	{
+    	    	babuinus = GetTemp(cnt);
+    	    	babuinus++;
 
+    	    	//USBSendCellTemperature((uint16)i);
+    	}    	corectieTemperatura();
+    	cnt = 0;
 
 
-    	sendAllUart(); //send usefull ingo
-    	//daca eroare register basicaly reset
-    	//daca eroare CRC forget
-    	//daca eroare valoare stupida then ZERO
     }
-   }
 
+//    while(1){
+//    	volatile int i = 100000;
+//    	while(i)
+//    		i--;
+//    	USBSendErrors();
+//    }
+}
 // test
 
 #ifdef __cplusplus

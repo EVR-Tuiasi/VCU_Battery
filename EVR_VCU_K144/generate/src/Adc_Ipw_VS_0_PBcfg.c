@@ -220,46 +220,6 @@ static const Adc_ChannelLimitCheckingType ChannelLimitCheckingConfig_0_VS_0[] =
         4095U, /* ChannelHighLimit */
         /**< @brief low limit value */
         0U /* ChannelLowLimit */
-    },
-    {
-        /**< @brief range for limit check */
-        (boolean)FALSE, /* ChannelLimitCheckEnabled */
-        /**< @brief range for limit check */
-        ADC_RANGE_ALWAYS, /* ChannelRange */
-        /**< @brief high limit value */
-        4095U, /* ChannelHighLimit */
-        /**< @brief low limit value */
-        0U /* ChannelLowLimit */
-    },
-    {
-        /**< @brief range for limit check */
-        (boolean)FALSE, /* ChannelLimitCheckEnabled */
-        /**< @brief range for limit check */
-        ADC_RANGE_ALWAYS, /* ChannelRange */
-        /**< @brief high limit value */
-        4095U, /* ChannelHighLimit */
-        /**< @brief low limit value */
-        0U /* ChannelLowLimit */
-    },
-    {
-        /**< @brief range for limit check */
-        (boolean)FALSE, /* ChannelLimitCheckEnabled */
-        /**< @brief range for limit check */
-        ADC_RANGE_ALWAYS, /* ChannelRange */
-        /**< @brief high limit value */
-        4095U, /* ChannelHighLimit */
-        /**< @brief low limit value */
-        0U /* ChannelLowLimit */
-    },
-    {
-        /**< @brief range for limit check */
-        (boolean)FALSE, /* ChannelLimitCheckEnabled */
-        /**< @brief range for limit check */
-        ADC_RANGE_ALWAYS, /* ChannelRange */
-        /**< @brief high limit value */
-        4095U, /* ChannelHighLimit */
-        /**< @brief low limit value */
-        0U /* ChannelLowLimit */
     }
 };
 #endif /* (ADC_ENABLE_LIMIT_CHECK == STD_ON) */
@@ -270,6 +230,26 @@ static const Adc_ChannelLimitCheckingType ChannelLimitCheckingConfig_0_VS_0[] =
 */
 static const Adc_ChannelLimitCheckingType ChannelLimitCheckingConfig_1_VS_0[] =
 {
+    {
+        /**< @brief range for limit check */
+        (boolean)FALSE, /* ChannelLimitCheckEnabled */
+        /**< @brief range for limit check */
+        ADC_RANGE_ALWAYS, /* ChannelRange */
+        /**< @brief high limit value */
+        4095U, /* ChannelHighLimit */
+        /**< @brief low limit value */
+        0U /* ChannelLowLimit */
+    },
+    {
+        /**< @brief range for limit check */
+        (boolean)FALSE, /* ChannelLimitCheckEnabled */
+        /**< @brief range for limit check */
+        ADC_RANGE_ALWAYS, /* ChannelRange */
+        /**< @brief high limit value */
+        4095U, /* ChannelHighLimit */
+        /**< @brief low limit value */
+        0U /* ChannelLowLimit */
+    },
     {
         /**< @brief range for limit check */
         (boolean)FALSE, /* ChannelLimitCheckEnabled */
@@ -333,9 +313,9 @@ const Adc_Ipw_Config AdcIpwCfg_VS_0 =
     {
         { ADC_INTERRUPT, ADC_INTERRUPT }, /* AdcDmaInterruptSoftware */
         /**< @brief number of groups per hw unit > */
-        { 8U, 2U }, /* AdcGroups */
+        { 4U, 4U }, /* AdcGroups */
         /**< @brief number of channels per hw unit > */
-        { 8U, 2U }, /* AdcChannels */
+        { 4U, 4U }, /* AdcChannels */
         { ADC_IPW_INVALID_DMA_CHANNEL_ID, ADC_IPW_INVALID_DMA_CHANNEL_ID }, /* AdcDmaChannelLogicId */
 #if (STD_ON == ADC_OPTIMIZE_DMA_STREAMING_GROUPS) || (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON)
         { ADC_IPW_INVALID_DMA_CHANNEL_ID, ADC_IPW_INVALID_DMA_CHANNEL_ID }, /* AdcCountingDmaChanLogicId */
@@ -531,58 +511,6 @@ const Adc_Ipw_GroupConfig AdcIpwGroupConfig_6_VS_0 =
 * @brief          ADC Ipw Group 7 Config VS_0.
 */
 const Adc_Ipw_GroupConfig AdcIpwGroupConfig_7_VS_0 =
-{
-#if (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF)
-    /**< @brief Main Average enable status of group */
-    STD_OFF, /* GroupAvgEnable */
-    /**< @brief Main Average selection of group */
-    ADC_IP_AVG_4_CONV, /* GroupAvgSelect */
-    1U, /* ConvTime */
-#if (ADC_DUAL_CLOCK_MODE == STD_ON)
-    /**< @brief Alternate Average enable status of group */
-    STD_OFF, /* GroupAvgEnableAlternate */
-    /**< @brief Alternate Average selection of group */
-    ADC_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
-    ADC_IP_DEFAULT_SAMPLE_TIME, /* AlternateConvTime */
-#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
-#endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
-    0U, /* PdbPeriod */
-    0U, /* PdbDelay */
-    (boolean)TRUE, /* AdcGroupEnableBackToBack */
-    (boolean)FALSE, /* AdcGroupEnableChannelDelays */
-    NULL_PTR /* DelayPtr */
-};
-
-/**
-* @brief          ADC Ipw Group 8 Config VS_0.
-*/
-const Adc_Ipw_GroupConfig AdcIpwGroupConfig_8_VS_0 =
-{
-#if (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF)
-    /**< @brief Main Average enable status of group */
-    STD_OFF, /* GroupAvgEnable */
-    /**< @brief Main Average selection of group */
-    ADC_IP_AVG_4_CONV, /* GroupAvgSelect */
-    1U, /* ConvTime */
-#if (ADC_DUAL_CLOCK_MODE == STD_ON)
-    /**< @brief Alternate Average enable status of group */
-    STD_OFF, /* GroupAvgEnableAlternate */
-    /**< @brief Alternate Average selection of group */
-    ADC_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
-    ADC_IP_DEFAULT_SAMPLE_TIME, /* AlternateConvTime */
-#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
-#endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
-    0U, /* PdbPeriod */
-    0U, /* PdbDelay */
-    (boolean)TRUE, /* AdcGroupEnableBackToBack */
-    (boolean)FALSE, /* AdcGroupEnableChannelDelays */
-    NULL_PTR /* DelayPtr */
-};
-
-/**
-* @brief          ADC Ipw Group 9 Config VS_0.
-*/
-const Adc_Ipw_GroupConfig AdcIpwGroupConfig_9_VS_0 =
 {
 #if (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF)
     /**< @brief Main Average enable status of group */

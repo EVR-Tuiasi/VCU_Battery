@@ -93,18 +93,18 @@ extern "C"{
 /**
 * @brief          ADC Ip List of Channels Configuration for Logical ID 0 corresponding to the ADC0 configuration variant VS_0.
 */
-static const Adc_Ip_ChanConfigType AdcIpChansConfig_0_VS_0[8U] =
+static const Adc_Ip_ChanConfigType AdcIpChansConfig_0_VS_0[4U] =
 {
     {
         0U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT0, /* Channel */
+        ADC_IP_INPUTCHAN_EXT4, /* Channel */
     #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
         (boolean)FALSE /* InterruptEnable */
     #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
     },
     {
         1U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT1, /* Channel */
+        ADC_IP_INPUTCHAN_EXT5, /* Channel */
     #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
         (boolean)FALSE /* InterruptEnable */
     #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
@@ -118,35 +118,7 @@ static const Adc_Ip_ChanConfigType AdcIpChansConfig_0_VS_0[8U] =
     },
     {
         3U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT3, /* Channel */
-    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
-        (boolean)FALSE /* InterruptEnable */
-    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
-    },
-    {
-        4U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT12, /* Channel */
-    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
-        (boolean)FALSE /* InterruptEnable */
-    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
-    },
-    {
-        5U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT13, /* Channel */
-    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
-        (boolean)FALSE /* InterruptEnable */
-    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
-    },
-    {
-        6U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT14, /* Channel */
-    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
-        (boolean)FALSE /* InterruptEnable */
-    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
-    },
-    {
-        7U, /* ChnIdx */
-        ADC_IP_INPUTCHAN_EXT15, /* Channel */
+        ADC_IP_INPUTCHAN_EXT8, /* Channel */
     #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
         (boolean)FALSE /* InterruptEnable */
     #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
@@ -156,7 +128,7 @@ static const Adc_Ip_ChanConfigType AdcIpChansConfig_0_VS_0[8U] =
 /**
 * @brief          ADC Ip List of Channels Configuration for Logical ID 1 corresponding to the ADC1 configuration variant VS_0.
 */
-static const Adc_Ip_ChanConfigType AdcIpChansConfig_1_VS_0[2U] =
+static const Adc_Ip_ChanConfigType AdcIpChansConfig_1_VS_0[4U] =
 {
     {
         0U, /* ChnIdx */
@@ -168,6 +140,20 @@ static const Adc_Ip_ChanConfigType AdcIpChansConfig_1_VS_0[2U] =
     {
         1U, /* ChnIdx */
         ADC_IP_INPUTCHAN_EXT11, /* Channel */
+    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
+        (boolean)FALSE /* InterruptEnable */
+    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
+    },
+    {
+        2U, /* ChnIdx */
+        ADC_IP_INPUTCHAN_EXT6, /* Channel */
+    #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
+        (boolean)FALSE /* InterruptEnable */
+    #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */
+    },
+    {
+        3U, /* ChnIdx */
+        ADC_IP_INPUTCHAN_EXT7, /* Channel */
     #if (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON)
         (boolean)FALSE /* InterruptEnable */
     #endif /* (ADC_IP_AIEN_INTERRUPT_ENABLE == STD_ON) */

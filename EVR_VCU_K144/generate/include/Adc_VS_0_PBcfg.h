@@ -101,14 +101,12 @@ extern "C"{
 #define ADC_CFGSET_VS_0_GROUP_5_CHANNELS      (1U)
 #define ADC_CFGSET_VS_0_GROUP_6_CHANNELS      (1U)
 #define ADC_CFGSET_VS_0_GROUP_7_CHANNELS      (1U)
-#define ADC_CFGSET_VS_0_GROUP_8_CHANNELS      (1U)
-#define ADC_CFGSET_VS_0_GROUP_9_CHANNELS      (1U)
 
 /**
 * @brief          Total number of groups in Config.
 *
 */
-#define ADC_GROUPS_VS_0                       (10U)
+#define ADC_GROUPS_VS_0                       (8U)
 /*==================================================================================================
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/

@@ -11,17 +11,18 @@ extern "C"{
 
 #define THERMISTOR_BANKS 16
 #define THERMISTORS_PER_BANK 8
-#define TEMP_MAX 60
 
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
 
 typedef struct Thermistors{
-	uint32 ThermistorValues[THERMISTOR_BANKS][THERMISTORS_PER_BANK]; // Warning la functile Adc pentru setup si read daca folosesc uint32
+	uint16 temperaturi[THERMISTOR_BANKS][THERMISTORS_PER_BANK]; // Warning la functile Adc pentru setup si read daca folosesc uint32
+	uint16 ThermistorValues[THERMISTOR_BANKS][THERMISTORS_PER_BANK]; // Warning la functile Adc pentru setup si read daca folosesc uint32
 	Dio_ChannelType BankSelectPins[THERMISTOR_BANKS];
-	uint16 BankSelectPinsID[THERMISTOR_BANKS];
+	uint32 BankSelectPinsID[THERMISTOR_BANKS];
 	Adc_GroupType BankReadChannels[THERMISTORS_PER_BANK];
+	float temperaturiF[THERMISTOR_BANKS][THERMISTORS_PER_BANK];
 }Thermistors;
 
 /*==================================================================================================
@@ -66,10 +67,7 @@ typedef struct Thermistors{
 void TempSensorInit(void);
 sint32 GetTemp(uint16 TempSensorIndex);
 void TempSensorTest(void);
-
 void corectieTemperatura(void);
-void checkTemperaturi(void);
-void getAllTemps(void);
 
 #ifdef __cplusplus
 }

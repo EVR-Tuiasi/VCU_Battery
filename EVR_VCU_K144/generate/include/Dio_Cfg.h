@@ -96,7 +96,7 @@ extern "C" {
 *
 * @implements     DIO_DEV_ERROR_DETECT_define
 */
-#define DIO_DEV_ERROR_DETECT           (STD_ON)
+#define DIO_DEV_ERROR_DETECT           (STD_OFF)
 
 /**
 * @brief          Function @p Dio_GetVersionInfo() enable switch.
@@ -237,6 +237,33 @@ extern "C" {
 *
 */
 #define DioConf_DioChannel_DioChannel_0  ((uint16)0x0060U)
+/* ---------- DioPort_1 ---------- */
+
+/**
+* @brief          Symbolic name for the port DioPort_1.
+*/
+#define DioConf_DioPort_DioPort_1  ((uint8)0x00U)
+/**
+* @brief          Symbolic name for the channel DioChannel_1.
+*
+*/
+#define DioConf_DioChannel_DioChannel_1  ((uint16)0x0001U)
+/* ---------- DioPort_2 ---------- */
+
+/**
+* @brief          Symbolic name for the port DioPort_2.
+*/
+#define DioConf_DioPort_DioPort_2  ((uint8)0x02U)
+/**
+* @brief          Symbolic name for the channel DioChannel_3.
+*
+*/
+#define DioConf_DioChannel_DioChannel_3  ((uint16)0x0043U)
+/**
+* @brief          Symbolic name for the channel DioChannel_4.
+*
+*/
+#define DioConf_DioChannel_DioChannel_4  ((uint16)0x0044U)
 
 /*=================================================================================================
 *                                             ENUMS
