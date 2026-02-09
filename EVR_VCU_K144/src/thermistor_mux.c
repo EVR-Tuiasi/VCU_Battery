@@ -38,10 +38,23 @@ Thermistors Thermistors_Data;
 
 // Nume temporare pt buffere
 
-uint16 bankselpins[THERMISTOR_BANKS] = {46, 47, 48, 15, 16, 7, 45,  129, 103, 102, 79, 49, 144, 143, 142, 141};
-uint32	bankselpinsid[THERMISTOR_BANKS] = {7, 8, 10 ,11 ,12 ,13 , 14 ,  19, 20, 21, 22, 6, 16, 16, 17, 18};
-uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0,1,2,3,4,5,6,7};
+// Index:        0    1    2    3    4    5    6    7
+//               8    9   10   11   12   13   14   15
 
+			uint16 bankselpins[16] = {   //PCR
+				129, 103, 142, 141,  47,  48,  49,  46,
+				144, 143, 102,  79,  07,  45,  15,  16
+			};
+
+			uint32 bankselpinsid[16] = { // ID
+			     19,  20,  17,  18,   8,  10,   6,   7,
+			     15,  16,  21,  22,  13,  14,  11,  12
+			};
+
+
+
+uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0,1,2,3,4,5,6,7};
+volatile int trap=0;
 
 /*==================================================================================================
 *                                      GLOBAL CONSTANTS
@@ -70,6 +83,11 @@ static void ActivateThermistorBank(uint16 ThermistorBankIndex){
 }
 
 static void DeactivateThermistorBank(uint16 ThermistorBankIndex){
+	/*if(ThermistorBankIndex == 10) //pescuieste bancul buba
+	{
+		trap++;
+        __asm volatile ("nop");
+	}*/
 	Port_SetPinDirection(Thermistors_Data.BankSelectPinsID[ThermistorBankIndex], PORT_PIN_HIGH_Z);
 }
 

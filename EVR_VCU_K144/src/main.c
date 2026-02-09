@@ -138,42 +138,8 @@ int main(void)
     Icu_Init(NULL_PTR);
     Icu_EnableNotification(0);
     //USBInit(0);
-    //USBInit(0);
-    //SevenSegmentInit();
-    //SevSegGrTest(0);
-    //ErrorsSet(BMS_VOLTAGE, BMS_NO_RESPONSE);
-    //ErrorsSet(SEVEN_SEGMENT, SEVEN_SEG_NO_RESPONSE);
-    //ErrorsSet(SEVEN_SEGMENT, SEVEN_SEG_NUMBER_TOO_LARGE);
-    //ErrorsSet(BRAKE_PEDAL, ACCELERATOR_PEDALS_DIFFERENT_OUTPUT);
-    //ErrorsSet(BMS_CURRENT, BMS_NO_RESPONSE);
 
-   // uint16 rezultat_buffer[PIN_BUF_SIZE][ADC_COUNT];
-	//uint16 grounds[PIN_BUF_SIZE * 2] = {6, 7, 8, 67, 2, 3};
-//
-	/*for(int i = 0; i < PIN_BUF_SIZE; i++)
-		Port_SetPinDirection(grounds[i], PORT_PIN_HIGH_Z);
 
-	for(int i = 0; i < ADC_COUNT; i++){
-		for(int k = 0; k < PIN_BUF_SIZE; k++){
-			Port_SetPinDirection(grounds[k], PORT_PIN_OUT);
-			Dio_WriteChannel(grounds[k + PIN_BUF_SIZE], STD_LOW);
-
-			Adc_SetupResultBuffer(i, &rezultat_buffer[k][i]);
-			Adc_StartGroupConversion(i);
-
-			while(Adc_GetGroupStatus(i) != ADC_STREAM_COMPLETED);
-
-			Adc_ReadGroup(i, &rezultat_buffer[k][i]);
-
-			rezultat_buffer[k][i] = (rezultat_buffer[k][i] * 500) / 4095;
-			Port_SetPinDirection(grounds[k], PORT_PIN_HIGH_Z);
-		}
-	}
-
-	while(1){
-		;
-	}
-*/
 
     TempSensorInit();
     uint16 cnt;
@@ -186,21 +152,14 @@ int main(void)
     	    	babuinus = GetTemp(cnt);
     	    	babuinus++;
 
-    	    	//USBSendCellTemperature((uint16)i);
-    	}    	corectieTemperatura();
-    	cnt = 0;
+    	}    	//corectieTemperatura();
 
+        __asm volatile ("nop");
 
     }
 
-//    while(1){
-//    	volatile int i = 100000;
-//    	while(i)
-//    		i--;
-//    	USBSendErrors();
-//    }
+
 }
-// test
 
 #ifdef __cplusplus
 }
