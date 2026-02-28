@@ -152,7 +152,8 @@ int main(void)
     	    	babuinus = GetTemp(cnt);
     	    	babuinus++;
 
-    	}    	//corectieTemperatura();
+    	}
+    	corectieTemperatura();
 
         __asm volatile ("nop");
 
