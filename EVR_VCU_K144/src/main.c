@@ -65,8 +65,8 @@ I2c_RequestType numarpedigit3 = {0, false, false, false, false, 2, I2C_SEND_DATA
 I2c_RequestType numarpedigit2 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar2};
 I2c_RequestType numarpedigit1 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar1};
 
-uint8 buffTrimitere[64];
-uint8 buffPrimire[64];
+extern uint8 buffTrimitere[64];
+extern uint8 buffPrimire[64];
 
 volatile uint8 ok = 0;
 

@@ -31,8 +31,8 @@ int ceva;
 #include "thermistor_mux.h"
 ///aici normal
 
-extern uint8 buffTrimitere[64];
-extern uint8 buffPrimire[64];
+uint8 buffTrimitere[64];
+uint8 buffPrimire[64];
 extern volatile int delei;
 struct biemese icBaterie;
 extern uint8 buffer[10];

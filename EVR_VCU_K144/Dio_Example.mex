@@ -3120,12 +3120,12 @@
                               <struct name="0">
                                  <setting name="Name" value="SpiChannel_0"/>
                                  <setting name="SpiChannelId" value="0"/>
-                                 <setting name="SpiChannelType" value="IB"/>
+                                 <setting name="SpiChannelType" value="EB"/>
                                  <setting name="SpiDataWidth" value="8"/>
                                  <array name="SpiDefaultData">
                                     <setting name="0" value="1"/>
                                  </array>
-                                 <setting name="SpiEbMaxLength" value="1"/>
+                                 <setting name="SpiEbMaxLength" value="100"/>
                                  <setting name="SpiIbNBuffers" value="4"/>
                                  <setting name="SpiTransferStart" value="MSB"/>
                                  <array name="SpiChannelHalfDuplexDirection"/>
