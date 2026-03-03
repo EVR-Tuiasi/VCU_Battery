@@ -15,11 +15,13 @@ extern "C" {
 #include "Dio.h"
 #include "Icu.h"
 #include "Mcu.h"
+#include "Spi.h"
 #include "Platform.h"
 #include "Port.h"
 #include "CDD_Uart.h"
 #include "7-segment-display.h"
 #include "thermistor_mux.h"
+#include "iso_spi_primitives.h"
 
 
 /*==================================================================================================
@@ -63,7 +65,15 @@ I2c_RequestType numarpedigit3 = {0, false, false, false, false, 2, I2C_SEND_DATA
 I2c_RequestType numarpedigit2 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar2};
 I2c_RequestType numarpedigit1 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar1};
 
+uint8 buffTrimitere[64];
+uint8 buffPrimire[64];
+
 volatile uint8 ok = 0;
+
+volatile int delei;
+uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
+uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
+
 
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
@@ -136,6 +146,7 @@ int main(void)
     Uart_Init(NULL_PTR);
     I2c_Init(NULL_PTR);
     Icu_Init(NULL_PTR);
+    Spi_Init(NULL_PTR);
     Icu_EnableNotification(0);
     //USBInit(0);
 
@@ -155,6 +166,19 @@ int main(void)
     	}
     	corectieTemperatura();
 
+    	int timp =10000000;
+    	while(timp--);
+    	buffTrimitere[0]=0;
+    	buffTrimitere[1]=0x27;
+    	transmisie(); //SRST
+
+    	timp =10000000;
+    	    while(timp--);
+
+
+    	buffTrimitere[0]=0;
+    	buffTrimitere[1]=0x2C;
+    	transmisie(); //read RDSID
         __asm volatile ("nop");
 
     }

@@ -670,7 +670,7 @@ PORT_CONFIG_VS_0_PB \
 *
 * @implements
 */
-#define PORT_RESET_PIN_MODE_API               (STD_OFF)
+#define PORT_RESET_PIN_MODE_API               (STD_ON)
 
 /**
 * @brief Enable/Disable Port_SetPinMode function updating the output level of the pins configured at runtime as GPIO
