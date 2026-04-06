@@ -22,6 +22,8 @@ extern "C" {
 #include "7-segment-display.h"
 #include "thermistor_mux.h"
 #include "iso_spi_primitives.h"
+#include "lut.h"
+#include "usb_monitoring.h"
 
 
 /*==================================================================================================
@@ -73,6 +75,8 @@ volatile uint8 ok = 0;
 volatile int delei;
 uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
 uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
+
+extern Thermistors Thermistors_Data;
 
 
 /*==================================================================================================
@@ -148,39 +152,50 @@ int main(void)
     Icu_Init(NULL_PTR);
     Spi_Init(NULL_PTR);
     Icu_EnableNotification(0);
-    //USBInit(0);
+    USBInit(0);
 
 
 
     TempSensorInit();
-    uint16 cnt;
-    volatile int babuinus;
+    volatile uint16 cnt,media,min,max;
+
     while(1)
     {
 
     	for(cnt = 0; cnt < THERMISTOR_BANKS; cnt++)
     	{
-    	    	babuinus = GetTemp(cnt);
-    	    	babuinus++;
-
+    	    	GetTemp(cnt);
     	}
+
     	corectieTemperatura();
+    	media=temp_lut[getMedie()];
+    	min=temp_lut[getMin()];
+    	max=temp_lut[getMax()];
 
-    	int timp =10000000;
-    	while(timp--);
-    	buffTrimitere[0]=0;
-    	buffTrimitere[1]=0x27;
-    	transmisie(); //SRST
+    	for (int i = 0; i < THERMISTOR_BANKS; i++)
+    	        {
+    	            for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+    	            {
+    	            	Thermistors_Data.temperaturi[i][j]=temp_lut[Thermistors_Data.ThermistorValues[i][j]];
 
-    	timp =10000000;
+    	            }
+    	        }
+
+    	int timp =100000;
     	    while(timp--);
-
 
     	buffTrimitere[0]=0;
     	buffTrimitere[1]=0x2C;
     	transmisie(); //read RDSID
-        __asm volatile ("nop");
 
+    	bmsInit();
+    	readBieMieSe();
+    	sendAllUart();
+
+
+
+
+        __asm volatile ("nop");
     }
 
 

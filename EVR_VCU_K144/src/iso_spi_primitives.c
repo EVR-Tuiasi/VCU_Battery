@@ -45,6 +45,7 @@ extern int numberOfMonitoare;
 extern int numberOfDevices;
 
 volatile int tensiuneMILIvolti1,tensiuneMILIvolti2, tensiuneMILIvolti3;
+extern Thermistors Thermistors_Data;
 
 void BmsInit(void)
 {
@@ -300,6 +301,24 @@ void readBieMieSe()
         	icBaterie.cellVoltage[j*12+2+i*3]=15 * (buffPrimire[9+8*j] * 256 + buffPrimire[8+8*j]) + 150000;
 
 		}
+
+        if (i == 0)
+        {
+                    icBaterie.packCurrent = ((buffPrimire[5+4+8*NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4+4+8*NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3+4+8*NUMARUL_DE_MONITOARE]))*25;
+                    if (icBaterie.packCurrent & 0x800000) {
+                                        	icBaterie.packCurrent |= 0xFF000000;  // Set upper 8 bits to 1
+                                        } else {
+                                        	icBaterie.packCurrent &= 0x00FFFFFF;  // Clear upper 8 bits
+                                        }
+               }
+                else if (i == 1) {
+                	icBaterie.packVoltage = (buffPrimire[2+4+8*NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1+4+8*NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4+8*NUMARUL_DE_MONITOARE];
+                    /*if (icBaterie.packVoltage & 0x800000) {
+                    	icBaterie.packVoltage |= 0xFF000000;  // Set upper 8 bits to 1
+                    } else {
+                    	icBaterie.packVoltage &= 0x00FFFFFF;  // Clear upper 8 bits
+                    }*/
+                }
     }
 
 }
@@ -381,7 +400,7 @@ void sendAllUart()
 		buffer[7] = CRC_calculate(8);
 		Uart_SyncSend(0, buffer, 8, 10000000);
     }
-    /*
+
 	for(int i=0;i<THERMISTOR_BANKS;i++)
 	{
 		for(int j=0;j<THERMISTORS_PER_BANK;j++)
@@ -391,14 +410,14 @@ void sendAllUart()
 			buffer[2] = i*8+j;
 			buffer[3] = 0;
 			buffer[4] = 0;
-			buffer[5] = (Thermistors_Data.ThermistorValues[i][j] >> 8)  % 256;
-			buffer[6] = Thermistors_Data.ThermistorValues[i][j] % 256;
+			buffer[5] = (Thermistors_Data.temperaturi[i][j] >> 8)  % 256;
+			buffer[6] = Thermistors_Data.temperaturi[i][j] % 256;
 			buffer[7] = CRC_calculate(8);
 			Uart_SyncSend(0, buffer, 8, 10000000);
 
 
 		}
-	}*/
+	}
 }
 
 void sendAMS(void)

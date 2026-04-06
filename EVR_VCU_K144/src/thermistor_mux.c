@@ -135,53 +135,69 @@ void TempSensorTest(){
 }
 
 void corectieTemperatura(){
-	for(int i=0;i<THERMISTOR_BANKS;i++)
-	    	{
-	    		for(int j=0;j<THERMISTORS_PER_BANK;j++)
-	    		{
-	    			//if(Thermistors_Data.ThermistorValues[i][j]<1040)
-	    			//	Thermistors_Data.ThermistorValues[i][j]=1040;
-	    			//else if(Thermistors_Data.ThermistorValues[i][j]>2074)
-	    			//	Thermistors_Data.ThermistorValues[i][j]=2074;
+	Thermistors_Data.ThermistorValues[7][0]=Thermistors_Data.ThermistorValues[7][1];
+	Thermistors_Data.ThermistorValues[6][0]=Thermistors_Data.ThermistorValues[6][1];
+	Thermistors_Data.ThermistorValues[11][1]=Thermistors_Data.ThermistorValues[11][0];
+	Thermistors_Data.ThermistorValues[13][7]=Thermistors_Data.ThermistorValues[13][6];
+	Thermistors_Data.ThermistorValues[12][7]=Thermistors_Data.ThermistorValues[12][6];
+	Thermistors_Data.ThermistorValues[12][4]=Thermistors_Data.ThermistorValues[12][3];
 
-	    			if(Thermistors_Data.ThermistorValues[i][j]>=1140)
-	    			{
-	    				Thermistors_Data.temperaturiF[i][j]=68400/Thermistors_Data.ThermistorValues[i][j];
-	    				//60 65
-	    			}
-	    			else if(Thermistors_Data.temperaturiF[i][j]>=1248)
-	    			{
-	    				//55 60
-	    				Thermistors_Data.ThermistorValues[i][j]=68640/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    			else if(Thermistors_Data.temperaturiF[i][j]>=1399)
-	    			{
-	    			    				//55 50
-	    				Thermistors_Data.temperaturiF[i][j]=69950/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    			else if(Thermistors_Data.temperaturi[i][j]>=1545)
-	    			{
-	    			    				//50 45
-	    				Thermistors_Data.temperaturiF[i][j]=69525/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    			else if(Thermistors_Data.temperaturi[i][j]>=1708)
-	    			{
-	    			    				//45 40
-	    				Thermistors_Data.temperaturiF[i][j]=68325/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    			else if(Thermistors_Data.temperaturi[i][j]>=1881)
-	    			{
-	    			    				//40 35
-	    				Thermistors_Data.temperaturiF[i][j]=65835/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    			else
-	    			{
-	    			    				//35 30
-	    				Thermistors_Data.temperaturi[i][j]=61410/Thermistors_Data.ThermistorValues[i][j];
-	    			}
-	    				//
-	    		}
-	    	}
+	Thermistors_Data.ThermistorValues[14][3]=Thermistors_Data.ThermistorValues[14][1];
+	Thermistors_Data.ThermistorValues[14][2]=Thermistors_Data.ThermistorValues[14][0];
+
+}
+
+
+uint16 getMin(void)
+{
+	uint16 min=65000;
+
+	for (int i = 0; i < THERMISTOR_BANKS; i++)
+	        {
+	            for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+	            {
+	            	if(Thermistors_Data.ThermistorValues[i][j]<min)
+	            		min=Thermistors_Data.ThermistorValues[i][j];
+
+	            }
+
+	        }
+
+	return min;
+}
+
+uint16 getMax(void)
+{
+	uint16 max=0;
+
+	for (int i = 0; i < THERMISTOR_BANKS; i++)
+	        {
+	            for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+	            {
+	            	if(Thermistors_Data.ThermistorValues[i][j]>max)
+	            		max=Thermistors_Data.ThermistorValues[i][j];
+
+	            }
+
+	        }
+
+	return max;
+
+}
+
+uint16 getMedie(void){
+	uint32 medie=0;
+
+	for (int i = 0; i < THERMISTOR_BANKS; i++)
+	        {
+	            for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+	            {
+	            	medie+=Thermistors_Data.ThermistorValues[i][j];
+	            }
+
+	        }
+
+	return medie/(THERMISTOR_BANKS*THERMISTORS_PER_BANK); //practic impart la 128
 }
 
 #ifdef __cplusplus

@@ -22,7 +22,6 @@ typedef struct Thermistors{
 	Dio_ChannelType BankSelectPins[THERMISTOR_BANKS];
 	uint32 BankSelectPinsID[THERMISTOR_BANKS];
 	Adc_GroupType BankReadChannels[THERMISTORS_PER_BANK];
-	float temperaturiF[THERMISTOR_BANKS][THERMISTORS_PER_BANK];
 }Thermistors;
 
 /*==================================================================================================
@@ -68,7 +67,9 @@ void TempSensorInit(void);
 sint32 GetTemp(uint16 TempSensorIndex);
 void TempSensorTest(void);
 void corectieTemperatura(void);
-
+uint16 getMin(void);
+uint16 getMax(void);
+uint16 getMedie(void);
 #ifdef __cplusplus
 }
 #endif

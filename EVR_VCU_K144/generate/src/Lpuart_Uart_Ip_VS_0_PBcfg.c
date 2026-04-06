@@ -145,11 +145,11 @@ extern Lpuart_Uart_Ip_StateStructureType Lpuart_Uart_Ip_apStateStructure[LPUART_
 const Lpuart_Uart_Ip_UserConfigType Lpuart_Uart_Ip_xHwConfigPB_0_VS_0 =
 {
     /* Actual baudrate */
-    9603,
+    1000000,
     /* Baudrate mantissa*/
-    49U,
+    1U,
     /* Baudrate Divisor*/
-    17U,
+    8U,
     /* Parity type */
     LPUART_UART_IP_PARITY_DISABLED,
     /* Number of stop bits, 1 stop bit (default) or 2 stop bits */
