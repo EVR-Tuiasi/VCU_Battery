@@ -188,6 +188,10 @@ int main(void)
     	buffTrimitere[1]=0x2C;
     	transmisie(); //read RDSID
 
+    	populeazaCMD(0x04, 0x30);
+    	transmisieCMD(); //ADV pentru activare HV measure
+
+
     	bmsInit();
     	readBieMieSe();
     	sendAllUart();

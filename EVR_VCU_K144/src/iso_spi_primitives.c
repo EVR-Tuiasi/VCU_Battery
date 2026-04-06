@@ -239,7 +239,7 @@ void parametriiADC()
     populeazaCMD(0x00, 0x01);
     for(int i=0;i<NUMARUL_DE_SUNTURI;i++)
     {
-        buffTrimitere[4+8*i]=0x0; //default
+        buffTrimitere[4+8*i]=0x01; //default
         buffTrimitere[5+8*i]=0; //CFGAR1
         buffTrimitere[6+8*i]=0; //CFGAR2
         buffTrimitere[7+8*i]=0x5F; //porneste GPIO
@@ -304,7 +304,7 @@ void readBieMieSe()
 
         if (i == 0)
         {
-                    icBaterie.packCurrent = ((buffPrimire[5+4+8*NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4+4+8*NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3+4+8*NUMARUL_DE_MONITOARE]))*25;
+                    icBaterie.packCurrent = ((buffPrimire[5+4+8*NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4+4+8*NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3+4+8*NUMARUL_DE_MONITOARE]))*5;
                     if (icBaterie.packCurrent & 0x800000) {
                                         	icBaterie.packCurrent |= 0xFF000000;  // Set upper 8 bits to 1
                                         } else {
@@ -313,11 +313,11 @@ void readBieMieSe()
                }
                 else if (i == 1) {
                 	icBaterie.packVoltage = (buffPrimire[2+4+8*NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1+4+8*NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4+8*NUMARUL_DE_MONITOARE];
-                    /*if (icBaterie.packVoltage & 0x800000) {
+                    if (icBaterie.packVoltage & 0x800000) {
                     	icBaterie.packVoltage |= 0xFF000000;  // Set upper 8 bits to 1
                     } else {
                     	icBaterie.packVoltage &= 0x00FFFFFF;  // Clear upper 8 bits
-                    }*/
+                    }
                 }
     }
 
