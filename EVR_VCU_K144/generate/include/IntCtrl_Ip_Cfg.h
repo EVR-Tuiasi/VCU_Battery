@@ -76,6 +76,7 @@ extern void LPI2C0_Master_IRQHandler(void);
 extern void PORT_CI_ICU_IP_C_EXT_IRQ_ISR(void);
 extern void Adc_0_Isr(void);
 extern void Adc_1_Isr(void);
+extern void undefined_handler(void);
 
 #define PLATFORM_STOP_SEC_CONFIG_DATA_UNSPECIFIED
 #include "Platform_MemMap.h"

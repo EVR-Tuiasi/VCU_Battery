@@ -24,6 +24,12 @@ extern "C" {
 #include "iso_spi_primitives.h"
 #include "lut.h"
 #include "usb_monitoring.h"
+#include "Can_GeneralTypes.h"
+#include "Can_43_FLEXCAN.h"
+#include "CanIf.h"
+#include "SchM_Can_43_FLEXCAN.h"
+#include "invertor.h"
+
 
 
 /*==================================================================================================
@@ -78,6 +84,30 @@ uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
 
 extern Thermistors Thermistors_Data;
 
+
+void CAN0_Wake_Up_IRQHandler(void) {
+    // Handle CAN0 wakeup interrupt
+
+}
+
+void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
+{
+    (void)Controller;
+    (void)ControllerMode;
+}
+void CanIf_ControllerBusOff(uint8_t Controller)
+{
+    (void)Controller;
+}
+
+uint8 dataCAN[8]={0x03,0xE8, //100,0 V trimit catre 0x1806E7F4
+		0,0x32, //2A
+		0, //porneste charger
+		0,0,0 //reserved
+};
+#define CAN_HTH_HANDLE      0x01U       //
+#define CAN_TARGET_ID       0x9806E5F4U
+Can_PduType pduInfo;
 
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES

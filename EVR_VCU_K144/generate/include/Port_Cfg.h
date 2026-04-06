@@ -727,6 +727,8 @@ PORT_CONFIG_VS_0_PB \
 #define PortConf_PortPin_BMS_SIN 24
 #define PortConf_PortPin_BMS_SOUT 25
 #define PortConf_PortPin_BMS_CS 26
+#define PortConf_PortPin_canRX 27
+#define PortConf_PortPin_canTX 28
 
 /**
 * @brief Number of available pad modes options
@@ -746,12 +748,12 @@ PORT_CONFIG_VS_0_PB \
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)27)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)29)
 
 /**
  * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (57U)
+#define PORT_MAX_UNUSED_PADS_U16    (55U)
 
 /**
 * @brief Port driver Pre-Compile configuration switch
