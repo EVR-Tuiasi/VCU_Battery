@@ -182,7 +182,12 @@ int main(void)
     Icu_Init(NULL_PTR);
     Spi_Init(NULL_PTR);
     Icu_EnableNotification(0);
+    Can_43_FLEXCAN_Init(NULL_PTR);
+    CanIf_Init(NULL_PTR);
+    InverterInit();
     USBInit(0);
+
+
 
 
 
@@ -191,6 +196,20 @@ int main(void)
 
     while(1)
     {
+    	//incearca sa transmiti
+    	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
+    	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
+    	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
+    	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
+    	Std_ReturnType Result = Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
+    	if(Result == E_OK)
+    	{
+    		cnt =1;
+    	}
+    	else
+    	{
+    	    //while(Result != E_OK);
+    	}
 
     	for(cnt = 0; cnt < THERMISTOR_BANKS; cnt++)
     	{
@@ -211,7 +230,7 @@ int main(void)
     	            }
     	        }
 
-    	int timp =100000;
+    	int timp =10000000;
     	    while(timp--);
 
     	buffTrimitere[0]=0;
