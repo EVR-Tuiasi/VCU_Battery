@@ -94,13 +94,11 @@ boolean InverterReceivedMessage(Can_HwHandleType handle, Can_IdType id, PduLengt
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
 void InverterInit(void){
-	/*Dio_WriteChannel(85, STD_HIGH);
+	/*(85, STD_HIGH);
 	volatile int i = 1000000;
 	while(i--);
 	Dio_WriteChannel(88, STD_HIGH);*/
-    Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
-	//Can_43_FLEXCAN_SetControllerMode()
-    Can_43_FLEXCAN_EnableControllerInterrupts(0);
+
 
 }
 

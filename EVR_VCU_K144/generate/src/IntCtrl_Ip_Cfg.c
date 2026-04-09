@@ -75,11 +75,11 @@ static const IntCtrl_Ip_IrqConfigType aIrqConfiguration[] = {
     {PORTC_IRQn, (boolean)TRUE, 0U, PORT_CI_ICU_IP_C_EXT_IRQ_ISR},
     {ADC0_IRQn, (boolean)TRUE, 0U, Adc_0_Isr},
     {ADC1_IRQn, (boolean)TRUE, 0U, Adc_1_Isr},
-    {CAN0_ORed_IRQn, (boolean)TRUE, 0U, undefined_handler},
-    {CAN0_Error_IRQn, (boolean)TRUE, 0U, undefined_handler},
-    {CAN0_Wake_Up_IRQn, (boolean)TRUE, 0U, undefined_handler},
-    {CAN0_ORed_0_15_MB_IRQn, (boolean)TRUE, 0U, undefined_handler},
-    {CAN0_ORed_16_31_MB_IRQn, (boolean)TRUE, 0U, undefined_handler},
+    {CAN0_ORed_IRQn, (boolean)TRUE, 0U, CAN0_ORED_IRQHandler},
+    {CAN0_Error_IRQn, (boolean)TRUE, 0U, CAN0_Error_IRQHandler},
+    {CAN0_Wake_Up_IRQn, (boolean)TRUE, 0U, CAN0_Wake_Up_IRQHandler},
+    {CAN0_ORed_0_15_MB_IRQn, (boolean)TRUE, 0U, CAN0_ORED_0_15_MB_IRQHandler},
+    {CAN0_ORed_16_31_MB_IRQn, (boolean)TRUE, 0U, CAN0_ORED_16_31_MB_IRQHandler},
 };
 const IntCtrl_Ip_CtrlConfigType intCtrlConfig = {
     10U,

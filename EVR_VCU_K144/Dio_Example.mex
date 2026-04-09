@@ -2186,35 +2186,35 @@
                                     <setting name="IsrName" value="CAN0_ORed_IRQn"/>
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="0"/>
-                                    <setting name="IsrHandler" value="undefined_handler"/>
+                                    <setting name="IsrHandler" value="CAN0_ORED_IRQHandler"/>
                                  </struct>
                                  <struct name="6">
                                     <setting name="Name" value="PlatformIsrConfig_6"/>
                                     <setting name="IsrName" value="CAN0_Error_IRQn"/>
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="0"/>
-                                    <setting name="IsrHandler" value="undefined_handler"/>
+                                    <setting name="IsrHandler" value="CAN0_Error_IRQHandler"/>
                                  </struct>
                                  <struct name="7">
                                     <setting name="Name" value="PlatformIsrConfig_7"/>
                                     <setting name="IsrName" value="CAN0_Wake_Up_IRQn"/>
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="0"/>
-                                    <setting name="IsrHandler" value="undefined_handler"/>
+                                    <setting name="IsrHandler" value="CAN0_Wake_Up_IRQHandler"/>
                                  </struct>
                                  <struct name="8">
                                     <setting name="Name" value="PlatformIsrConfig_8"/>
                                     <setting name="IsrName" value="CAN0_ORed_0_15_MB_IRQn"/>
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="0"/>
-                                    <setting name="IsrHandler" value="undefined_handler"/>
+                                    <setting name="IsrHandler" value="CAN0_ORED_0_15_MB_IRQHandler"/>
                                  </struct>
                                  <struct name="9">
                                     <setting name="Name" value="PlatformIsrConfig_9"/>
                                     <setting name="IsrName" value="CAN0_ORed_16_31_MB_IRQn"/>
                                     <setting name="IsrEnabled" value="true"/>
                                     <setting name="IsrPriority" value="0"/>
-                                    <setting name="IsrHandler" value="undefined_handler"/>
+                                    <setting name="IsrHandler" value="CAN0_ORED_16_31_MB_IRQHandler"/>
                                  </struct>
                               </array>
                               <array name="PlatformNvicEcucPartitionRef"/>
@@ -3446,7 +3446,7 @@
                                  <array name="CanControllerBaudrateConfig">
                                     <struct name="0">
                                        <setting name="Name" value="CanControllerBaudrateConfig_0"/>
-                                       <setting name="CanAdvancedSetting" value="true"/>
+                                       <setting name="CanAdvancedSetting" value="false"/>
                                        <setting name="CanBusLength" value="40"/>
                                        <setting name="CanPropDelayTranceiver" value="150"/>
                                        <setting name="CanTxArbitrationStartDelay" value="12"/>
@@ -3457,7 +3457,7 @@
                                        <setting name="CanControllerSyncSeg" value="1"/>
                                        <setting name="CanControllerPropSeg" value="5"/>
                                        <setting name="CanControllerSeg1" value="5"/>
-                                       <setting name="CanControllerSeg2" value="6"/>
+                                       <setting name="CanControllerSeg2" value="5"/>
                                        <setting name="CanControllerSyncJumpWidth" value="1"/>
                                        <array name="CanControllerFdBaudrateConfig"/>
                                     </struct>
@@ -3515,13 +3515,7 @@
                                  <array name="CanMainFunctionRWPeriodRef"/>
                                  <array name="CanHwObjectUsesBlock"/>
                                  <setting name="CanHwObjectCount" value="1"/>
-                                 <array name="CanHwFilter">
-                                    <struct name="0">
-                                       <setting name="Name" value="Can_aHwFilter_Object_0"/>
-                                       <setting name="CanHwFilterCode" value="0x1806E5F4"/>
-                                       <setting name="CanHwFilterMask" value="0x1806E5F4"/>
-                                    </struct>
-                                 </array>
+                                 <array name="CanHwFilter"/>
                                  <array name="CanTTHardwareObjectTrigger"/>
                               </struct>
                            </array>
@@ -3572,7 +3566,7 @@
                               <setting name="0" value="2"/>
                            </array>
                            <array name="CanIfMaxTxPduCfg">
-                              <setting name="0" value="1"/>
+                              <setting name="0" value="2"/>
                            </array>
                            <array name="CanIfTxPduCfg">
                               <struct name="0">
@@ -3584,6 +3578,19 @@
                                     <setting name="0" value="EXTENDED_CAN"/>
                                  </array>
                                  <setting name="CanIfTxPduId" value="0"/>
+                                 <array name="CanIfTxPduUserTxConfirmationName"/>
+                                 <array name="CanIfTxPduUserTxConfirmationUL"/>
+                                 <setting name="CanIfTxPduBufferRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfBufferCfg_0"/>
+                              </struct>
+                              <struct name="1">
+                                 <setting name="Name" value="CanIfTxPduCfg_1"/>
+                                 <array name="CanIfTxPduCanId">
+                                    <setting name="0" value="0x114"/>
+                                 </array>
+                                 <array name="CanIfTxPduCanIdType">
+                                    <setting name="0" value="EXTENDED_CAN"/>
+                                 </array>
+                                 <setting name="CanIfTxPduId" value="1"/>
                                  <array name="CanIfTxPduUserTxConfirmationName"/>
                                  <array name="CanIfTxPduUserTxConfirmationUL"/>
                                  <setting name="CanIfTxPduBufferRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfBufferCfg_0"/>

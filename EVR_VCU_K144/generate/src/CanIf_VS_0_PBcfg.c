@@ -77,13 +77,27 @@ extern "C"{
 #include "CanIf_MemMap.h"
 
 /* Here is the TxPdu configuration */
-static const CanIf_TxPduType CanIf_TxPdu[1U] =
+static const CanIf_TxPduType CanIf_TxPdu[2U] =
 {
     {
         /* .PduIdType */
         (uint8)0U,
         /* .CanId */
         (Can_IdType)403105780U,
+        /* .CanFrameType */
+        CANIF_EXTENDED_CAN,
+        /* .Can_HwHandleType */
+        (Can_HwHandleType)1U,
+        /* .CanIfCtrlId */
+        (uint8)0U,
+        /* .UserTxConfirmation */
+        NULL_PTR
+    },
+    {
+        /* .PduIdType */
+        (uint8)1U,
+        /* .CanId */
+        (Can_IdType)276U,
         /* .CanFrameType */
         CANIF_EXTENDED_CAN,
         /* .Can_HwHandleType */
@@ -134,7 +148,7 @@ const CanIf_ConfigType CanIf_Config =
     /* .NumRxPdu */
     (uint8)1U,
     /* .NumTxPdu */
-    (uint8)1U,
+    (uint8)2U,
     CanIf_CanDrvConfig,
     /* .CanIf_RxPduConfigPtr */
     CanIf_RxPdu,

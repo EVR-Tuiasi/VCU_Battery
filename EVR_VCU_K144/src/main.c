@@ -100,13 +100,21 @@ void CanIf_ControllerBusOff(uint8_t Controller)
     (void)Controller;
 }
 
-uint8 dataCAN[8]={0x03,0xE8, //100,0 V trimit catre 0x1806E7F4
+uint8 dataCAN2[8]={0x03,0xE8, //100,0 V trimit catre 0x1806E7F4
 		0,0x32, //2A
 		0, //porneste charger
 		0,0,0 //reserved
 };
+
+uint8 dataCAN[8]={0x00,0x00, //ceva hardcoded de la matei
+		0x0f,0x67,
+		0x40,
+		0xbb,0xbd,0xe8
+};
+
 #define CAN_HTH_HANDLE      0x01U       //
-#define CAN_TARGET_ID       0x9806E5F4U
+//#define CAN_TARGET_ID       0x9806E5F4U
+#define CAN_TARGET_ID       0x80000114U
 Can_PduType pduInfo;
 
 /*==================================================================================================
@@ -184,7 +192,10 @@ int main(void)
     Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
-    InverterInit();
+
+    Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
+    Can_43_FLEXCAN_EnableControllerInterrupts(0);
+
     USBInit(0);
 
 
@@ -192,8 +203,20 @@ int main(void)
 
 
     TempSensorInit();
-    volatile uint16 cnt,media,min,max;
+    //volatile uint16 cnt,media,min,max;
 
+    while(1)
+    {
+    	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
+    	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
+    	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
+    	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
+    	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
+
+    	volatile int timp =10000000;
+    		while(timp--);
+    }
+    /*
     while(1)
     {
     	//incearca sa transmiti
@@ -250,7 +273,7 @@ int main(void)
 
         __asm volatile ("nop");
     }
-
+	*/
 
 }
 
