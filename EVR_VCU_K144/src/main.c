@@ -1,3 +1,4 @@
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,6 +30,7 @@ extern "C" {
 #include "CanIf.h"
 #include "SchM_Can_43_FLEXCAN.h"
 #include "invertor.h"
+#include "CanMessaging.h"
 
 
 
@@ -204,7 +206,7 @@ int main(void)
 
     TempSensorInit();
     //volatile uint16 cnt,media,min,max;
-
+    CanMessaging_Test();
     while(1)
     {
     	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
@@ -212,7 +214,7 @@ int main(void)
     	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
     	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
     	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-
+    	dataCAN[3]++;
     	volatile int timp =10000000;
     		while(timp--);
     }
