@@ -18,8 +18,8 @@ extern "C"{
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
-#define CELLS_NUM 400
-#define THERMISTOR_NUM 100
+#define CELLS_NUM 24
+#define THERMISTOR_NUM 128
 
 typedef struct{
     /* General values */

@@ -59,7 +59,7 @@ TsacMonitoredValues_t baterieCan;
 DashboardMonitoredValues_t bordCan;
 
 uint8_t bufferCan[8];
-
+#define delayMacro 500000
 
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
@@ -166,57 +166,58 @@ void CanMessaging_Test(void){
 
 void CanMessaging_Update(void){
 
+	volatile int i;
 	Can_PduType pduInfo;
-	pduInfo.swPduHandle=0;
+	/*pduInfo.swPduHandle=0;
 	pduInfo.length=8;
 
 	CanMessaging_CreateBuffer(idCanInvertorStanga);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanInvertorStanga | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	volatile int i=100000;
+	i=delayMacro;
 			while(i--);
 
 	CanMessaging_CreateBuffer(idCanInvertorDreapta);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanInvertorDreapta | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
+	i=delayMacro;
 			while(i--);
 
 	CanMessaging_CreateBuffer(idCanInvertoare);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanInvertoare | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
+	i=delayMacro;
 			while(i--);
 
 	CanMessaging_CreateBuffer(idCanBord);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanBord | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
+	i=delayMacro;
 			while(i--);
 
 	CanMessaging_CreateBuffer(idCanAcceleratie);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanAcceleratie | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
+	i=delayMacro;
 			while(i--);
 
 	CanMessaging_CreateBuffer(idCanFrana);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanFrana | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
-			while(i--);
+	i=delayMacro;
+			while(i--);*/
 
 	CanMessaging_CreateBuffer(idCanBaterie);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanBaterie | 0x80000000U;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-	i=100000;
+	i=delayMacro;
 			while(i--);
 }
 

@@ -79,6 +79,7 @@ extern uint8 buffTrimitere[64];
 extern uint8 buffPrimire[64];
 
 volatile uint8 ok = 0;
+extern struct biemese icBaterie;
 
 volatile int delei;
 uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
@@ -205,9 +206,10 @@ int main(void)
 
 
     TempSensorInit();
-    //volatile uint16 cnt,media,min,max;
-    CanMessaging_Test();
-    while(1)
+    volatile uint16 cnt,media,min,max;
+
+    //CanMessaging_Test();
+    /*while(1)
     {
     	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
     	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
@@ -218,23 +220,23 @@ int main(void)
     	volatile int timp =10000000;
     		while(timp--);
     }
-    /*
+    */
     while(1)
     {
-    	//incearca sa transmiti
+    	/*incearca sa transmiti
     	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
     	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
     	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
     	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
-    	Std_ReturnType Result = Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-    	if(Result == E_OK)
+    	//Std_ReturnType Result = Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);*/
+    	/*if(Result == E_OK)
     	{
     		cnt =1;
     	}
     	else
     	{
     	    //while(Result != E_OK);
-    	}
+    	}*/
 
     	for(cnt = 0; cnt < THERMISTOR_BANKS; cnt++)
     	{
@@ -270,12 +272,18 @@ int main(void)
     	readBieMieSe();
     	sendAllUart();
 
+    	int dilii=100000;
+    			while(dilii--);
+    	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (icBaterie.packVoltage/10));
+    	CanMessaging_SetValue(Can_TSAC_OverallCurrent, icBaterie.packCurrent/100);
+    	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, Thermistors_Data.temperaturi[13][6]/10);
+    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, icBaterie.cellVoltage[0]/1000);
 
-
+    	CanMessaging_Update();
 
         __asm volatile ("nop");
     }
-	*/
+
 
 }
 

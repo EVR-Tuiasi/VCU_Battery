@@ -142,7 +142,7 @@ void UartMessaging_Update(void);
 void UartMessaging_SetValue(UartMonitoredValue_t DesiredValueType, uint32_t Value);
 uint32_t UartMessaging_ReadValue(UartMonitoredValue_t DesiredValueType);
 void UartMessaging_CreateBuffer(idUart_t type);
-uint8_t CRC_calculate(uint8_t length);
+uint8_t CRC_calculate_Matei(uint8_t length);
 
 #ifdef __cplusplus
 }

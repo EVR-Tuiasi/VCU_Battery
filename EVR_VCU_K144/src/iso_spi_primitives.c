@@ -29,6 +29,7 @@ int ceva;
 #include "CDD_Uart.h"
 #include "7-segment-display.h"
 #include "thermistor_mux.h"
+#include "usb_monitoring.h"
 ///aici normal
 
 uint8 buffTrimitere[64];
