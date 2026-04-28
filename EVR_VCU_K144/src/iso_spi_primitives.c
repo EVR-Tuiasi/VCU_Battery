@@ -1,23 +1,10 @@
 /*
- * iso_spi_primitives.c
- *
- *  Created on: 3 mar. 2026
- *      Author: cosaa
- */
-
-
-#include "iso_spi_primitives.h"
-uint16 dpec;
-int ceva;
-/*
  * bms_cosa.c
  *
  *  Created on: 29 apr. 2025
  *      Author: cosaa
  */
-
-#define BMS_CS 26
-
+#include "iso_spi_primitives.h"
 #include "CDD_I2c.h"
 #include "Dio.h"
 #include "Icu.h"
@@ -30,21 +17,25 @@ int ceva;
 #include "7-segment-display.h"
 #include "thermistor_mux.h"
 #include "usb_monitoring.h"
-///aici normal
 
-uint8 buffTrimitere[64];
-uint8 buffPrimire[64];
+
+//----local variables
 volatile int delei;
 struct biemese icBaterie;
-uint8 bufferUART[10];
+uint8 buffTrimitere[64];
+uint8 buffPrimire[64];
 
+uint8 bufferUART[10];
+uint16 dpec;
+
+//--- comenzi
 uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
 uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
 
 volatile int tensiuneMILIvolti1,tensiuneMILIvolti2, tensiuneMILIvolti3;
 extern Thermistors Thermistors_Data;
 
-void BmsInit(void)
+void Bms_RESET(void)
 {
 	buffTrimitere[0]=0;
 	buffTrimitere[1]=0x27;
@@ -55,16 +46,14 @@ void BmsTest(void)
 {
     do
     {
-        buffTrimitere[0]=0;
-        buffTrimitere[1]=0x2C;
-        transmisie(); //read RDSID
+    	BmsReadID();
         //aprinde LED
     }
     while(buffPrimire[4]!=255);
 
 }
 
-void verif(void)
+void BmsReadID(void)
 {
 	buffTrimitere[0]=0;
 	buffTrimitere[1]=0x2C;
@@ -154,7 +143,7 @@ void transmisieCMD(void)
 	#if 0
 	    	Dio_WriteChannel(37, 1);
 	#endif
-	    	delei = DELAY_COMENZI;
+	    	delei = MARELE_DELAY;
 	    	while(delei){
 	    		delei--;
 	    	}
@@ -582,13 +571,6 @@ void sendEroareUnitate(int index)
 
 }
 
-int CRCok(uint8 *pointer) //nu merge
-{
-	uint16 peculCalculat=pec10_calc(true,6U, pointer);
-	uint16 pecPrimit= (pointer[7]<<8)|pointer[6];
-	return peculCalculat==pecPrimit;
-}
-
 void readShuntOW()
 {
 	volatile int delayul;
@@ -597,10 +579,27 @@ void readShuntOW()
 
     populeazaCMD(0x01, 0xFA); //69
     transmisieCMD(); //ADSV OW par
-
-
 }
 
+int BmsGetPackCurrent(void)
+{
+	return icBaterie.packCurrent;
+}
+
+int BmsGetPackVoltage(void)
+{
+	return icBaterie.packVoltage;
+}
+
+int BmsGetHighestCellVoltage(void)
+{
+	int max=0;
+	for (int i=0;i<BATTERY_CELLS;i++)
+		if(icBaterie.cellVoltage[i]>max)
+			max=icBaterie.cellVoltage[i];
+
+	return max;
+}
 
 /*!<**************************************** BMS Driver APIs definitions ********************************************/
 

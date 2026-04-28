@@ -4,32 +4,22 @@
  *  Created on: 29 apr. 2025
  *      Author: cosaa
  */
-
+#pragma once
 #include "Mcu.h"
 #ifndef BMS_COSA_H_
 #define BMS_COSA_H_
 #define BATTERY_CELLS 24
-#define BOARDS_NUMBER 5
 #define NUMARUL_DE_MONITOARE 2
 #define NUMARUL_DE_SUNTURI 1
-#define CRC_DARIUS 0x8D
-#define MARELE_DELAY 4000//4000
-//30000 mergea binex
-#define DELAY_COMENZI 4000//4000
-//300000 initial
-
-#define CURENT_MAX 600000 //600A
-//in MILIAMPERI te rog
-#define UNDERVOLTAGE_CELL 350000 //3.5V pentru moment
-//in MILIVOLTI te implor
+#define MARELE_DELAY 4000 //stabil cu minim 4000 //30000 mergea binex
+#define CURENT_MAX 600000 //mA =>600A
+#define UNDERVOLTAGE_CELL 350000 //*100mV =>3.5V pentru moment
 #define TENSIUNE_MAX 10100 //101V
 #define TENSIUNE_MIN 6000 //60V
 #define OVERVOLTAGE_CELL 423000 //4.23V pentru moment
-#define CURENT_STUPID 1000000
-#define TENSIUNE_STUPID 1000000
-#define CELULA_STUPID 500000
-//100k e 10v
-//
+#define CURENT_STUPID 1000000  //valoare imposibila pentru a semnifica eroare de coms
+#define TENSIUNE_STUPID 1000000 //valoare imposibila pentru a semnifica eroare de coms
+#define CELULA_STUPID 500000 //valoare imposibila pentru a semnifica eroare de coms
 
 struct biemese
 {
@@ -39,8 +29,8 @@ struct biemese
 	bool flag;
 	uint8 stateBMS[NUMARUL_DE_MONITOARE];
 	uint8 stateSHUNT;
-	//Spi_ChannelType bmsSpiChannel;
 };
+
 
 uint16 pec10_calc(bool rx_cmd, int len, uint8 *data);
 uint16 Pec15_Calc
@@ -48,6 +38,7 @@ uint16 Pec15_Calc
 	uint8 len, /*!< Number of bytes that will be used to calculate a PEC */
 	uint8 *data /*!< Array of data that will be used to calculate  a PEC */
 );
+
 
 void BmsInit(void);
 void BmsTest(void);
@@ -85,12 +76,13 @@ int getCurent(void);
 int getVoltagePachet(void);
 int CFGAok(void);
 void bmsInit(void);
+void BmsReadID(void);
 void sendEroareUnitate(int index);
-int CRCok(uint8 *pointer);
 void clearStates(void);
 void readShuntOW(void);
+int BmsGetHighestCellVoltage(void);
 
-uint8 CRC_calculate(uint8 length);
+
 
 
 #endif /* BMS_COSA_H_ */

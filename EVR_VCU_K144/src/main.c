@@ -20,7 +20,7 @@ extern "C" {
 #include "Platform.h"
 #include "Port.h"
 #include "CDD_Uart.h"
-#include "7-segment-display.h"
+//#include "7-segment-display.h"
 #include "thermistor_mux.h"
 #include "iso_spi_primitives.h"
 #include "lut.h"
@@ -146,8 +146,13 @@ int main(void)
 
     while(1)
     {
-    	setParametriiCharger(1000,50);//100V cu 5A
-    	transmiteCharger();
+    	//daca am subtensiune pornesc chargeru
+    	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
+    	{
+    		setParametriiCharger(1000,50);//100V cu 5A
+    		transmiteCharger();
+    	}
+
 
     	citesteToateADC();
     	corectieValoriADC();
@@ -158,13 +163,14 @@ int main(void)
     	sendAllUart();
 
     	// TODO integrat astea in functie de CAN
-    	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (icBaterie.packVoltage/10));
-    	CanMessaging_SetValue(Can_TSAC_OverallCurrent, icBaterie.packCurrent/100);
+    	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
+    	CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
     	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
-    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, icBaterie.cellVoltage[0]/1000);
+    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);
     	CanMessaging_Update();
 
         __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
+        // TODO gasit o metoda mai buna pentru breakpoint artificial
     }
 
 
