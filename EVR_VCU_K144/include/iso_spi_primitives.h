@@ -20,7 +20,7 @@
 
 #define CURENT_MAX 600000 //600A
 //in MILIAMPERI te rog
-#define UNDERVOLTAGE_CELL 250000 //3.5V pentru moment
+#define UNDERVOLTAGE_CELL 350000 //3.5V pentru moment
 //in MILIVOLTI te implor
 #define TENSIUNE_MAX 10100 //101V
 #define TENSIUNE_MIN 6000 //60V

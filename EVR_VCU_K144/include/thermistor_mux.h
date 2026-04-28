@@ -65,11 +65,13 @@ typedef struct Thermistors{
 
 void TempSensorInit(void);
 sint32 GetTemp(uint16 TempSensorIndex);
-void TempSensorTest(void);
-void corectieTemperatura(void);
+void corectieValoriADC(void);
+void citesteToateADC(void);
 uint16 getMin(void);
 uint16 getMax(void);
 uint16 getMedie(void);
+void lookUPtemperaturi(void);
+
 #ifdef __cplusplus
 }
 #endif

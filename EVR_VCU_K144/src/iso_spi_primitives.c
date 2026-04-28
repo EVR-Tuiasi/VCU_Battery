@@ -34,16 +34,12 @@ int ceva;
 
 uint8 buffTrimitere[64];
 uint8 buffPrimire[64];
-extern volatile int delei;
+volatile int delei;
 struct biemese icBaterie;
-extern uint8 buffer[10];
+uint8 bufferUART[10];
 
-extern uint8 pachete[6];
-extern uint8 pacheteS[6];
-
-extern int numberOfSunturi;
-extern int numberOfMonitoare;
-extern int numberOfDevices;
+uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
+uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
 
 volatile int tensiuneMILIvolti1,tensiuneMILIvolti2, tensiuneMILIvolti3;
 extern Thermistors Thermistors_Data;
@@ -68,6 +64,12 @@ void BmsTest(void)
 
 }
 
+void verif(void)
+{
+	buffTrimitere[0]=0;
+	buffTrimitere[1]=0x2C;
+	transmisie(); //read RDSID
+}
 
 
 void transmisie(void)
@@ -280,6 +282,9 @@ void ADCV()
 
 void readBieMieSe()
 {
+	populeazaCMD(0x04, 0x30);
+	transmisieCMD(); //ADV pentru activare HV measure
+
 	volatile int delayul=1000000;
     for(int i=0;i<=3;i++)
     {
@@ -372,49 +377,49 @@ void readBieMieSeOW()
 
 void sendAllUart()
 {
-    buffer[0] = 13;
-    buffer[1] = (icBaterie.packCurrent >> 24) % 256;
-    buffer[2] = (icBaterie.packCurrent >> 16) % 256;
-    buffer[3] = (icBaterie.packCurrent >> 8)  % 256;
-    buffer[4] = icBaterie.packCurrent % 256;
-    buffer[5] = CRC_calculate(6);
-    Uart_SyncSend(0, buffer, 6, 10000000);
+    bufferUART[0] = 13;
+    bufferUART[1] = (icBaterie.packCurrent >> 24) % 256;
+    bufferUART[2] = (icBaterie.packCurrent >> 16) % 256;
+    bufferUART[3] = (icBaterie.packCurrent >> 8)  % 256;
+    bufferUART[4] = icBaterie.packCurrent % 256;
+    bufferUART[5] = CRC_calculate(6);
+    Uart_SyncSend(0, bufferUART, 6, 10000000);
 
-    buffer[0] = 12;
-    buffer[1] = (icBaterie.packVoltage >> 24) % 256;
-    buffer[2] = (icBaterie.packVoltage >> 16) % 256;
-    buffer[3] = (icBaterie.packVoltage >> 8)  % 256;
-    buffer[4] = icBaterie.packVoltage % 256;
-    buffer[5] = CRC_calculate(6);
-    Uart_SyncSend(0, buffer, 6, 10000000);
+    bufferUART[0] = 12;
+    bufferUART[1] = (icBaterie.packVoltage >> 24) % 256;
+    bufferUART[2] = (icBaterie.packVoltage >> 16) % 256;
+    bufferUART[3] = (icBaterie.packVoltage >> 8)  % 256;
+    bufferUART[4] = icBaterie.packVoltage % 256;
+    bufferUART[5] = CRC_calculate(6);
+    Uart_SyncSend(0, bufferUART, 6, 10000000);
 
 
     for(int i=0;i<BATTERY_CELLS;i++)
     {
-		buffer[0] = 11;
-		buffer[1] = 0;
-		buffer[2] = i;
-		buffer[3] = (icBaterie.cellVoltage[i]>>24) % 256;
-		buffer[4] = (icBaterie.cellVoltage[i] >> 16) % 256;
-		buffer[5] = (icBaterie.cellVoltage[i] >> 8)  % 256;
-		buffer[6] = icBaterie.cellVoltage[i] % 256;
-		buffer[7] = CRC_calculate(8);
-		Uart_SyncSend(0, buffer, 8, 10000000);
+		bufferUART[0] = 11;
+		bufferUART[1] = 0;
+		bufferUART[2] = i;
+		bufferUART[3] = (icBaterie.cellVoltage[i]>>24) % 256;
+		bufferUART[4] = (icBaterie.cellVoltage[i] >> 16) % 256;
+		bufferUART[5] = (icBaterie.cellVoltage[i] >> 8)  % 256;
+		bufferUART[6] = icBaterie.cellVoltage[i] % 256;
+		bufferUART[7] = CRC_calculate(8);
+		Uart_SyncSend(0, bufferUART, 8, 10000000);
     }
 
 	for(int i=0;i<THERMISTOR_BANKS;i++)
 	{
 		for(int j=0;j<THERMISTORS_PER_BANK;j++)
 		{
-			buffer[0] = 10;
-			buffer[1] = 0;
-			buffer[2] = i*8+j;
-			buffer[3] = 0;
-			buffer[4] = 0;
-			buffer[5] = (Thermistors_Data.temperaturi[i][j] >> 8)  % 256;
-			buffer[6] = Thermistors_Data.temperaturi[i][j] % 256;
-			buffer[7] = CRC_calculate(8);
-			Uart_SyncSend(0, buffer, 8, 10000000);
+			bufferUART[0] = 10;
+			bufferUART[1] = 0;
+			bufferUART[2] = i*8+j;
+			bufferUART[3] = 0;
+			bufferUART[4] = 0;
+			bufferUART[5] = (Thermistors_Data.temperaturi[i][j] >> 8)  % 256;
+			bufferUART[6] = Thermistors_Data.temperaturi[i][j] % 256;
+			bufferUART[7] = CRC_calculate(8);
+			Uart_SyncSend(0, bufferUART, 8, 10000000);
 
 
 		}
@@ -468,23 +473,23 @@ void sendOW()
 
 void sendErori(void)
 {
-	buffer[0]=100;
-	buffer[1]=0x07;
-	buffer[2]=icBaterie.stateSHUNT;
-	buffer[3]=CRC_calculate(4);
-	Uart_SyncSend(0, buffer, 4, 10000000);
+	bufferUART[0]=100;
+	bufferUART[1]=0x07;
+	bufferUART[2]=icBaterie.stateSHUNT;
+	bufferUART[3]=CRC_calculate(4);
+	Uart_SyncSend(0, bufferUART, 4, 10000000);
 
-	buffer[0]=100;
-	buffer[1]=0x08;
-	buffer[2]=icBaterie.stateBMS[0];
-	buffer[3]=CRC_calculate(4);
-	Uart_SyncSend(0, buffer, 4, 10000000);
+	bufferUART[0]=100;
+	bufferUART[1]=0x08;
+	bufferUART[2]=icBaterie.stateBMS[0];
+	bufferUART[3]=CRC_calculate(4);
+	Uart_SyncSend(0, bufferUART, 4, 10000000);
 
-	/*buffer[0]=100;
-	buffer[1]=0x09;
-	buffer[2]=icBaterie.stateBMS[1];
-	buffer[3]=CRC_calculate(4);
-	Uart_SyncSend(0, buffer, 4, 10000000);*/
+	/*bufferUART[0]=100;
+	bufferUART[1]=0x09;
+	bufferUART[2]=icBaterie.stateBMS[1];
+	bufferUART[3]=CRC_calculate(4);
+	Uart_SyncSend(0, bufferUART, 4, 10000000);*/
 
 
 }
@@ -569,11 +574,11 @@ void bmsInit(void)
 void sendEroareUnitate(int index)
 //trimite eroare ca modulul index este bulit
 {
-	buffer[0]=100;
-	buffer[1]=0xF8;
-	buffer[2]=index+1;
-	buffer[3]=CRC_calculate(4);
-	Uart_SyncSend(0, buffer, 4, 10000000);
+	bufferUART[0]=100;
+	bufferUART[1]=0xF8;
+	bufferUART[2]=index+1;
+	bufferUART[3]=CRC_calculate(4);
+	Uart_SyncSend(0, bufferUART, 4, 10000000);
 
 }
 

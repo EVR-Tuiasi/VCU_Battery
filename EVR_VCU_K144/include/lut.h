@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #define LUT_SIZE 8192
+// TODO de facut si versiunea cu functie
 
 static const uint16_t temp_lut[LUT_SIZE] = {
     15000, 15000, 15000, 15000, 15000, 15000, 15000, 15000,

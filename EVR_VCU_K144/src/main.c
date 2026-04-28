@@ -31,9 +31,7 @@ extern "C" {
 #include "SchM_Can_43_FLEXCAN.h"
 #include "invertor.h"
 #include "CanMessaging.h"
-
-
-
+#include "charger.h"
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -62,64 +60,8 @@ extern "C" {
 /*==================================================================================================
 *                                      GLOBAL VARIABLES
 ==================================================================================================*/
-
-uint8 DigitNumar1[2] = {0x01, 0x0f};
-uint8 DigitNumar2[2] = {0x02, 0x0f};
-uint8 DigitNumar3[2] = {0x03, 0x0f};
-uint8 DigitNumar4[2] = {0x04, 0x0f};// numarul care va fi afisat pe digit
-uint8 test_data[2] = {0x0f, 1}; // comanda test optic
-
-I2c_RequestType test = {0, false, false, false, false, 2, I2C_SEND_DATA, test_data};
-I2c_RequestType numarpedigit4 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar4};
-I2c_RequestType numarpedigit3 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar3};
-I2c_RequestType numarpedigit2 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar2};
-I2c_RequestType numarpedigit1 = {0, false, false, false, false, 2, I2C_SEND_DATA, DigitNumar1};
-
-extern uint8 buffTrimitere[64];
-extern uint8 buffPrimire[64];
-
-volatile uint8 ok = 0;
 extern struct biemese icBaterie;
-
-volatile int delei;
-uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
-uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
-
 extern Thermistors Thermistors_Data;
-
-
-void CAN0_Wake_Up_IRQHandler(void) {
-    // Handle CAN0 wakeup interrupt
-
-}
-
-void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
-{
-    (void)Controller;
-    (void)ControllerMode;
-}
-void CanIf_ControllerBusOff(uint8_t Controller)
-{
-    (void)Controller;
-}
-
-uint8 dataCAN2[8]={0x03,0xE8, //100,0 V trimit catre 0x1806E7F4
-		0,0x32, //2A
-		0, //porneste charger
-		0,0,0 //reserved
-};
-
-uint8 dataCAN[8]={0x00,0x00, //ceva hardcoded de la matei
-		0x0f,0x67,
-		0x40,
-		0xbb,0xbd,0xe8
-};
-
-#define CAN_HTH_HANDLE      0x01U       //
-//#define CAN_TARGET_ID       0x9806E5F4U
-#define CAN_TARGET_ID       0x80000114U
-Can_PduType pduInfo;
-
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
@@ -128,38 +70,38 @@ Can_PduType pduInfo;
 /*==================================================================================================
 *                                       LOCAL FUNCTIONS
 ==================================================================================================*/
-
-
-/*==================================================================================================
-*                                       GLOBAL FUNCTIONS
-==================================================================================================*/
-
 void IntrerupereBTN(void){
-	ok = 1;
-	Dio_WriteChannel(96, 1);
-	Dio_WriteChannel(111, 1);
 
 }
 
 void I2c_Callback(uint8 Event, uint8 Channel){
-	Dio_WriteChannel(96, 0);
-	Dio_WriteChannel(111, 1);
-
 	(void)Event;
 	(void)Channel;
 }
 
 void I2c_ErrorCallback(uint8 Event, uint8 Channel){
-	Dio_WriteChannel(111, 0);
-	Dio_WriteChannel(96, 1);
-	ok = 1;
-
 	(void)Event;
 	(void)Channel;
 }
 
-#define PIN_BUF_SIZE 3
-#define ADC_COUNT 2
+void CAN0_Wake_Up_IRQHandler(void)
+{
+
+}
+
+void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
+{
+    (void)Controller;
+    (void)ControllerMode;
+}
+
+void CanIf_ControllerBusOff(uint8_t Controller)
+{
+    (void)Controller;
+}
+/*==================================================================================================
+*                                       GLOBAL FUNCTIONS
+==================================================================================================*/
 
 int main(void)
 {
@@ -195,93 +137,34 @@ int main(void)
     Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
-
     Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
     Can_43_FLEXCAN_EnableControllerInterrupts(0);
-
     USBInit(0);
-
-
-
-
-
     TempSensorInit();
-    volatile uint16 cnt,media,min,max;
 
-    //CanMessaging_Test();
-    /*while(1)
-    {
-    	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
-    	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
-    	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
-    	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
-    	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
-    	dataCAN[3]++;
-    	volatile int timp =10000000;
-    		while(timp--);
-    }
-    */
+    //CanMessaging_Test(); //intra in bucla lui Matei
+
     while(1)
     {
-    	/*incearca sa transmiti
-    	pduInfo.swPduHandle = 0;                    // Handle-ul software pentru PDU
-    	pduInfo.length = 8;                         // Lungimea datelor: 8 bytes
-    	pduInfo.sdu = dataCAN;                      // Pointer catre datele mesajului
-    	pduInfo.id = CAN_TARGET_ID;                 // ID-ul mesajului CAN (extended)
-    	//Std_ReturnType Result = Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);*/
-    	/*if(Result == E_OK)
-    	{
-    		cnt =1;
-    	}
-    	else
-    	{
-    	    //while(Result != E_OK);
-    	}*/
+    	setParametriiCharger(1000,50);//100V cu 5A
+    	transmiteCharger();
 
-    	for(cnt = 0; cnt < THERMISTOR_BANKS; cnt++)
-    	{
-    	    	GetTemp(cnt);
-    	}
-
-    	corectieTemperatura();
-    	media=temp_lut[getMedie()];
-    	min=temp_lut[getMin()];
-    	max=temp_lut[getMax()];
-
-    	for (int i = 0; i < THERMISTOR_BANKS; i++)
-    	        {
-    	            for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-    	            {
-    	            	Thermistors_Data.temperaturi[i][j]=temp_lut[Thermistors_Data.ThermistorValues[i][j]];
-
-    	            }
-    	        }
-
-    	int timp =10000000;
-    	    while(timp--);
-
-    	buffTrimitere[0]=0;
-    	buffTrimitere[1]=0x2C;
-    	transmisie(); //read RDSID
-
-    	populeazaCMD(0x04, 0x30);
-    	transmisieCMD(); //ADV pentru activare HV measure
-
+    	citesteToateADC();
+    	corectieValoriADC();
+    	lookUPtemperaturi();
 
     	bmsInit();
     	readBieMieSe();
     	sendAllUart();
 
-    	int dilii=100000;
-    			while(dilii--);
+    	// TODO integrat astea in functie de CAN
     	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (icBaterie.packVoltage/10));
     	CanMessaging_SetValue(Can_TSAC_OverallCurrent, icBaterie.packCurrent/100);
-    	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, Thermistors_Data.temperaturi[13][6]/10);
+    	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
     	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, icBaterie.cellVoltage[0]/1000);
-
     	CanMessaging_Update();
 
-        __asm volatile ("nop");
+        __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
     }
 
 
