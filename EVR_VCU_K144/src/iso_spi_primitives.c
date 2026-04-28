@@ -18,587 +18,600 @@
 #include "thermistor_mux.h"
 #include "usb_monitoring.h"
 
+/*==================================================================================================
+ * LOCAL VARIABLES
+ *==================================================================================================*/
 
-//----local variables
 volatile int delei;
 struct biemese icBaterie;
 uint8 buffTrimitere[64];
 uint8 buffPrimire[64];
-
 uint8 bufferUART[10];
 uint16 dpec;
 
-//--- comenzi
-uint8 pachete[6]={0x44, 0x46, 0x48, 0x4A};
-uint8 pacheteS[6]={0x03, 0x05, 0x07, 0x0D};
+// Comenzi pentru citirea registrelor de tensiune ADC
+uint8 pacheteAverage[4]={0x44, 0x46, 0x48, 0x4A}; // RDACA, RDACB, RDACC, RDACD
+// Comenzi pentru citirea registrelor în mod Open Wire
+uint8 pacheteOW[4]={0x03, 0x05, 0x07, 0x0D};      // RDSVA, RDSVB, RDSVC, RDSVD
 
-volatile int tensiuneMILIvolti1,tensiuneMILIvolti2, tensiuneMILIvolti3;
+volatile int tensiuneMILIvolti1, tensiuneMILIvolti2, tensiuneMILIvolti3;
 extern Thermistors Thermistors_Data;
 
+/*==================================================================================================
+ * GLOBAL FUNCTIONS
+ *==================================================================================================*/
+
+/**
+* @brief          Resetează sistemul BMS.
+* @details        Trimite comanda de Software Reset (SRST) către integratul BMS.
+*
+* @return         void
+*/
 void Bms_RESET(void)
 {
-	buffTrimitere[0]=0;
-	buffTrimitere[1]=0x27;
-	transmisieCMD(); //SRST
+    populeazaCMD(0, 0x27);
+    transmisieCMD(); // SRST
 }
 
+/**
+* @brief          Funcție de test pentru verificarea comunicării cu BMS-ul.
+* @details        Citește ID-ul BMS-ului într-o buclă până când se primește un răspuns valid.
+*
+* @return         void
+*/
 void BmsTest(void)
 {
     do
     {
-    	BmsReadID();
-        //aprinde LED
+        BmsReadID();
     }
-    while(buffPrimire[4]!=255);
-
+    while(buffPrimire[4] != 255);
 }
 
+/**
+* @brief          Citește ID-ul dispozitivului BMS.
+* @details        Trimite comanda RDSID pentru a identifica dispozitivele de pe bus-ul ISO-SPI.
+*
+* @return         void
+*/
 void BmsReadID(void)
 {
-	buffTrimitere[0]=0;
-	buffTrimitere[1]=0x2C;
-	transmisie(); //read RDSID
+    populeazaCMD(0, 0x2C);
+    transmisieCMD(); // read RDSID
 }
 
-
-void transmisie(void)
-{
-	#if 1
-	    	Port_SetPinMode(BMS_CS, PORT_MUX_AS_GPIO);
-	    	Dio_WriteChannel(99, 0);
-	    	delei = 30;
-	    	while(delei){
-	    		delei--;
-	    	}
-	    	Dio_WriteChannel(99, 1);
-	    	Port_ResetPinMode(BMS_CS);
-	    	delei = 3000;
-	    	while(delei){
-	    		delei--;
-	    	}
-	#endif
-	    	//comanda fara pec
-	        //TODO GRIJA MARE LA LSB SI MSB, acum se trimit pe dos
-	        //comanda cu pec
-
-
-	    	uint16 pec = Pec15_Calc(2U, buffTrimitere);
-	    	buffTrimitere[2] = pec >> 8;
-	    	buffTrimitere[3] = pec % 256;
-	        Spi_SetupEB(0u, buffTrimitere, buffPrimire, 64U);
-	#if 0
-	    	Dio_WriteChannel(99, 0);
-	#endif
-
-	        Spi_SyncTransmit(0);
-	#if 0
-	    	Dio_WriteChannel(99, 1);
-	#endif
-	    	delei = 300000;
-	    	while(delei){
-	    		delei--;
-	    	}
-
-	    	//////
-}
-
-void populeazaCMD(char MSB,char LSB)
-{
-	buffTrimitere[0] = MSB;
-	buffTrimitere[1] = LSB;
-}
-
-
-
+/**
+* @brief          Execută transmisia unei comenzi prin SPI cu manipularea CS-ului.
+* @details        Include o secvență de "bit banging" pe pinul de Chip Select pentru a
+* trezi transceiverul/interfața ISO-SPI înainte de transferul sincron.
+*
+* @return         void
+*/
 void transmisieCMD(void)
 {
-	uint16 pec = Pec15_Calc(2U, buffTrimitere);
-	buffTrimitere[2] = pec >> 8;
-	buffTrimitere[3] = pec % 256;
-	#if 1
-			Port_SetPinMode(9, PORT_MUX_AS_GPIO);
-			Dio_WriteChannel(37, 0);
-			delei = 30;
-			while(delei){
-				delei--;
-			}
-			Dio_WriteChannel(37, 1);
-			Port_ResetPinMode(9);
-			delei = 3000;
-			while(delei){
-				delei--;
-			}
-	#endif
-			//comanda fara pec
-			//TODO GRIJA MARE LA LSB SI MSB, acum se trimit pe dos
-			//comanda cu pec
+#if 1
+    Port_SetPinMode(BMS_CS, PORT_MUX_AS_GPIO);
+    Dio_WriteChannel(99, 0);
+    delei = 30;
+    while(delei) { delei--; }
+    Dio_WriteChannel(99, 1);
+    Port_ResetPinMode(BMS_CS);
+    delei = 3000;
+    while(delei) { delei--; }
+#endif
 
+    uint16 pec = Pec15_Calc(2U, buffTrimitere);
+    buffTrimitere[2] = pec >> 8;
+    buffTrimitere[3] = pec % 256;
+    Spi_SetupEB(0u, buffTrimitere, buffPrimire, 64U);
 
-/*AICI*/    Spi_SetupEB(0u, buffTrimitere, buffPrimire, 64u);
-	#if 0
-	    	Dio_WriteChannel(37, 0);
-	#endif
+    Spi_SyncTransmit(0);
 
-	        Spi_SyncTransmit(0);
-	#if 0
-	    	Dio_WriteChannel(37, 1);
-	#endif
-	    	delei = MARELE_DELAY;
-	    	while(delei){
-	    		delei--;
-	    	}
-
-	    	//////
+    delei = 300000;
+    while(delei) { delei--; }
 }
 
+/**
+* @brief          Populează bufferul de trimitere cu codul comenzii.
+*
+* @param[in]      MSB: Most Significant Byte al comenzii.
+* @param[in]      LSB: Least Significant Byte al comenzii.
+*
+* @return         void
+*/
+void populeazaCMD(char MSB, char LSB)
+{
+    buffTrimitere[0] = MSB;
+    buffTrimitere[1] = LSB;
+}
+
+/**
+* @brief          Transmite o configurație extinsă (Write Configuration).
+* @details        Calculează PEC-ul și trimite un pachet de date a cărui lungime
+* depinde de numărul de șunturi și monitoare configurate.
+*
+* @return         void
+*/
 void transmisieWR48(void)
 {
-	uint16 pec = Pec15_Calc(2U, buffTrimitere);
-	buffTrimitere[2] = pec >> 8;
-	buffTrimitere[3] = pec % 256;
-	#if 1
-			Port_SetPinMode(9, PORT_MUX_AS_GPIO);
-			Dio_WriteChannel(37, 0);
-			delei = 30;
-			while(delei){
-				delei--;
-			}
-			Dio_WriteChannel(37, 1);
-			Port_ResetPinMode(9);
-			delei = 3000;
-			while(delei){
-				delei--;
-			}
-	#endif
-			//comanda fara pec
-			//TODO GRIJA MARE LA LSB SI MSB, acum se trimit pe dos
-			//comanda cu pec
+    uint16 pec = Pec15_Calc(2U, buffTrimitere);
+    buffTrimitere[2] = pec >> 8;
+    buffTrimitere[3] = pec % 256;
+#if 1
+    Port_SetPinMode(BMS_CS, PORT_MUX_AS_GPIO);
+    Dio_WriteChannel(99, 0);
+    delei = 30;
+    while(delei) { delei--; }
+    Dio_WriteChannel(99, 1);
+    Port_ResetPinMode(BMS_CS);
+    delei = 3000;
+    while(delei) { delei--; }
+#endif
 
+    Spi_SetupEB(0u, buffTrimitere, buffPrimire, 4 + 8 * NUMARUL_DE_SUNTURI + 8 * NUMARUL_DE_MONITOARE);
+    Spi_SyncTransmit(0);
 
-/*AICI*/    Spi_SetupEB(0u, buffTrimitere, buffPrimire, 4+8*NUMARUL_DE_SUNTURI+8*NUMARUL_DE_MONITOARE);
-	#if 0
-	    	Dio_WriteChannel(37, 0);
-	#endif
-
-	        Spi_SyncTransmit(0);
-	#if 0
-	    	Dio_WriteChannel(37, 1);
-	#endif
-	    	delei = 300000;
-	    	while(delei){
-	    		delei--;
-	    	}
-
-	    	//////
+    delei = 300000;
+    while(delei) { delei--; }
 }
 
-
+/**
+* @brief          Curăță bufferele de transmisie și recepție SPI.
+*
+* @return         void
+*/
 void flushTX()
 {
-	for(int i=0;i<64;i++)
-	{
-		buffTrimitere[i]=0;
-		buffPrimire[i]=0;
-	}
+    for(int i = 0; i < 64; i++)
+    {
+        buffTrimitere[i] = 0;
+        buffPrimire[i] = 0;
+    }
 }
 
-void SRST()
+/**
+* @brief          Citește registrul de configurație A al BMS-ului.
+*
+* @return         void
+*/
+void BmsReadConfigA()
 {
-    populeazaCMD(0x00, 0x27);
-    transmisieCMD(); //SRST
+    populeazaCMD(0x00, 0x02);
+    transmisieCMD(); // RDCFGA
 }
 
-void RDSID()
+/**
+* @brief          Citește registrul de configurație B al BMS-ului.
+*
+* @return         void
+*/
+void BmsReadConfigB()
 {
-    populeazaCMD(0x00, 0x2C);
-    transmisieCMD(); //read RDSID
+    populeazaCMD(0x00, 0x26);
+    transmisieCMD(); // RDCFGB
 }
 
-void RDCFGA()
-{
-    populeazaCMD(0x00,0x02);
-    transmisieCMD();     //RDCFGA
-}
-
-void RDCFGB()
-{
-    populeazaCMD(0x00,0x26);
-    transmisieCMD();     //RDCFGB
-}
-
+/**
+* @brief          Configurează parametrii ADC pentru monitoare și șunturi.
+* @details        Setează pinii GPIO, modurile de operare și calculează PEC-ul pentru
+* fiecare modul din lanțul de comunicație.
+*
+* @return         void
+*/
 void parametriiADC()
 {
-    populeazaCMD(0x00, 0x01);
-    for(int i=0;i<NUMARUL_DE_SUNTURI;i++)
-    {
-        buffTrimitere[4+8*i]=0x01; //default
-        buffTrimitere[5+8*i]=0; //CFGAR1
-        buffTrimitere[6+8*i]=0; //CFGAR2
-        buffTrimitere[7+8*i]=0x5F; //porneste GPIO
-        buffTrimitere[8+8*i]=0x0;
-        buffTrimitere[9+8*i]=0x10;
-        dpec = pec10_calc(false,6U, buffTrimitere+4+8*i);
-        buffTrimitere[10+8*i] = dpec >> 8;
-        buffTrimitere[11+8*i] = dpec % 256;
-    }
-
-    for(int i=0;i<NUMARUL_DE_MONITOARE;i++)
-    {
-        buffTrimitere[4+8*NUMARUL_DE_SUNTURI+8*i]=0x81; //default
-        buffTrimitere[5+8*NUMARUL_DE_SUNTURI+8*i]=0; //CFGAR1
-        buffTrimitere[6+8*NUMARUL_DE_SUNTURI+8*i]=0; //CFGAR2
-        buffTrimitere[7+8*NUMARUL_DE_SUNTURI+8*i]=0xFF; //porneste GPIO
-        buffTrimitere[8+8*NUMARUL_DE_SUNTURI+8*i]=0x03;
-        buffTrimitere[9+8*NUMARUL_DE_SUNTURI+8*i]=0x10;
-        dpec = pec10_calc(false,6U, buffTrimitere+4+8*NUMARUL_DE_SUNTURI+8*i);
-        buffTrimitere[10+8*NUMARUL_DE_SUNTURI+8*i] = dpec >> 8;
-        buffTrimitere[11+8*NUMARUL_DE_SUNTURI+8*i] = dpec % 256;
-    }
-    transmisieWR48();     //WRCFGA
-}
-
-void CLRFLG()
-{
-    populeazaCMD(0x17,0x07);
-    transmisieCMD(); //CLRFLG
-}
-
-void ADCV()
-{
-    populeazaCMD(0x03, 0xE0);
-    transmisieCMD(); //ADCV
-}
-
-void readBieMieSe()
-{
-	populeazaCMD(0x04, 0x30);
-	transmisieCMD(); //ADV pentru activare HV measure
-
-	volatile int delayul=1000000;
-    for(int i=0;i<=3;i++)
-    {
-        delayul = MARELE_DELAY;
-        while (delayul--) {
-            // wait
-        }
-
-        ADCV();
-
-        populeazaCMD(0,pachete[i]);
-        transmisieCMD();
-
-
-
-        for(int j=0;j<NUMARUL_DE_MONITOARE;j++)
-        {
-        	icBaterie.cellVoltage[j*12+0+i*3]=15 * (buffPrimire[5+8*j] * 256 + buffPrimire[4+8*j]) + 150000;
-        	icBaterie.cellVoltage[j*12+1+i*3]=15 * (buffPrimire[7+8*j] * 256 + buffPrimire[6+8*j]) + 150000;
-        	icBaterie.cellVoltage[j*12+2+i*3]=15 * (buffPrimire[9+8*j] * 256 + buffPrimire[8+8*j]) + 150000;
-
-		}
-
-        if (i == 0)
-        {
-                    icBaterie.packCurrent = ((buffPrimire[5+4+8*NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4+4+8*NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3+4+8*NUMARUL_DE_MONITOARE]))*5;
-                    if (icBaterie.packCurrent & 0x800000) {
-                                        	icBaterie.packCurrent |= 0xFF000000;  // Set upper 8 bits to 1
-                                        } else {
-                                        	icBaterie.packCurrent &= 0x00FFFFFF;  // Clear upper 8 bits
-                                        }
-               }
-                else if (i == 1) {
-                	icBaterie.packVoltage = (buffPrimire[2+4+8*NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1+4+8*NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4+8*NUMARUL_DE_MONITOARE];
-                    if (icBaterie.packVoltage & 0x800000) {
-                    	icBaterie.packVoltage |= 0xFF000000;  // Set upper 8 bits to 1
-                    } else {
-                    	icBaterie.packVoltage &= 0x00FFFFFF;  // Clear upper 8 bits
-                    }
-                }
-    }
-
-}
-
-void readBieMieSeOW()
-{
-	volatile int delayul;
-    for (int i = 0; i <= 3; i++) {
-        delayul = MARELE_DELAY;
-        while (delayul--) {
-            // wait
-        }
-
-        populeazaCMD(0x01, 0x6A); //69
-        transmisieCMD(); //ADSV OW par
-
-
-        populeazaCMD(0,pacheteS[i]);
-        transmisieCMD();
-
-
-
-        for(int j=0;j<NUMARUL_DE_MONITOARE;j++)
-        {
-        	tensiuneMILIvolti1=15 * (buffPrimire[5+8*j] * 256 + buffPrimire[4+8*j]) + 150000;
-        	tensiuneMILIvolti2=15 * (buffPrimire[7+8*j] * 256 + buffPrimire[6+8*j]) + 150000;
-        	tensiuneMILIvolti3=15 * (buffPrimire[9+8*j] * 256 + buffPrimire[8+8*j]) + 150000;
-
-        	if(tensiuneMILIvolti1>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+0+i*3]=0;
-        		sendEroareUnitate(j*12+0+i*3);
-        		icBaterie.flag=true;
-        	}
-        	if(tensiuneMILIvolti2>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+1+i*3]=0;
-        		sendEroareUnitate(j*12+1+i*3);
-        		icBaterie.flag=true;
-        	}
-        	if(tensiuneMILIvolti3>CELULA_STUPID)
-        	{
-        		icBaterie.cellVoltage[j*12+2+i*3]=0;
-        		sendEroareUnitate(j*12+2+i*3);
-        		icBaterie.flag=true;
-        	}
-		}
-    }
-}
-
-void sendAllUart()
-{
-    bufferUART[0] = 13;
-    bufferUART[1] = (icBaterie.packCurrent >> 24) % 256;
-    bufferUART[2] = (icBaterie.packCurrent >> 16) % 256;
-    bufferUART[3] = (icBaterie.packCurrent >> 8)  % 256;
-    bufferUART[4] = icBaterie.packCurrent % 256;
-    bufferUART[5] = CRC_calculate(6);
-    Uart_SyncSend(0, bufferUART, 6, 10000000);
-
-    bufferUART[0] = 12;
-    bufferUART[1] = (icBaterie.packVoltage >> 24) % 256;
-    bufferUART[2] = (icBaterie.packVoltage >> 16) % 256;
-    bufferUART[3] = (icBaterie.packVoltage >> 8)  % 256;
-    bufferUART[4] = icBaterie.packVoltage % 256;
-    bufferUART[5] = CRC_calculate(6);
-    Uart_SyncSend(0, bufferUART, 6, 10000000);
-
-
-    for(int i=0;i<BATTERY_CELLS;i++)
-    {
-		bufferUART[0] = 11;
-		bufferUART[1] = 0;
-		bufferUART[2] = i;
-		bufferUART[3] = (icBaterie.cellVoltage[i]>>24) % 256;
-		bufferUART[4] = (icBaterie.cellVoltage[i] >> 16) % 256;
-		bufferUART[5] = (icBaterie.cellVoltage[i] >> 8)  % 256;
-		bufferUART[6] = icBaterie.cellVoltage[i] % 256;
-		bufferUART[7] = CRC_calculate(8);
-		Uart_SyncSend(0, bufferUART, 8, 10000000);
-    }
-
-	for(int i=0;i<THERMISTOR_BANKS;i++)
-	{
-		for(int j=0;j<THERMISTORS_PER_BANK;j++)
-		{
-			bufferUART[0] = 10;
-			bufferUART[1] = 0;
-			bufferUART[2] = i*8+j;
-			bufferUART[3] = 0;
-			bufferUART[4] = 0;
-			bufferUART[5] = (Thermistors_Data.temperaturi[i][j] >> 8)  % 256;
-			bufferUART[6] = Thermistors_Data.temperaturi[i][j] % 256;
-			bufferUART[7] = CRC_calculate(8);
-			Uart_SyncSend(0, bufferUART, 8, 10000000);
-
-
-		}
-	}
-}
-
-void sendAMS(void)
-{
-	if(icBaterie.packCurrent > CURENT_MAX)
-	{
-		icBaterie.flag=true; //cevaEroare
-		icBaterie.stateSHUNT=icBaterie.stateSHUNT|32;
-	}
-	if(icBaterie.packVoltage > TENSIUNE_MAX)
-		{
-			icBaterie.flag=true; //cevaEroare
-			icBaterie.stateSHUNT=icBaterie.stateSHUNT|4;
-		}
-	if(icBaterie.packVoltage < TENSIUNE_MIN)
-			{
-				icBaterie.flag=true; //cevaEroare
-				icBaterie.stateSHUNT=icBaterie.stateSHUNT|2;
-			}
-
-
-
-
-}
-
-
-
-void sendOW()
-{
-	for(int i=0;i<BATTERY_CELLS;i++)
-		{
-			if(icBaterie.cellVoltage[i]<UNDERVOLTAGE_CELL)
-			{
-				icBaterie.flag=true; //cevaEroare
-				icBaterie.stateBMS[i/12]=icBaterie.stateBMS[i/12]|8;
-			}
-			else if(icBaterie.cellVoltage[i]>OVERVOLTAGE_CELL)
-			{
-				icBaterie.flag=true; //cevaEroare
-				icBaterie.stateBMS[i/12]=icBaterie.stateBMS[i/12]|4;
-			}
-		}
-}
-
-
-
-
-void sendErori(void)
-{
-	bufferUART[0]=100;
-	bufferUART[1]=0x07;
-	bufferUART[2]=icBaterie.stateSHUNT;
-	bufferUART[3]=CRC_calculate(4);
-	Uart_SyncSend(0, bufferUART, 4, 10000000);
-
-	bufferUART[0]=100;
-	bufferUART[1]=0x08;
-	bufferUART[2]=icBaterie.stateBMS[0];
-	bufferUART[3]=CRC_calculate(4);
-	Uart_SyncSend(0, bufferUART, 4, 10000000);
-
-	/*bufferUART[0]=100;
-	bufferUART[1]=0x09;
-	bufferUART[2]=icBaterie.stateBMS[1];
-	bufferUART[3]=CRC_calculate(4);
-	Uart_SyncSend(0, bufferUART, 4, 10000000);*/
-
-
-}
-
-void clearStates()
-{
-	for(int i=0;i<NUMARUL_DE_MONITOARE;i++)
-		icBaterie.stateBMS[i]=0;
-	icBaterie.stateSHUNT=0;
-}
-
-
-int getCelula(int index) //returneaza tensiunea celulei X
-{
-	if(index<BATTERY_CELLS)
-	{
-		return icBaterie.cellVoltage[index];
-
-	}
-	return 0;
-}
-
-int getCurent(void)
-{
-	return icBaterie.packCurrent;
-}
-
-int getVoltagePachet(void)
-{
-	return icBaterie.packVoltage;
-}
-
-int CFGAok(void) // returneaza TRUE daca TOTI registrii din serie sunt conform configuratiei
-{
-    RDCFGA();
-    int offset;
+    populeazaCMD(0x00, 0x01); // WRCFGA
     for(int i = 0; i < NUMARUL_DE_SUNTURI; i++)
     {
-        if(buffPrimire[4 + 8*i] != 0x00)        // default
-            return false;
-        if(buffPrimire[5 + 8*i] != 0x00)        // CFGAR1
-            return false;
-        if(buffPrimire[6 + 8*i] != 0x00)        // CFGAR2
-            return false;
-        if(buffPrimire[7 + 8*i] != 0x5F)        // porneste GPIO
-            return false;
-        if(buffPrimire[8 + 8*i] != 0x00)
-            return false;
-        if(buffPrimire[9 + 8*i] != 0x10)
-            return false;
+        buffTrimitere[4 + 8 * i] = 0x01; // default
+        buffTrimitere[5 + 8 * i] = 0;    // CFGAR1
+        buffTrimitere[6 + 8 * i] = 0;    // CFGAR2
+        buffTrimitere[7 + 8 * i] = 0x5F; // porneste GPIO
+        buffTrimitere[8 + 8 * i] = 0x0;
+        buffTrimitere[9 + 8 * i] = 0x10;
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * i);
+        buffTrimitere[10 + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * i] = dpec % 256;
     }
 
     for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
     {
-        offset = 4 + 8*NUMARUL_DE_SUNTURI + 8*i;
-        if(buffPrimire[offset + 0] != 0x81)      // default
-            return false;
-        if(buffPrimire[offset + 1] != 0x00)      // CFGAR1
-            return false;
-        if(buffPrimire[offset + 2] != 0x00)      // CFGAR2
-            return false;
-        if(buffPrimire[offset + 3] != 0xFF)      // porneste GPIO
-            return false;
-        if(buffPrimire[offset + 4] != 0x03)
-            return false;
-        if(buffPrimire[offset + 5] != 0x10)
-            return false;
+        buffTrimitere[4 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x81; // default
+        buffTrimitere[5 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0;    // CFGAR1
+        buffTrimitere[6 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0;    // CFGAR2
+        buffTrimitere[7 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0xFF; // porneste GPIO
+        buffTrimitere[8 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x03;
+        buffTrimitere[9 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x10;
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * NUMARUL_DE_SUNTURI + 8 * i);
+        buffTrimitere[10 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec % 256;
+    }
+    transmisieWR48();
+}
+
+/**
+* @brief          Șterge flag-urile de eroare/status din BMS.
+*
+* @return         void
+*/
+void BmsClearFLAGS()
+{
+    populeazaCMD(0x17, 0x07);
+    transmisieCMD(); // CLRFLG
+}
+
+/**
+* @brief          Inițiază conversia ADC pentru tensiunile celulelor.
+*
+* @return         void
+*/
+void BmsADCV()
+{
+    populeazaCMD(0x03, 0xE0);
+    transmisieCMD(); // ADCV
+}
+
+/**
+* @brief          Inițiază conversia pentru tensiunile auxiliare (High Voltage).
+*
+* @return         void
+*/
+void BmsADV()
+{
+    populeazaCMD(0x04, 0x30);
+    transmisieCMD(); // ADV
+}
+
+/**
+* @brief          Selectează și execută o comandă de citire dintr-un vector de comenzi.
+*
+* @param[in]      vector: Pointer către array-ul de comenzi.
+* @param[in]      id: Indexul comenzii dorite.
+*
+* @return         void
+*/
+void BmsSelectReadCommand(uint8 *vector, uint8 id)
+{
+    populeazaCMD(0, vector[id]);
+    transmisieCMD();
+}
+
+/**
+* @brief          Citește datele principale de la BMS (Tensiuni celule, Curent, Tensiune pachet).
+* @details        Parcurge pachetele de date, calculează valorile reale și gestionează semnul
+* pentru curent și tensiunea totală.
+*
+* @return         void
+*/
+void readBieMieSe()
+{
+    BmsADV();
+    volatile int delayul = MARELE_DELAY;
+    for(int i = 0; i <= 3; i++)
+    {
+        delayul = MARELE_DELAY;
+        while (delayul--) { }
+        BmsSelectReadCommand(pacheteAverage, i);
+
+        for(int j = 0; j < NUMARUL_DE_MONITOARE; j++)
+        {
+            icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
+            icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 15 * (buffPrimire[7 + 8 * j] * 256 + buffPrimire[6 + 8 * j]) + 150000;
+            icBaterie.cellVoltage[j * 12 + 2 + i * 3] = 15 * (buffPrimire[9 + 8 * j] * 256 + buffPrimire[8 * j]) + 150000;
+        }
+
+        if (i == 0)
+        {
+            icBaterie.packCurrent = ((buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3 + 4 + 8 * NUMARUL_DE_MONITOARE])) * 5;
+            if (icBaterie.packCurrent & 0x800000) {
+                icBaterie.packCurrent |= 0xFF000000;
+            } else {
+                icBaterie.packCurrent &= 0x00FFFFFF;
+            }
+        }
+        else if (i == 1) {
+            icBaterie.packVoltage = (buffPrimire[2 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4 + 8 * NUMARUL_DE_MONITOARE];
+            if (icBaterie.packVoltage & 0x800000) {
+                icBaterie.packVoltage |= 0xFF000000;
+            } else {
+                icBaterie.packVoltage &= 0x00FFFFFF;
+            }
+        }
+    }
+}
+
+/**
+* @brief          Inițiază conversia ADC în modul Open Wire.
+*
+* @return         void
+*/
+void BmsADSV_OW()
+{
+    populeazaCMD(0x01, 0x6A);
+    transmisieCMD(); // ADSV OW
+}
+
+/**
+* @brief          Citește tensiunile și verifică integritatea conexiunilor (Open Wire).
+* @details        Dacă o tensiune depășește pragul STUPID, se consideră fir întrerupt.
+*
+* @return         void
+*/
+void readBieMieSeOW()
+{
+    volatile int delayul;
+    for (int i = 0; i <= 3; i++) {
+        delayul = MARELE_DELAY;
+        while (delayul--) { }
+        BmsADSV_OW();
+        BmsSelectReadCommand(pacheteOW, i);
+
+        for(int j = 0; j < NUMARUL_DE_MONITOARE; j++)
+        {
+            tensiuneMILIvolti1 = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
+            tensiuneMILIvolti2 = 15 * (buffPrimire[7 + 8 * j] * 256 + buffPrimire[6 + 8 * j]) + 150000;
+            tensiuneMILIvolti3 = 15 * (buffPrimire[9 + 8 * j] * 256 + buffPrimire[8 * j]) + 150000;
+
+            if(tensiuneMILIvolti1 > CELULA_STUPID)
+            {
+                icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 0;
+                sendEroareUnitate(j * 12 + 0 + i * 3);
+                icBaterie.flagOW[j * 12 + 0 + i * 3] = true;
+            }
+            if(tensiuneMILIvolti2 > CELULA_STUPID)
+            {
+                icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 0;
+                sendEroareUnitate(j * 12 + 1 + i * 3);
+                icBaterie.flagOW[j * 12 + 1 + i * 3] = true;
+            }
+            if(tensiuneMILIvolti3 > CELULA_STUPID)
+            {
+                icBaterie.cellVoltage[j * 12 + 2 + i * 3] = 0;
+                sendEroareUnitate(j * 12 + 2 + i * 3);
+                icBaterie.flagOW[j * 12 + 2 + i * 3] = true;
+            }
+        }
+    }
+}
+
+/**
+* @brief          Trimite toate datele colectate (tensiuni, curent, temperaturi) prin UART/USB.
+*
+* @return         void
+*/
+void sendAllUart()
+{
+    USBSendBMSCurrent(icBaterie.packCurrent);
+    USBSendBMSVoltage(icBaterie.packVoltage);
+
+    for(int i = 0; i < BATTERY_CELLS; i++)
+    {
+        USBSendCellVoltage(i, icBaterie.cellVoltage[i]);
     }
 
+    for(int i = 0; i < THERMISTOR_BANKS; i++)
+    {
+        for(int j = 0; j < THERMISTORS_PER_BANK; j++)
+        {
+            USBSendCellTemperature(i * 8 + j, Thermistors_Data.temperaturi[i][j]);
+        }
+    }
+}
+
+/**
+* @brief          Verifică limitele de siguranță pentru pachetul de baterii (AMS).
+* @details        Monitorizează depășirile de curent și tensiune totală.
+*
+* @return         void
+*/
+void generateAMS(void)
+{
+    if(icBaterie.packCurrent > CURENT_MAX)
+    {
+        icBaterie.flag = true;
+        icBaterie.stateSHUNT |= 32;
+    }
+    if(icBaterie.packVoltage > TENSIUNE_MAX)
+    {
+        icBaterie.flag = true;
+        icBaterie.stateSHUNT |= 4;
+    }
+    if(icBaterie.packVoltage < TENSIUNE_MIN)
+    {
+        icBaterie.flag = true;
+        icBaterie.stateSHUNT |= 2;
+    }
+}
+
+/**
+* @brief          Verifică limitele de tensiune pentru fiecare celulă în parte.
+* @details        Setează flag-uri de eroare pentru Overvoltage și Undervoltage per celulă.
+*
+* @return         void
+*/
+void generateOW()
+{
+    for(int i = 0; i < BATTERY_CELLS; i++)
+    {
+        if(icBaterie.cellVoltage[i] < UNDERVOLTAGE_CELL)
+        {
+            icBaterie.flag = true;
+            icBaterie.stateBMS[i / 12] |= 8;
+        }
+        else if(icBaterie.cellVoltage[i] > OVERVOLTAGE_CELL)
+        {
+            icBaterie.flag = true;
+            icBaterie.stateBMS[i / 12] |= 4;
+        }
+    }
+}
+
+/**
+* @brief          Trimite stările de eroare către interfața UART.
+* @details        Pachetele includ ID-ul erorii, starea curentă și un CRC pentru validare.
+*
+* @return         void
+*/
+void sendErori(void)
+{
+    bufferUART[0] = 100;
+    bufferUART[1] = 0x07;
+    bufferUART[2] = icBaterie.stateSHUNT;
+    bufferUART[3] = CRC_calculate(4);
+    Uart_SyncSend(0, bufferUART, 4, 10000000);
+
+    bufferUART[0] = 100;
+    bufferUART[1] = 0x08;
+    bufferUART[2] = icBaterie.stateBMS[0];
+    bufferUART[3] = CRC_calculate(4);
+    Uart_SyncSend(0, bufferUART, 4, 10000000);
+
+    bufferUART[0] = 100;
+    bufferUART[1] = 0x09;
+    bufferUART[2] = icBaterie.stateBMS[1];
+    bufferUART[3] = CRC_calculate(4);
+    Uart_SyncSend(0, bufferUART, 4, 10000000);
+}
+
+/**
+* @brief          Resetează flag-urile de stare pentru monitoare și șunturi.
+*
+* @return         void
+*/
+void clearStates()
+{
+    for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
+        icBaterie.stateBMS[i] = 0;
+    icBaterie.stateSHUNT = 0;
+}
+
+/**
+* @brief          Returnează tensiunea unei anumite celule.
+*
+* @param[in]      index: Indexul celulei dorite.
+* @return         int Tensiunea celulei în mV sau 0 dacă indexul este invalid.
+*/
+int getCelula(int index)
+{
+    if(index < BATTERY_CELLS)
+    {
+        return icBaterie.cellVoltage[index];
+    }
+    return 0;
+}
+
+/**
+* @brief          Returnează curentul total al pachetului.
+* @return         int Curentul pachetului.
+*/
+int getCurent(void)
+{
+    return icBaterie.packCurrent;
+}
+
+/**
+* @brief          Returnează tensiunea totală a pachetului.
+* @return         int Tensiunea pachetului.
+*/
+int getVoltagePachet(void)
+{
+    return icBaterie.packVoltage;
+}
+
+/**
+* @brief          Validează configurația registrelor BMS.
+* @details        Citește configurația curentă și o compară cu valorile de inițializare.
+*
+* @return         bool TRUE dacă configurația este corectă, FALSE altfel.
+*/
+bool CFGAok(void)
+{
+    BmsReadConfigA();
+    int offset;
+    for(int i = 0; i < NUMARUL_DE_SUNTURI; i++)
+    {
+        if(buffPrimire[4 + 8 * i] != 0x00) return false;
+        if(buffPrimire[5 + 8 * i] != 0x00) return false;
+        if(buffPrimire[6 + 8 * i] != 0x00) return false;
+        if(buffPrimire[7 + 8 * i] != 0x5F) return false;
+        if(buffPrimire[8 + 8 * i] != 0x00) return false;
+        if(buffPrimire[9 + 8 * i] != 0x10) return false;
+    }
+
+    for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
+    {
+        offset = 4 + 8 * NUMARUL_DE_SUNTURI + 8 * i;
+        if(buffPrimire[offset + 0] != 0x81) return false;
+        if(buffPrimire[offset + 1] != 0x00) return false;
+        if(buffPrimire[offset + 2] != 0x00) return false;
+        if(buffPrimire[offset + 3] != 0xFF) return false;
+        if(buffPrimire[offset + 4] != 0x03) return false;
+        if(buffPrimire[offset + 5] != 0x10) return false;
+    }
     return true;
 }
 
+/**
+* @brief          Inițializează sistemul BMS.
+* @details        Configurează ADC, pornește conversiile inițiale și curăță stările.
+*
+* @return         void
+*/
 void bmsInit(void)
 {
-
-    parametriiADC(); //bmsINIT
-    ADCV();
+    parametriiADC();
+    BmsADCV();
+    BmsADV();
     flushTX();
     clearStates();
 }
 
+/**
+* @brief          Trimite o alertă UART pentru o eroare la un anumit modul/index.
+*
+* @param[in]      index: Indexul componentei defecte.
+* @return         void
+*/
 void sendEroareUnitate(int index)
-//trimite eroare ca modulul index este bulit
 {
-	bufferUART[0]=100;
-	bufferUART[1]=0xF8;
-	bufferUART[2]=index+1;
-	bufferUART[3]=CRC_calculate(4);
-	Uart_SyncSend(0, bufferUART, 4, 10000000);
-
+    bufferUART[0] = 100;
+    bufferUART[1] = 0xF8;
+    bufferUART[2] = index + 1;
+    bufferUART[3] = CRC_calculate(4);
+    Uart_SyncSend(0, bufferUART, 4, 10000000);
 }
 
-void readShuntOW()
-{
-	volatile int delayul;
-	delayul = MARELE_DELAY;
-    while (delayul--) {}
-
-    populeazaCMD(0x01, 0xFA); //69
-    transmisieCMD(); //ADSV OW par
-}
-
+/**
+* @brief          Getter pentru curentul pachetului.
+* @return         int Curentul pachetului.
+*/
 int BmsGetPackCurrent(void)
 {
-	return icBaterie.packCurrent;
+    return icBaterie.packCurrent;
 }
 
+/**
+* @brief          Getter pentru tensiunea pachetului.
+* @return         int Tensiunea pachetului.
+*/
 int BmsGetPackVoltage(void)
 {
-	return icBaterie.packVoltage;
+    return icBaterie.packVoltage;
 }
 
+/**
+* @brief          Identifică cea mai mare tensiune de celulă din pachet.
+*
+* @return         int Tensiunea maximă găsită (mV).
+*/
 int BmsGetHighestCellVoltage(void)
 {
-	int max=0;
-	for (int i=0;i<BATTERY_CELLS;i++)
-		if(icBaterie.cellVoltage[i]>max)
-			max=icBaterie.cellVoltage[i];
+    int max = 0;
+    for (int i = 0; i < BATTERY_CELLS; i++)
+        if(icBaterie.cellVoltage[i] > max)
+            max = icBaterie.cellVoltage[i];
 
-	return max;
+    return max;
 }
 
 /*!<**************************************** BMS Driver APIs definitions ********************************************/
@@ -633,7 +646,7 @@ const uint16 Crc15Table[256] =
   0x585a, 0x8ba7, 0x4e3e, 0x450c, 0x8095
 };
 
-/* Pre-computed CRC10 Table */
+/* Pre-computed CRC10 Table
 static const uint16 crc10Table[256] =
     {
         0x000, 0x08f, 0x11e, 0x191, 0x23c, 0x2b3, 0x322, 0x3ad, 0x0f7, 0x078, 0x1e9, 0x166, 0x2cb, 0x244, 0x3d5, 0x35a,
@@ -652,7 +665,7 @@ static const uint16 crc10Table[256] =
         0x038, 0x0b7, 0x126, 0x1a9, 0x204, 0x28b, 0x31a, 0x395, 0x0cf, 0x040, 0x1d1, 0x15e, 0x2f3, 0x27c, 0x3ed, 0x362,
         0x20a, 0x285, 0x314, 0x39b, 0x036, 0x0b9, 0x128, 0x1a7, 0x2fd, 0x272, 0x3e3, 0x36c, 0x0c1, 0x04e, 0x1df, 0x150,
         0x3e4, 0x36b, 0x2fa, 0x275, 0x1d8, 0x157, 0x0c6, 0x049, 0x313, 0x39c, 0x20d, 0x282, 0x12f, 0x1a0, 0x031, 0x0be};
-/* Const 16 section end */
+Const 16 section end */
 
 
 /**

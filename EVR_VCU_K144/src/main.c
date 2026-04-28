@@ -160,6 +160,7 @@ int main(void)
 
     	bmsInit();
     	readBieMieSe();
+    	readBieMieSeOW();
     	sendAllUart();
 
     	// TODO integrat astea in functie de CAN
