@@ -71,7 +71,6 @@ extern "C" {
 /* List of configuration for interrupts  */
 static const IntCtrl_Ip_IrqConfigType aIrqConfiguration[] = {
     {LPUART1_RxTx_IRQn, (boolean)TRUE, 0U, LPUART_UART_IP_1_IRQHandler},
-    {LPI2C0_Master_IRQn, (boolean)TRUE, 0U, LPI2C0_Master_IRQHandler},
     {PORTC_IRQn, (boolean)TRUE, 0U, PORT_CI_ICU_IP_C_EXT_IRQ_ISR},
     {ADC0_IRQn, (boolean)TRUE, 0U, Adc_0_Isr},
     {ADC1_IRQn, (boolean)TRUE, 0U, Adc_1_Isr},
@@ -82,7 +81,7 @@ static const IntCtrl_Ip_IrqConfigType aIrqConfiguration[] = {
     {CAN0_ORed_16_31_MB_IRQn, (boolean)TRUE, 0U, CAN0_ORED_16_31_MB_IRQHandler},
 };
 const IntCtrl_Ip_CtrlConfigType intCtrlConfig = {
-    10U,
+    9U,
     aIrqConfiguration
 };
 

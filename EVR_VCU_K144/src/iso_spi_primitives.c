@@ -5,7 +5,6 @@
  *      Author: cosaa
  */
 #include "iso_spi_primitives.h"
-#include "CDD_I2c.h"
 #include "Dio.h"
 #include "Icu.h"
 #include "Mcu.h"
@@ -14,7 +13,6 @@
 #include "Port.h"
 #include "Spi.h"
 #include "CDD_Uart.h"
-#include "7-segment-display.h"
 #include "thermistor_mux.h"
 #include "usb_monitoring.h"
 

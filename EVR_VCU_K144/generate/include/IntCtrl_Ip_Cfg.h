@@ -72,7 +72,6 @@
 extern const IntCtrl_Ip_CtrlConfigType intCtrlConfig;
 /* Declaration of the ISR Handlers */
 extern void LPUART_UART_IP_1_IRQHandler(void);
-extern void LPI2C0_Master_IRQHandler(void);
 extern void PORT_CI_ICU_IP_C_EXT_IRQ_ISR(void);
 extern void Adc_0_Isr(void);
 extern void Adc_1_Isr(void);

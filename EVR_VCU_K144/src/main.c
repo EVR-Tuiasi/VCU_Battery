@@ -12,7 +12,6 @@ extern "C" {
 ==================================================================================================*/
 #include "Adc.h"
 #include "Mcl.h"
-#include "CDD_I2c.h"
 #include "Dio.h"
 #include "Icu.h"
 #include "Mcu.h"
@@ -74,16 +73,6 @@ void IntrerupereBTN(void){
 
 }
 
-void I2c_Callback(uint8 Event, uint8 Channel){
-	(void)Event;
-	(void)Channel;
-}
-
-void I2c_ErrorCallback(uint8 Event, uint8 Channel){
-	(void)Event;
-	(void)Channel;
-}
-
 void CAN0_Wake_Up_IRQHandler(void)
 {
 
@@ -131,7 +120,6 @@ int main(void)
     Platform_Init(NULL_PTR);
     Adc_Init(NULL_PTR);
     Uart_Init(NULL_PTR);
-    I2c_Init(NULL_PTR);
     Icu_Init(NULL_PTR);
     Spi_Init(NULL_PTR);
     Icu_EnableNotification(0);
