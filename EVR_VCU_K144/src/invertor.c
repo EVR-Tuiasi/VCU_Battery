@@ -56,7 +56,7 @@ uint8 currentDebounceIndex = 0U, voltageDebounceIndex = 0U;
 /*==================================================================================================
 *                                       LOCAL FUNCTIONS
 ==================================================================================================*/
-boolean InverterReceivedMessage(Can_HwHandleType handle, Can_IdType id, PduLengthType length, uint8* data){
+/*boolean InverterReceivedMessage(Can_HwHandleType handle, Can_IdType id, PduLengthType length, uint8* data){
 	uint64 mean = 0;
 	if(length == 8U){
 		if((id & 0x3FFFFFFF) == 0x0CF11E05){//mesaj tip 1 invertor, mascat deoarece driverul de CAN modifica cei mai din stanga doi biti
@@ -87,117 +87,7 @@ boolean InverterReceivedMessage(Can_HwHandleType handle, Can_IdType id, PduLengt
 	return TRUE;
 }
 
-
-
-
-/*==================================================================================================
-*                                       GLOBAL FUNCTIONS
-==================================================================================================*/
-void InverterInit(void){
-	/*(85, STD_HIGH);
-	volatile int i = 1000000;
-	while(i--);
-	Dio_WriteChannel(88, STD_HIGH);*/
-
-
-}
-
-
-uint16 InverterGetRpm(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		//return InverterInstance[InverterIndex].rpm;
-
-		if(InverterInstance[InverterIndex].rpm > 6000U){
-			return 6000U;
-		}
-		else if(InverterInstance[InverterIndex].rpm < 35U){
-			return 0U;
-		}
-		else{
-			return InverterInstance[InverterIndex].rpm;
-		}
-	}
-	else{
-		return 0;
-	}
-}
-
-uint16 InverterGetCurrent(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		//return InverterInstance[InverterIndex].current;
-
-		if(InverterInstance[InverterIndex].current > 4000U){
-			return 4000U;
-		}
-		else{
-			return InverterInstance[InverterIndex].current;
-		}
-	}
-	else{
-		return 0;
-	}
-}
-
-uint16 InverterGetVoltage(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		//return InverterInstance[InverterIndex].voltage;
-
-		if(InverterInstance[InverterIndex].voltage > 1800U){
-			return 1800U;
-		}
-		else{
-			return InverterInstance[InverterIndex].voltage;
-		}
-	}
-	else{
-		return 0;
-	}
-}
-
-uint8 InverterGetPedalPercent(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		return ((uint16)InverterInstance[InverterIndex].throttle) * 25U / 64U;
-	}
-	else{
-		return 0;
-	}
-}
-
-uint8 InverterGetControllerTemperature(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		if(InverterInstance[InverterIndex].controllerTemperature <= 40U){
-			return 0;
-		}
-		else{
-			return InverterInstance[InverterIndex].controllerTemperature - 40U;
-		}
-	}
-	else{
-		return 0;
-	}
-}
-
-uint8 InverterGetMotorTemperature(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		if(InverterInstance[InverterIndex].motorTemperature <= 30U){
-			return 0;
-		}
-		else{
-			return InverterInstance[InverterIndex].motorTemperature - 30U;
-		}
-	}
-	else{
-		return 0;
-	}
-}
-uint8 InverterGetThrottle(uint8 InverterIndex){
-	if(InverterIndex < 2U){
-		return (((uint16)InverterInstance[InverterIndex].throttle) * 25U) / 64U;
-	}
-	else{
-		return 0;
-	}
-}
+*/
 
 #ifdef __cplusplus
 }

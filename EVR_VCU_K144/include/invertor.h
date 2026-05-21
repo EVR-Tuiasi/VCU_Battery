@@ -55,16 +55,7 @@ typedef struct{
 /*==================================================================================================
 *                                    FUNCTION PROTOTYPES
 ==================================================================================================*/
-void CanIf_PrimitMesaj1(PduIdType RxPduId, const PduInfoType * PduInfoPtr);
-void CanIf_PrimitMesaj2(PduIdType RxPduId, const PduInfoType * PduInfoPtr);
-void InverterInit(void);
-uint16 InverterGetRpm(uint8 InverterIndex);
-uint16 InverterGetCurrent(uint8 InverterIndex);
-uint16 InverterGetVoltage(uint8 InverterIndex);
-uint8 InverterGetPedalPercent(uint8 InverterIndex);
-uint8 InverterGetControllerTemperature(uint8 InverterIndex);
-uint8 InverterGetMotorTemperature(uint8 InverterIndex);
-uint8 InverterGetThrottle(uint8 InverterIndex);
+
 
 #ifdef __cplusplus
 }

@@ -135,11 +135,7 @@ int main(void)
     while(1)
     {
     	//daca am subtensiune pornesc chargeru
-    	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
-    	{
-    		setParametriiCharger(1000,50);//100V cu 5A
-    		transmiteCharger();
-    	}
+
 
 
     	citesteToateADC();
@@ -157,6 +153,12 @@ int main(void)
     	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
     	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);
     	CanMessaging_Update();
+
+    	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
+    	    	{
+    	    		setParametriiCharger(1000,50);//100V cu 5A
+    	    		transmiteCharger();
+    	    	}
 
         __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
         // TODO gasit o metoda mai buna pentru breakpoint artificial
