@@ -164,7 +164,7 @@ void USBSendBrakePedal(uint16 Value){
 	buffer[3] = CRC_calculate(4);
 	Uart_SyncSend(UART_Channel, buffer, 4, 50000000);
 }
-
+/*
 uint8 CRC_calculate(uint8 length){
 	uint8 crc=0, message[length];
 	uint16 divisor = 0x8D, dividend;
@@ -194,7 +194,7 @@ uint8 CRC_calculate(uint8 length){
 	crc = (dividend % 256);
 
 	return crc;
-}
+}*/
 
 #ifdef __cplusplus
 }

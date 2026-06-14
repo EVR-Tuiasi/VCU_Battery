@@ -148,10 +148,23 @@ int main(void)
     	sendAllUart();
 
     	// TODO integrat astea in functie de CAN
-    	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
+    	/*CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
     	CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
     	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
     	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);
+    	for (int i =0;i<24;i++)
+    	{
+    		CanMessaging_SetCellVoltage(20 ,i);
+    	}*/
+
+    	for (int i = 0; i < THERMISTOR_BANKS; i++)
+    	    {
+    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+    	        {
+    	        	CanMessaging_SetCellTemperature((i*16+j)*10,i*16+j);
+    	        }
+    	    }
+
     	CanMessaging_Update();
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
