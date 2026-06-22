@@ -110,13 +110,13 @@ void CanMessaging_Test(void){
 		CanMessaging_SetValue(Can_TSAC_LowestCellVoltage, cnt);
 		CanMessaging_SetValue(Can_TSAC_LowestCellTemperature, cnt);
 
-		for(uint16_t index = 0; index <= CELLS_NUM; index++){
-			CanMessaging_SetCellVoltageErrors(cnt & 1, index);
+		for(uint16_t index = 0; index < CELLS_NUM; index++){
+			CanMessaging_SetCellVoltageErrors(0, index);
 			CanMessaging_SetCellVoltage(cnt, index);
 		}
 
-		for(uint16_t index = 0; index <= THERMISTOR_NUM; index++){
-			CanMessaging_SetCellTemperatureErrors(cnt & 1, index);
+		for(uint16_t index = 0; index < THERMISTOR_NUM; index++){
+			CanMessaging_SetCellTemperatureErrors(0, index);
 			CanMessaging_SetCellTemperature(cnt, index);
 		}
 
@@ -193,7 +193,7 @@ void CanMessaging_Test(void){
 
 		cnt+=1;
 		CanMessaging_Update();
-		i=100000;
+		i=1000000;
 		while(i--);
 	}
 }
@@ -245,7 +245,7 @@ void CanMessaging_Update(void){
 	pduInfo.id=idCanFrana | ID_MASK;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
 	i=500000;
-	while(i--);
+	while(i--);*/
 
 	CanMessaging_CreateBuffer(idCanBaterie1);
 	pduInfo.sdu=bufferCan;
@@ -254,7 +254,7 @@ void CanMessaging_Update(void){
 	i=500000;
 	while(i--);
 
-	for(uint16_t index = 0; index <= CELLS_LINES; index++){
+	for(uint16_t index = 0; index < CELLS_LINES; index++){
 		CanMessaging_CreateCellVoltageBuffer(index);
 		pduInfo.sdu=bufferCan;
 		pduInfo.id=idCanBaterie2 | ID_MASK;
@@ -262,7 +262,7 @@ void CanMessaging_Update(void){
 		i=500000;
 		while(i--);
 	}
-	*/
+
 	for(uint16_t index = 0; index <= THERMISTOR_LINES; index++){
 		CanMessaging_CreateCellTemperatureBuffer(index);
 		pduInfo.sdu=bufferCan;
@@ -271,7 +271,7 @@ void CanMessaging_Update(void){
 		i=500000;
 		while(i--);
 	}
-	/*
+
 	CanMessaging_CreateBuffer(idCanBaterie4);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanBaterie4 | ID_MASK;
@@ -284,15 +284,15 @@ void CanMessaging_Update(void){
 	pduInfo.id=idCanBaterie5 | ID_MASK;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
 	i=500000;
-	while(i--);*/
-	/*
-	CanMessaging_CreateBuffer(idCanComunicatii);
+	while(i--);
+
+	/*CanMessaging_CreateBuffer(idCanComunicatii);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanComunicatii | ID_MASK;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
 	i=500000;
-	while(i--);
-	*/
+	while(i--);*/
+
 }
 
 void CanMessaging_SetValue(CanMonitoredValue_t DesiredValueType, uint32_t Value){
@@ -845,7 +845,7 @@ boolean CanMessaging_ReceiveData(Can_HwHandleType handle, Can_IdType id, PduLeng
 			break;
 
 		case idCanBaterie2:{
-			uint8_t index = (uint8_t)((data[0])) & (0x03);
+			uint8_t index = (uint8_t)((data[0])) & (0x07);
 			index = index * 5;
 			CanMessaging_SetCellVoltageErrors(((data[0] & (1<<7)) >> 7), index + 0);
 			CanMessaging_SetCellVoltageErrors(((data[0] & (1<<6)) >> 6), index + 1);

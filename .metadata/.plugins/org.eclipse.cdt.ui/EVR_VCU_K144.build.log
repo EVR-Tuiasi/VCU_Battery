@@ -1,0 +1,11 @@
+22:17:33 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+
+22:17:34 Build Finished. 0 errors, 0 warnings. (took 463ms)
+

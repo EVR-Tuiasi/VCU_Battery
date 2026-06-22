@@ -1,0 +1,120 @@
+21:57:50 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+21:59:04 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:01:59 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:02:06 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:02:53 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:03:27 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:03:50 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:03:56 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:04:07 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:14:17 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:14:20 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:14:34 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:15:03 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:15:35 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
+22:17:33 **** Incremental Build of configuration Debug_FLASH for project EVR_VCU_K144 ****
+make -j8 all 
+Invoking: Standard S32DS Print Size
+arm-none-eabi-size --format=berkeley EVR_VCU_K144.elf
+   text	   data	    bss	    dec	    hex	filename
+  72456	    308	  11348	  84112	  14890	EVR_VCU_K144.elf
+Finished building: EVR_VCU_K144.siz
+ 
