@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding= "UTF-8" ?>
-<configuration name="S32K144" xsi:schemaLocation="http://mcuxpresso.nxp.com/XSD/mex_configuration_18 http://mcuxpresso.nxp.com/XSD/mex_configuration_18.xsd" uuid="4179bacd-df3b-49d1-b875-310026dec15f" version="18" xmlns="http://mcuxpresso.nxp.com/XSD/mex_configuration_18" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<configuration name="S32K144" xsi:schemaLocation="http://mcuxpresso.nxp.com/XSD/mex_configuration_15 http://mcuxpresso.nxp.com/XSD/mex_configuration_15.xsd" uuid="4179bacd-df3b-49d1-b875-310026dec15f" version="15" xmlns="http://mcuxpresso.nxp.com/XSD/mex_configuration_15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <common>
       <processor>S32K144</processor>
       <package>S32K144_LQFP100</package>
@@ -11,13 +11,13 @@
    </common>
    <preferences>
       <validate_boot_init_only>true</validate_boot_init_only>
+      <generate_extended_information>false</generate_extended_information>
       <generate_code_modified_registers_only>false</generate_code_modified_registers_only>
       <update_include_paths>true</update_include_paths>
-      <enable_parallel_routing>true</enable_parallel_routing>
       <generate_registers_defines>false</generate_registers_defines>
    </preferences>
    <tools>
-      <pins name="Pins" version="17.0" enabled="true" update_project_code="true">
+      <pins name="Pins" version="15.0" enabled="true" update_project_code="true">
          <generated_project_files>
             <file path="board/Port_Ci_Port_Ip_Cfg.c" update_enabled="true"/>
             <file path="board/Port_Ci_Port_Ip_Cfg.h" update_enabled="true"/>
@@ -25,6 +25,7 @@
          <pins_profile>
             <processor_version>0.0.0</processor_version>
             <external_user_signals>
+               <routingDetailsColumns/>
                <properties/>
             </external_user_signals>
          </pins_profile>
@@ -245,7 +246,7 @@
             </function>
          </functions_list>
       </pins>
-      <clocks name="Clocks" version="17.0" enabled="true" update_project_code="true">
+      <clocks name="Clocks" version="13.0" enabled="true" update_project_code="true">
          <generated_project_files>
             <file path="generate/include/Clock_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Clock_Ip_Cfg_Defines.h" update_enabled="true"/>
@@ -269,10 +270,20 @@
                         <data>INPUT</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="PinSignal" resourceId="SOSC.EXTAL" description="&apos;External pin&apos; (Pins tool id: SOSC.EXTAL, Clocks tool id: SOSC.EXTAL) needs to have &apos;INPUT&apos; direction" problem_level="1" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="direction" evaluation="">
+                        <data>INPUT</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="PinSignal" resourceId=".rtc_clkin" description="&apos;RTC_CLKIN&apos; (Pins tool id: .rtc_clkin, Clocks tool id: RTC.RTC_CLKIN) needs to be routed" problem_level="1" source="Clocks:BOARD_BootClockRUN">
                      <feature name="routed" evaluation="">
                         <data>true</data>
                      </feature>
+                     <feature name="direction" evaluation="">
+                        <data>INPUT</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PinSignal" resourceId=".rtc_clkin" description="&apos;RTC_CLKIN&apos; (Pins tool id: .rtc_clkin, Clocks tool id: RTC.RTC_CLKIN) needs to have &apos;INPUT&apos; direction" problem_level="1" source="Clocks:BOARD_BootClockRUN">
                      <feature name="direction" evaluation="">
                         <data>INPUT</data>
                      </feature>
@@ -420,7 +431,7 @@
             <processor_version>N/A</processor_version>
          </ice_profile>
       </ice>
-      <periphs name="Peripherals" version="15.0" enabled="true" update_project_code="true">
+      <periphs name="Peripherals" version="14.0" enabled="true" update_project_code="true">
          <dependencies>
             <dependency resourceType="SWComponent" resourceId="platform.driver.dio" description="dio is not found in the toolchain/IDE project. The project will not compile!" problem_level="2" source="Peripherals">
                <feature name="enabled" evaluation="equal">

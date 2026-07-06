@@ -161,7 +161,7 @@ int main(void)
     	    {
     	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
     	        {
-    	        	CanMessaging_SetCellTemperature(Thermistors_Data.ThermistorValues[i][j]*10,i*16+j);
+    	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
     	        }
     	    }
 
