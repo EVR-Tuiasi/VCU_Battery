@@ -315,7 +315,7 @@
                   <clock_output id="FIRCDIV2_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
                   <clock_output id="FIRCOUT.outFreq" value="48 MHz" locked="false" accuracy=""/>
                   <clock_output id="FLASH_CLK.outFreq" value="12 MHz" locked="false" accuracy=""/>
-                  <clock_output id="FLEXCAN0_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXCAN0_CLK.outFreq" value="48 MHz" locked="true" accuracy="0.001"/>
                   <clock_output id="FLEXCAN1_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
                   <clock_output id="FLEXCAN2_CLK.outFreq" value="48 MHz" locked="false" accuracy=""/>
                   <clock_output id="FTFC0_CLK.outFreq" value="12 MHz" locked="false" accuracy=""/>
@@ -1766,6 +1766,10 @@
                                     <struct name="2">
                                        <setting name="Name" value="I2CClock"/>
                                        <setting name="McuClockFrequencySelect" value="LPI2C0_CLK"/>
+                                    </struct>
+                                    <struct name="3">
+                                       <setting name="Name" value="FlexCAN0"/>
+                                       <setting name="McuClockFrequencySelect" value="FIRC_CLK"/>
                                     </struct>
                                  </array>
                               </struct>
@@ -3303,13 +3307,13 @@
                                  <setting name="CanClockFromBus" value="true"/>
                                  <setting name="CanControllerDefaultBaudrate" value="/Can_43_FLEXCAN/Can/CanConfigSet/CanController_0/CanControllerBaudrateConfig_0"/>
                                  <array name="CanControllerEcucPartitionRef"/>
-                                 <setting name="CanCpuClockRef" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/McuClockReferencePoint_0"/>
+                                 <setting name="CanCpuClockRef" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/FlexCAN0"/>
                                  <setting name="CanCpuClockRefAlternate" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/McuClockReferencePoint_0"/>
                                  <array name="CanWakeupSourceRef"/>
                                  <array name="CanControllerBaudrateConfig">
                                     <struct name="0">
                                        <setting name="Name" value="CanControllerBaudrateConfig_0"/>
-                                       <setting name="CanAdvancedSetting" value="false"/>
+                                       <setting name="CanAdvancedSetting" value="true"/>
                                        <setting name="CanBusLength" value="40"/>
                                        <setting name="CanPropDelayTranceiver" value="150"/>
                                        <setting name="CanTxArbitrationStartDelay" value="12"/>

@@ -19,7 +19,7 @@ outputs:
 - {id: FIRCDIV2_CLK.outFreq, value: 48 MHz}
 - {id: FIRCOUT.outFreq, value: 48 MHz}
 - {id: FLASH_CLK.outFreq, value: 12 MHz}
-- {id: FLEXCAN0_CLK.outFreq, value: 48 MHz}
+- {id: FLEXCAN0_CLK.outFreq, value: 48 MHz, locked: true, accuracy: '0.001'}
 - {id: FLEXCAN1_CLK.outFreq, value: 48 MHz}
 - {id: FLEXCAN2_CLK.outFreq, value: 48 MHz}
 - {id: FTFC0_CLK.outFreq, value: 12 MHz}

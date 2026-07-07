@@ -247,12 +247,12 @@ void CanMessaging_Update(void){
 	i=500000;
 	while(i--);*/
 
-	CanMessaging_CreateBuffer(idCanBaterie1);
+	/*CanMessaging_CreateBuffer(idCanBaterie1);
 	pduInfo.sdu=bufferCan;
 	pduInfo.id=idCanBaterie1 | ID_MASK;
 	Can_43_FLEXCAN_Write(CAN_HTH_HANDLE, &pduInfo);
 	i=500000;
-	while(i--);
+	while(i--);*/
 
 	for(uint16_t index = 0; index < CELLS_LINES; index++){
 		CanMessaging_CreateCellVoltageBuffer(index);
