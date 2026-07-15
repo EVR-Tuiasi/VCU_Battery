@@ -2244,7 +2244,6 @@ extern "C" {
 *
 *
 */
-#define PortConf_PortPin_BRAKELIGHT 0
 #define PortConf_PortPin_INV_OFF 1
 #define PortConf_PortPin_CAN_TX1 2
 #define PortConf_PortPin_CAN0_EN 3
@@ -2260,41 +2259,49 @@ extern "C" {
 #define PortConf_PortPin_BRK02 13
 #define PortConf_PortPin_ECO02 14
 #define PortConf_PortPin_FWD02 15
-#define PortConf_PortPin_REV02 16
 #define PortConf_PortPin_ACC01 17
 #define PortConf_PortPin_RX_UART01 18
-#define PortConf_PortPin_TX_UART01 19
-#define PortConf_PortPin_ECO01 20
-#define PortConf_PortPin_FWD01 21
-#define PortConf_PortPin_BRK01 22
-#define PortConf_PortPin_REV01 23
+#define PortConf_PortPin_T_1 19
+#define PortConf_PortPin_T_2 20
+#define PortConf_PortPin_T_3 21
+#define PortConf_PortPin_T_4 22
+#define PortConf_PortPin_T_5 23
 #define PortConf_PortPin_PWM_2 24
-#define PortConf_PortPin_PWM_1 25
-#define PortConf_PortPin_PWM_3 26
-#define PortConf_PortPin_PWM_4 27
+#define PortConf_PortPin_T_6 25
+#define PortConf_PortPin_T_7 26
+#define PortConf_PortPin_T_8 27
 #define PortConf_PortPin_CAN0_TX 28
 #define PortConf_PortPin_CAN0_RX 29
-#define PortConf_PortPin_CAN0_STB 30
-#define PortConf_PortPin_BRAKELIGHT_maomor 31
-#define PortConf_PortPin_PortPin_32 32
-#define PortConf_PortPin_PortPin_33 33
-#define PortConf_PortPin_PortPin_34 34
-#define PortConf_PortPin_PortPin_35 35
-#define PortConf_PortPin_PortPin_36 36
-#define PortConf_PortPin_PortPin_37 37
-#define PortConf_PortPin_PortPin_38 38
-#define PortConf_PortPin_PortPin_39 39
-#define PortConf_PortPin_PortPin_40 40
+#define PortConf_PortPin_G_1 30
+#define PortConf_PortPin_G_2 31
+#define PortConf_PortPin_G_3 32
+#define PortConf_PortPin_G_4 33
+#define PortConf_PortPin_G_5 34
+#define PortConf_PortPin_G_6 35
+#define PortConf_PortPin_G_7 36
+#define PortConf_PortPin_G_8 37
+#define PortConf_PortPin_G_9 38
+#define PortConf_PortPin_G_10 39
+#define PortConf_PortPin_G_11 40
+#define PortConf_PortPin_G_12 41
+#define PortConf_PortPin_G_13 42
+#define PortConf_PortPin_G_14 43
+#define PortConf_PortPin_G_15 44
+#define PortConf_PortPin_G_16 45
+#define PortConf_PortPin_BMS_CS 46
+#define PortConf_PortPin_BMS_MOSI 47
+#define PortConf_PortPin_BMS_MISO 0
+#define PortConf_PortPin_BMS_SCK 16
 
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)41)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)48)
 
 /**
 * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (99U)
+#define PORT_MAX_UNUSED_PADS_U16    (92U)
 /**
 * @brief Port driver Pre-Compile configuration switch
 */

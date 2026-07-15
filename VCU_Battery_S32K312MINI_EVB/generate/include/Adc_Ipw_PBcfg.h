@@ -101,6 +101,36 @@ extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_0;
 */
 extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_1;
 
+/**
+* @brief          ADC Ipw Group 2 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_2;
+
+/**
+* @brief          ADC Ipw Group 3 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_3;
+
+/**
+* @brief          ADC Ipw Group 4 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_4;
+
+/**
+* @brief          ADC Ipw Group 5 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_5;
+
+/**
+* @brief          ADC Ipw Group 6 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_6;
+
+/**
+* @brief          ADC Ipw Group 7 Config.
+*/
+extern const Adc_Ipw_GroupConfig AdcIpwGroupConfig_7;
+
 #endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
 
 

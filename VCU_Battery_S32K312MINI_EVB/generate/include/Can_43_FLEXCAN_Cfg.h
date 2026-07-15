@@ -243,7 +243,7 @@ extern "C"{
 /**
 *   @brief      Number Of HardwareObject Config
 */
-#define CAN_43_FLEXCAN_HWOBJECT_CONFIG_COUNT    ((Can_HwHandleType)24U)
+#define CAN_43_FLEXCAN_HWOBJECT_CONFIG_COUNT    ((Can_HwHandleType)25U)
 
 /**
 *   @brief      Symbolic Name generated for Can Controller
@@ -276,6 +276,7 @@ extern "C"{
 #define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_2_TRANSMIT    ((Can_HwHandleType)21U)
 #define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_CHARGER_TRANSMIT    ((Can_HwHandleType)22U)
 #define Can_43_FLEXCANConf_CanHardwareObject_COMUNICATII_TRANSMIT    ((Can_HwHandleType)23U)
+#define Can_43_FLEXCANConf_CanHardwareObject_CHARGER_TX    ((Can_HwHandleType)24U)
 
 /**
 *   @brief      Can Wakeup Polling support

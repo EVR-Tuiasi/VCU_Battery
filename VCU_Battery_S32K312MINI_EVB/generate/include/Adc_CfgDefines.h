@@ -271,7 +271,7 @@ extern "C"{
 /**
 * @brief           max number of groups configured across all configset.
 */
-#define ADC_MAX_GROUPS                      (2U)
+#define ADC_MAX_GROUPS                      (8U)
 
 /**
 * @brief           Invalid Hardware group ID to determine there is no ongoing hardware group
@@ -401,6 +401,9 @@ extern "C"{
 #define AdcChannel_2                       (0x2U)
 #define AdcChannel_3                       (0x3U)
 #define AdcChannel_4                       (0x1000U)
+#define AdcChannel_5                       (0x1001U)
+#define AdcChannel_6                       (0x1002U)
+#define AdcChannel_7                       (0x1003U)
 
 /**
 * @brief           Symbolic names of threshold control register with encoded value.
@@ -432,6 +435,12 @@ extern "C"{
 
 #define AdcGroup_0                                (0U)
 #define AdcGroup_1                                (1U)
+#define AdcGroup_2                                (2U)
+#define AdcGroup_3                                (3U)
+#define AdcGroup_4                                (4U)
+#define AdcGroup_5                                (5U)
+#define AdcGroup_6                                (6U)
+#define AdcGroup_7                                (7U)
 
 /**
 * @brief           Symbolic names of groups - ecuc 2108 compliant.
@@ -439,6 +448,12 @@ extern "C"{
 
 #define AdcConf_AdcGroup_AdcGroup_0               (0U)
 #define AdcConf_AdcGroup_AdcGroup_1               (1U)
+#define AdcConf_AdcGroup_AdcGroup_2               (2U)
+#define AdcConf_AdcGroup_AdcGroup_3               (3U)
+#define AdcConf_AdcGroup_AdcGroup_4               (4U)
+#define AdcConf_AdcGroup_AdcGroup_5               (5U)
+#define AdcConf_AdcGroup_AdcGroup_6               (6U)
+#define AdcConf_AdcGroup_AdcGroup_7               (7U)
 
 /**
 * @brief           Adc Autosar Extension Enable/Disable invalid group index.

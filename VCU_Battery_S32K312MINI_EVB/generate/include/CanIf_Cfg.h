@@ -143,6 +143,9 @@ extern "C"{
 /* Symbolic name for CanIfTxPduCfg_COMUNICATII */
 #define CanIfTxPduCfg_COMUNICATII    ((PduIdType)11U)
 
+/* Symbolic name for CanIfTxPduCfg_CHARGER */
+#define CanIfTxPduCfg_CHARGER    ((PduIdType)12U)
+
 /* Symbolic name for CanIfRxPduCfg_INVERTOR_STANGA */
 #define CanIfRxPduCfg_INVERTOR_STANGA    ((PduIdType)0U)
 

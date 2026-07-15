@@ -93,12 +93,18 @@ extern "C"{
 
 #define ADC_CFGSET_GROUP_0_CHANNELS      (4U)
 #define ADC_CFGSET_GROUP_1_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_2_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_3_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_4_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_5_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_6_CHANNELS      (1U)
+#define ADC_CFGSET_GROUP_7_CHANNELS      (1U)
 
 /**
 * @brief          Total number of groups in Config.
 *
 */
-#define ADC_GROUPS                       (2U)
+#define ADC_GROUPS                       (8U)
 
 
 

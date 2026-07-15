@@ -13,7 +13,7 @@ extern "C" {
 #include "Adc.h"
 #include "Mcl.h"
 #include "Dio.h"
-#include "Icu.h"
+//#include "Icu.h"
 #include "Mcu.h"
 #include "Spi.h"
 #include "Platform.h"
@@ -120,9 +120,9 @@ int main(void)
     Platform_Init(NULL_PTR);
     Adc_Init(NULL_PTR);
     Uart_Init(NULL_PTR);
-    Icu_Init(NULL_PTR);
+    //Icu_Init(NULL_PTR);
     Spi_Init(NULL_PTR);
-    Icu_EnableNotification(0);
+    //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
     Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);

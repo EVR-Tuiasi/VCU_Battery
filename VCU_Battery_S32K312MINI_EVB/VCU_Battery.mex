@@ -26,6 +26,38 @@
          </generated_project_files>
          <pins_profile>
             <processor_version>0.0.0</processor_version>
+            <pin_labels>
+               <pin_label pin_num="7" pin_signal="PTD1" label="T_1"/>
+               <pin_label pin_num="8" pin_signal="PTD0" label="T_2"/>
+               <pin_label pin_num="155" pin_signal="PTA13" label="T_3"/>
+               <pin_label pin_num="172" pin_signal="PTA8" label="T_4"/>
+               <pin_label pin_num="171" pin_signal="PTA9" label="T_5"/>
+               <pin_label pin_num="152" pin_signal="PTA14" label="T_6"/>
+               <pin_label pin_num="147" pin_signal="PTE2" label="T_7"/>
+               <pin_label pin_num="146" pin_signal="PTE6" label="T_8"/>
+               <pin_label pin_num="100" pin_signal="PTA7" label="CAN_TX"/>
+               <pin_label pin_num="102" pin_signal="PTA6" label="CAN_RX"/>
+               <pin_label pin_num="91" pin_signal="PTC26" label="G_1"/>
+               <pin_label pin_num="93" pin_signal="PTC27" label="G_2"/>
+               <pin_label pin_num="86" pin_signal="PTC21" label="G_3"/>
+               <pin_label pin_num="85" pin_signal="PTC20" label="G_4"/>
+               <pin_label pin_num="129" pin_signal="PTB10" label="G_5"/>
+               <pin_label pin_num="130" pin_signal="PTB9" label="G_6"/>
+               <pin_label pin_num="15" pin_signal="PTA25" label="G_7"/>
+               <pin_label pin_num="14" pin_signal="PTA24" label="G_8"/>
+               <pin_label pin_num="145" pin_signal="PTA15" label="G_9"/>
+               <pin_label pin_num="143" pin_signal="PTA16" label="G_10"/>
+               <pin_label pin_num="61" pin_signal="PTC1" label="G_11"/>
+               <pin_label pin_num="62" pin_signal="PTC0" label="G_12"/>
+               <pin_label pin_num="69" pin_signal="PTB23" label="G_13"/>
+               <pin_label pin_num="104" pin_signal="PTE7" label="G_15"/>
+               <pin_label pin_num="67" pin_signal="PTB22" label="G_14"/>
+               <pin_label pin_num="153" pin_signal="PTE21" label="G_16"/>
+               <pin_label pin_num="110" pin_signal="PTB17" label="BMS_CS"/>
+               <pin_label pin_num="112" pin_signal="PTB16" label="BMS_MOSI"/>
+               <pin_label pin_num="113" pin_signal="PTB15" label="BMS_MISO"/>
+               <pin_label pin_num="114" pin_signal="PTB14" label="BMS_SCK"/>
+            </pin_labels>
          </pins_profile>
          <functions_list>
             <function name="PortContainer_0_BOARD_InitPeripherals">
@@ -47,35 +79,12 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 90" pin_num="91" pin_signal="PTC26">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 85" pin_num="86" pin_signal="PTC21">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 41" pin_num="130" pin_signal="PTB9">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="LPUART6" signal="lpuart6_tx" pin_num="63" pin_signal="PTD9">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="LPUART6" signal="lpuart6_rx" pin_num="145" pin_signal="PTA15"/>
-                  <pin peripheral="ADC0" signal="adc0_s8" pin_num="116" pin_signal="PTB13"/>
-                  <pin peripheral="ADC0" signal="adc0_s16" pin_num="121" pin_signal="PTD2"/>
                   <pin peripheral="SIUL2" signal="gpio, 102" pin_num="52" pin_signal="PTD6">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 64" pin_num="62" pin_signal="PTC0">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
@@ -100,28 +109,12 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="LPUART1" signal="lpuart1_rx" pin_num="69" pin_signal="PTB23"/>
-                  <pin peripheral="LPUART1" signal="lpuart1_tx" pin_num="67" pin_signal="PTB22">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="SIUL2" signal="gpio, 123" pin_num="132" pin_signal="PTD27">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
                   <pin peripheral="SIUL2" signal="gpio, 145" pin_num="142" pin_signal="PTE17">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 135" pin_num="104" pin_signal="PTE7">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 149" pin_num="153" pin_signal="PTE21">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
@@ -141,21 +134,6 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="eMIOS_1" signal="emios_1_ch_6_h" pin_num="164" pin_signal="PTE26">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 84" pin_num="85" pin_signal="PTC20">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 42" pin_num="129" pin_signal="PTB10">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
                   <pin peripheral="SIUL2" signal="gpio, 139" pin_num="9" pin_signal="PTE11">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
@@ -171,16 +149,7 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="eMIOS_1" signal="emios_1_ch_17_y" pin_num="111" pin_signal="PTD20">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="eMIOS_1" signal="emios_1_ch_18_y" pin_num="115" pin_signal="PTD21">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
+                  <pin peripheral="ADC0" signal="adc0_s8" pin_num="116" pin_signal="PTB13"/>
                   <pin peripheral="eMIOS_1" signal="emios_1_ch_12_h" pin_num="101" pin_signal="PTC30">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
@@ -191,18 +160,108 @@
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="ADC0" signal="adc0_p1" pin_num="8" pin_signal="PTD0"/>
                   <pin peripheral="ADC0" signal="adc0_p0" pin_num="7" pin_signal="PTD1"/>
+                  <pin peripheral="ADC0" signal="adc0_p1" pin_num="8" pin_signal="PTD0"/>
                   <pin peripheral="ADC1" signal="adc1_p1" pin_num="155" pin_signal="PTA13"/>
                   <pin peripheral="ADC0" signal="adc0_p2" pin_num="172" pin_signal="PTA8"/>
+                  <pin peripheral="ADC0" signal="adc0_p7" pin_num="171" pin_signal="PTA9"/>
+                  <pin peripheral="ADC1" signal="adc1_p4" pin_num="152" pin_signal="PTA14"/>
+                  <pin peripheral="ADC1" signal="adc1_p5" pin_num="147" pin_signal="PTE2"/>
+                  <pin peripheral="ADC1" signal="adc1_p6" pin_num="146" pin_signal="PTE6"/>
                   <pin peripheral="CAN0" signal="can0_tx" pin_num="100" pin_signal="PTA7"/>
                   <pin peripheral="CAN0" signal="can0_rx" pin_num="102" pin_signal="PTA6"/>
-                  <pin peripheral="LPUART6" signal="lpuart6_tx" pin_num="143" pin_signal="PTA16">
+                  <pin peripheral="SIUL2" signal="gpio, 90" pin_num="91" pin_signal="PTC26">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 91" pin_num="93" pin_signal="PTC27">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 85" pin_num="86" pin_signal="PTC21">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 84" pin_num="85" pin_signal="PTC20">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 42" pin_num="129" pin_signal="PTB10">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 41" pin_num="130" pin_signal="PTB9">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpi, 25" pin_num="15" pin_signal="PTA25"/>
+                  <pin peripheral="SIUL2" signal="gpi, 24" pin_num="14" pin_signal="PTA24"/>
+                  <pin peripheral="SIUL2" signal="gpio, 15" pin_num="145" pin_signal="PTA15">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 16" pin_num="143" pin_signal="PTA16">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 65" pin_num="61" pin_signal="PTC1">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 64" pin_num="62" pin_signal="PTC0">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 55" pin_num="69" pin_signal="PTB23">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 54" pin_num="67" pin_signal="PTB22">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 135" pin_num="104" pin_signal="PTE7">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 149" pin_num="153" pin_signal="PTE21">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LPSPI1" signal="lpspi1_pcs3" pin_num="110" pin_signal="PTB17">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
                   </pin>
-                  <pin peripheral="ADC0" signal="adc0_p7" pin_num="171" pin_signal="PTA9"/>
+                  <pin peripheral="LPSPI1" signal="lpspi1_sout" pin_num="112" pin_signal="PTB16">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LPSPI1" signal="lpspi1_sin" pin_num="113" pin_signal="PTB15">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LPSPI1" signal="lpspi1_sck" pin_num="114" pin_signal="PTB14">
+                     <pin_features>
+                        <pin_feature name="direction" value="OUTPUT"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
          </functions_list>
@@ -532,6 +591,16 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.spi" description="Spi is not found in the toolchain/IDE project. The project will not compile!" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.spi" description="An unsupported version of the Spi in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}. The project might not compile correctly." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="equivalent">
+                  <data type="Version">1.0.0</data>
+               </feature>
+            </dependency>
             <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
                <feature name="enabled" evaluation="equal">
                   <data>true</data>
@@ -580,6 +649,8 @@
             <file path="generate/include/Dma_Ip_Cfg_DeviceRegistersV3.h" update_enabled="true"/>
             <file path="generate/include/Dma_Ip_Cfg_Devices.h" update_enabled="true"/>
             <file path="generate/include/Dma_Ip_PBcfg.h" update_enabled="true"/>
+            <file path="generate/include/Dspi_Ip_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/Dspi_Ip_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/EcuM_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Emios_Mcl_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Emios_Mcl_Ip_Cfg_Defines.h" update_enabled="true"/>
@@ -592,6 +663,9 @@
             <file path="generate/include/Flexio_Mcl_Ip_Cfg_Defines.h" update_enabled="true"/>
             <file path="generate/include/Flexio_Mcl_Ip_Cfg_DeviceRegisters.h" update_enabled="true"/>
             <file path="generate/include/Flexio_Mcl_Ip_PBcfg.h" update_enabled="true"/>
+            <file path="generate/include/Flexio_Spi_Ip_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/Flexio_Spi_Ip_CfgDefines.h" update_enabled="true"/>
+            <file path="generate/include/Flexio_Spi_Ip_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/Flexio_Uart_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Flexio_Uart_Ip_CfgDefines.h" update_enabled="true"/>
             <file path="generate/include/Flexio_Uart_Ip_Defines.h" update_enabled="true"/>
@@ -607,6 +681,8 @@
             <file path="generate/include/Lcu_Ip_Features.h" update_enabled="true"/>
             <file path="generate/include/Lcu_Ip_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/Lcu_Ip_Regs.h" update_enabled="true"/>
+            <file path="generate/include/Lpspi_Ip_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/Lpspi_Ip_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/Lpuart_Uart_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Lpuart_Uart_Ip_Defines.h" update_enabled="true"/>
             <file path="generate/include/Lpuart_Uart_Ip_PBcfg.h" update_enabled="true"/>
@@ -635,6 +711,10 @@
             <file path="generate/include/Siul2_Port_Ip_Defines.h" update_enabled="true"/>
             <file path="generate/include/Siul2_Port_Ip_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/Soc_Ips.h" update_enabled="true"/>
+            <file path="generate/include/Spi_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/Spi_Ipw_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/Spi_Ipw_PBcfg.h" update_enabled="true"/>
+            <file path="generate/include/Spi_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/System_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/System_Ip_CfgDefines.h" update_enabled="true"/>
             <file path="generate/include/Trgmux_Ip_Cfg.h" update_enabled="true"/>
@@ -662,14 +742,17 @@
             <file path="generate/src/Dio_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Dma_Ip_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Dma_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/Dspi_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Emios_Mcl_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/FlexCAN_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Flexio_Mcl_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/Flexio_Spi_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Flexio_Uart_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Igf_Port_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/IntCtrl_Ip_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Lcu_Ip_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Lcu_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/Lpspi_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Lpuart_Uart_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Mcu_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Mcu_PBcfg.c" update_enabled="true"/>
@@ -685,6 +768,8 @@
             <file path="generate/src/Ram_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Sdadc_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Siul2_Port_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/Spi_Ipw_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/Spi_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Trgmux_Ip_Cfg.c" update_enabled="true"/>
             <file path="generate/src/Trgmux_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Tspc_Port_Ip_PBcfg.c" update_enabled="true"/>
@@ -781,27 +866,6 @@
                                  <setting name="Name" value="PortContainer_0"/>
                                  <array name="PortPin">
                                     <struct name="0">
-                                       <setting name="Name" value="BRAKELIGHT"/>
-                                       <setting name="PortPinPue" value="false"/>
-                                       <setting name="PortPinPus" value="false"/>
-                                       <setting name="PortPinSafeMode" value="false"/>
-                                       <setting name="PortPinDse" value="false"/>
-                                       <setting name="PortPinWithReadBack" value="false"/>
-                                       <setting name="PortPinPke" value="false"/>
-                                       <setting name="PortPinIfe" value="false"/>
-                                       <setting name="PortPinDirectionChangeable" value="true"/>
-                                       <setting name="PortPinModeChangeable" value="true"/>
-                                       <setting name="PortPinInvertControl" value="false"/>
-                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
-                                       <setting name="PortPinId" value="1"/>
-                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
-                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
-                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
-                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
-                                       <array name="IGFSettings"/>
-                                       <array name="PortPinEcucPartitionRef"/>
-                                    </struct>
-                                    <struct name="1">
                                        <setting name="Name" value="INV_OFF"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -822,7 +886,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="2">
+                                    <struct name="1">
                                        <setting name="Name" value="CAN_TX1"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -843,7 +907,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="3">
+                                    <struct name="2">
                                        <setting name="Name" value="CAN0_EN"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -864,7 +928,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="4">
+                                    <struct name="3">
                                        <setting name="Name" value="PZZ"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -885,7 +949,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="5">
+                                    <struct name="4">
                                        <setting name="Name" value="CAN_RX2"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -906,7 +970,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="6">
+                                    <struct name="5">
                                        <setting name="Name" value="CAN_TX2"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -927,7 +991,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="7">
+                                    <struct name="6">
                                        <setting name="Name" value="CAN_RX1"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -948,7 +1012,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="8">
+                                    <struct name="7">
                                        <setting name="Name" value="TX_UART02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -969,7 +1033,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="9">
+                                    <struct name="8">
                                        <setting name="Name" value="RX_UART02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -990,7 +1054,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="10">
+                                    <struct name="9">
                                        <setting name="Name" value="TPSOUT01"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1011,7 +1075,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="11">
+                                    <struct name="10">
                                        <setting name="Name" value="TPSOUT02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1032,7 +1096,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="12">
+                                    <struct name="11">
                                        <setting name="Name" value="NXP_ACC02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1053,7 +1117,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="13">
+                                    <struct name="12">
                                        <setting name="Name" value="BRK02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1074,7 +1138,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="14">
+                                    <struct name="13">
                                        <setting name="Name" value="ECO02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1095,7 +1159,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="15">
+                                    <struct name="14">
                                        <setting name="Name" value="FWD02"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1116,28 +1180,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="16">
-                                       <setting name="Name" value="REV02"/>
-                                       <setting name="PortPinPue" value="false"/>
-                                       <setting name="PortPinPus" value="false"/>
-                                       <setting name="PortPinSafeMode" value="false"/>
-                                       <setting name="PortPinDse" value="false"/>
-                                       <setting name="PortPinWithReadBack" value="false"/>
-                                       <setting name="PortPinPke" value="false"/>
-                                       <setting name="PortPinIfe" value="false"/>
-                                       <setting name="PortPinDirectionChangeable" value="true"/>
-                                       <setting name="PortPinModeChangeable" value="true"/>
-                                       <setting name="PortPinInvertControl" value="false"/>
-                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
-                                       <setting name="PortPinId" value="17"/>
-                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
-                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
-                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
-                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
-                                       <array name="IGFSettings"/>
-                                       <array name="PortPinEcucPartitionRef"/>
-                                    </struct>
-                                    <struct name="17">
+                                    <struct name="15">
                                        <setting name="Name" value="ACC01"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1158,7 +1201,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="18">
+                                    <struct name="16">
                                        <setting name="Name" value="RX_UART01"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1179,8 +1222,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="19">
-                                       <setting name="Name" value="TX_UART01"/>
+                                    <struct name="17">
+                                       <setting name="Name" value="T_1"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1200,8 +1243,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="20">
-                                       <setting name="Name" value="ECO01"/>
+                                    <struct name="18">
+                                       <setting name="Name" value="T_2"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1221,8 +1264,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="21">
-                                       <setting name="Name" value="FWD01"/>
+                                    <struct name="19">
+                                       <setting name="Name" value="T_3"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1242,8 +1285,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="22">
-                                       <setting name="Name" value="BRK01"/>
+                                    <struct name="20">
+                                       <setting name="Name" value="T_4"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1263,8 +1306,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="23">
-                                       <setting name="Name" value="REV01"/>
+                                    <struct name="21">
+                                       <setting name="Name" value="T_5"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1284,7 +1327,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="24">
+                                    <struct name="22">
                                        <setting name="Name" value="PWM_2"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1305,8 +1348,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="25">
-                                       <setting name="Name" value="PWM_1"/>
+                                    <struct name="23">
+                                       <setting name="Name" value="T_6"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1326,8 +1369,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="26">
-                                       <setting name="Name" value="PWM_3"/>
+                                    <struct name="24">
+                                       <setting name="Name" value="T_7"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1347,8 +1390,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="27">
-                                       <setting name="Name" value="PWM_4"/>
+                                    <struct name="25">
+                                       <setting name="Name" value="T_8"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1368,7 +1411,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="28">
+                                    <struct name="26">
                                        <setting name="Name" value="CAN0_TX"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1389,7 +1432,7 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="29">
+                                    <struct name="27">
                                        <setting name="Name" value="CAN0_RX"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
@@ -1410,8 +1453,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="30">
-                                       <setting name="Name" value="CAN0_STB"/>
+                                    <struct name="28">
+                                       <setting name="Name" value="G_1"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1431,8 +1474,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="31">
-                                       <setting name="Name" value="BRAKELIGHT_maomor"/>
+                                    <struct name="29">
+                                       <setting name="Name" value="G_2"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1452,8 +1495,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="32">
-                                       <setting name="Name" value="PortPin_32"/>
+                                    <struct name="30">
+                                       <setting name="Name" value="G_3"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1473,8 +1516,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="33">
-                                       <setting name="Name" value="PortPin_33"/>
+                                    <struct name="31">
+                                       <setting name="Name" value="G_4"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1494,8 +1537,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="34">
-                                       <setting name="Name" value="PortPin_34"/>
+                                    <struct name="32">
+                                       <setting name="Name" value="G_5"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1515,8 +1558,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="35">
-                                       <setting name="Name" value="PortPin_35"/>
+                                    <struct name="33">
+                                       <setting name="Name" value="G_6"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1536,8 +1579,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="36">
-                                       <setting name="Name" value="PortPin_36"/>
+                                    <struct name="34">
+                                       <setting name="Name" value="G_7"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1557,8 +1600,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="37">
-                                       <setting name="Name" value="PortPin_37"/>
+                                    <struct name="35">
+                                       <setting name="Name" value="G_8"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1578,8 +1621,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="38">
-                                       <setting name="Name" value="PortPin_38"/>
+                                    <struct name="36">
+                                       <setting name="Name" value="G_9"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1599,8 +1642,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="39">
-                                       <setting name="Name" value="PortPin_39"/>
+                                    <struct name="37">
+                                       <setting name="Name" value="G_10"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1620,8 +1663,8 @@
                                        <array name="IGFSettings"/>
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
-                                    <struct name="40">
-                                       <setting name="Name" value="PortPin_40"/>
+                                    <struct name="38">
+                                       <setting name="Name" value="G_11"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1634,6 +1677,195 @@
                                        <setting name="PortPinInvertControl" value="false"/>
                                        <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
                                        <setting name="PortPinId" value="41"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="39">
+                                       <setting name="Name" value="G_12"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="42"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="40">
+                                       <setting name="Name" value="G_13"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="43"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="41">
+                                       <setting name="Name" value="G_14"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="44"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="42">
+                                       <setting name="Name" value="G_15"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="45"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="43">
+                                       <setting name="Name" value="G_16"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="46"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="44">
+                                       <setting name="Name" value="BMS_CS"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="47"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="45">
+                                       <setting name="Name" value="BMS_MOSI"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="48"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="46">
+                                       <setting name="Name" value="BMS_MISO"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="1"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="47">
+                                       <setting name="Name" value="BMS_SCK"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="17"/>
                                        <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
                                        <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
                                        <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
@@ -3619,6 +3851,22 @@
                                  <setting name="CanHwObjectCount" value="1"/>
                                  <array name="CanHwFilter"/>
                               </struct>
+                              <struct name="24">
+                                 <setting name="Name" value="CHARGER_TX"/>
+                                 <array name="CanFdPaddingValue"/>
+                                 <setting name="CanHandleType" value="FULL"/>
+                                 <setting name="CanIdType" value="EXTENDED"/>
+                                 <setting name="CanObjectId" value="24"/>
+                                 <setting name="CanObjectType" value="TRANSMIT"/>
+                                 <array name="CanObjectPayloadLength"/>
+                                 <array name="CanHardwareObjectUsesPolling"/>
+                                 <array name="CanTriggerTransmitEnable"/>
+                                 <setting name="CanControllerRef" value="/Can_43_FLEXCAN/Can/CanConfigSet/CanController_0"/>
+                                 <array name="CanMainFunctionRWPeriodRef"/>
+                                 <array name="CanHwObjectUsesBlock"/>
+                                 <setting name="CanHwObjectCount" value="1"/>
+                                 <array name="CanHwFilter"/>
+                              </struct>
                            </array>
                         </struct>
                         <struct name="CommonPublishedInformation" quick_selection="Default">
@@ -3666,10 +3914,10 @@
                         <struct name="CanIfInitCfg">
                            <setting name="Name" value="CanIfInitCfg"/>
                            <array name="CanIfMaxRxPduCfg">
-                              <setting name="0" value="12"/>
+                              <setting name="0" value="13"/>
                            </array>
                            <array name="CanIfMaxTxPduCfg">
-                              <setting name="0" value="12"/>
+                              <setting name="0" value="13"/>
                            </array>
                            <array name="CanIfTxPduCfg">
                               <struct name="0">
@@ -3827,6 +4075,19 @@
                                  <array name="CanIfTxPduUserTxConfirmationName"/>
                                  <array name="CanIfTxPduUserTxConfirmationUL"/>
                                  <setting name="CanIfTxPduBufferRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfBufferCfg_COMUNICATII"/>
+                              </struct>
+                              <struct name="12">
+                                 <setting name="Name" value="CanIfTxPduCfg_CHARGER"/>
+                                 <array name="CanIfTxPduCanId">
+                                    <setting name="0" value="0x1806E7F4"/>
+                                 </array>
+                                 <array name="CanIfTxPduCanIdType">
+                                    <setting name="0" value="EXTENDED_CAN"/>
+                                 </array>
+                                 <setting name="CanIfTxPduId" value="12"/>
+                                 <array name="CanIfTxPduUserTxConfirmationName"/>
+                                 <array name="CanIfTxPduUserTxConfirmationUL"/>
+                                 <setting name="CanIfTxPduBufferRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfBufferCfg_INVERTOR_STANGA"/>
                               </struct>
                            </array>
                            <array name="CanIfRxPduCfg">
@@ -4060,6 +4321,10 @@
                                  <setting name="Name" value="CanIfBufferCfg_COMUNICATII"/>
                                  <setting name="CanIfBufferHthRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfInitHohCfg_0/CanIfHthCfg_COMUNICATII"/>
                               </struct>
+                              <struct name="12">
+                                 <setting name="Name" value="CanIfBufferCfg_CHARGER"/>
+                                 <setting name="CanIfBufferHthRef" value="/CanIf/CanIf/CanIfInitCfg/CanIfInitHohCfg_0/CanIfHthCfg_CHARGER"/>
+                              </struct>
                            </array>
                            <array name="CanIfInitHohCfg">
                               <struct name="0">
@@ -4124,6 +4389,11 @@
                                        <setting name="Name" value="CanIfHthCfg_COMUNICATII"/>
                                        <setting name="CanIfHthCanCtrlIdRef" value="/CanIf/CanIf/CanIfCtrlDrvCfg_0/CanIfCtrlCfg_0"/>
                                        <setting name="CanIfHthIdSymRef" value="/Can_43_FLEXCAN/Can/CanConfigSet/COMUNICATII_TRANSMIT"/>
+                                    </struct>
+                                    <struct name="12">
+                                       <setting name="Name" value="CanIfHthCfg_CHARGER"/>
+                                       <setting name="CanIfHthCanCtrlIdRef" value="/CanIf/CanIf/CanIfCtrlDrvCfg_0/CanIfCtrlCfg_0"/>
+                                       <setting name="CanIfHthIdSymRef" value="/Can_43_FLEXCAN/Can/CanConfigSet/CHARGER_TX"/>
                                     </struct>
                                  </array>
                                  <array name="CanIfHrhCfg">
@@ -4363,8 +4633,8 @@
                                     <struct name="0">
                                        <setting name="Name" value="AdcChannel_0"/>
                                        <setting name="AdcLogicalChannelId" value="0"/>
-                                       <setting name="AdcChannelName" value="P7_ChanNum7"/>
-                                       <setting name="AdcChannelId" value="7"/>
+                                       <setting name="AdcChannelName" value="P0_ChanNum0"/>
+                                       <setting name="AdcChannelId" value="0"/>
                                        <array name="AdcChannelConvTime"/>
                                        <array name="AdcChannelLimitCheck"/>
                                        <array name="AdcChannelHighLimit">
@@ -4384,8 +4654,8 @@
                                     <struct name="1">
                                        <setting name="Name" value="AdcChannel_1"/>
                                        <setting name="AdcLogicalChannelId" value="1"/>
-                                       <setting name="AdcChannelName" value="P2_ChanNum2"/>
-                                       <setting name="AdcChannelId" value="2"/>
+                                       <setting name="AdcChannelName" value="P1_ChanNum1"/>
+                                       <setting name="AdcChannelId" value="1"/>
                                        <array name="AdcChannelConvTime"/>
                                        <array name="AdcChannelLimitCheck"/>
                                        <array name="AdcChannelHighLimit">
@@ -4405,8 +4675,8 @@
                                     <struct name="2">
                                        <setting name="Name" value="AdcChannel_2"/>
                                        <setting name="AdcLogicalChannelId" value="2"/>
-                                       <setting name="AdcChannelName" value="P1_ChanNum1"/>
-                                       <setting name="AdcChannelId" value="1"/>
+                                       <setting name="AdcChannelName" value="P2_ChanNum2"/>
+                                       <setting name="AdcChannelId" value="2"/>
                                        <array name="AdcChannelConvTime"/>
                                        <array name="AdcChannelLimitCheck"/>
                                        <array name="AdcChannelHighLimit">
@@ -4426,8 +4696,8 @@
                                     <struct name="3">
                                        <setting name="Name" value="AdcChannel_3"/>
                                        <setting name="AdcLogicalChannelId" value="3"/>
-                                       <setting name="AdcChannelName" value="P0_ChanNum0"/>
-                                       <setting name="AdcChannelId" value="0"/>
+                                       <setting name="AdcChannelName" value="P7_ChanNum7"/>
+                                       <setting name="AdcChannelId" value="7"/>
                                        <array name="AdcChannelConvTime"/>
                                        <array name="AdcChannelLimitCheck"/>
                                        <array name="AdcChannelHighLimit">
@@ -4491,6 +4761,147 @@
                                           <setting name="1" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_1"/>
                                           <setting name="2" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_2"/>
                                           <setting name="3" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_3"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="1">
+                                       <setting name="Name" value="AdcGroup_2"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="2"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_2"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="2">
+                                       <setting name="Name" value="AdcGroup_3"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="3"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_3"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="3">
+                                       <setting name="Name" value="AdcGroup_4"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="4"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_3"/>
                                        </array>
                                        <array name="AdcGroupEcucPartitionRef"/>
                                     </struct>
@@ -4560,6 +4971,69 @@
                                        <array name="AdcThresholdRegister"/>
                                        <setting name="AdcWdogNotification" value="NULL_PTR"/>
                                     </struct>
+                                    <struct name="1">
+                                       <setting name="Name" value="AdcChannel_5"/>
+                                       <setting name="AdcLogicalChannelId" value="1"/>
+                                       <setting name="AdcChannelName" value="P4_ChanNum4"/>
+                                       <setting name="AdcChannelId" value="4"/>
+                                       <array name="AdcChannelConvTime"/>
+                                       <array name="AdcChannelLimitCheck"/>
+                                       <array name="AdcChannelHighLimit">
+                                          <setting name="0" value="65535"/>
+                                       </array>
+                                       <array name="AdcChannelLowLimit"/>
+                                       <array name="AdcChannelRangeSelect"/>
+                                       <array name="AdcChannelRefVoltsrcHigh"/>
+                                       <array name="AdcChannelRefVoltsrcLow"/>
+                                       <array name="AdcChannelResolution"/>
+                                       <array name="AdcChannelSampTime"/>
+                                       <setting name="AdcEnablePresampling" value="false"/>
+                                       <setting name="AdcEnableThresholds" value="false"/>
+                                       <array name="AdcThresholdRegister"/>
+                                       <setting name="AdcWdogNotification" value="NULL_PTR"/>
+                                    </struct>
+                                    <struct name="2">
+                                       <setting name="Name" value="AdcChannel_6"/>
+                                       <setting name="AdcLogicalChannelId" value="2"/>
+                                       <setting name="AdcChannelName" value="P5_ChanNum5"/>
+                                       <setting name="AdcChannelId" value="5"/>
+                                       <array name="AdcChannelConvTime"/>
+                                       <array name="AdcChannelLimitCheck"/>
+                                       <array name="AdcChannelHighLimit">
+                                          <setting name="0" value="65535"/>
+                                       </array>
+                                       <array name="AdcChannelLowLimit"/>
+                                       <array name="AdcChannelRangeSelect"/>
+                                       <array name="AdcChannelRefVoltsrcHigh"/>
+                                       <array name="AdcChannelRefVoltsrcLow"/>
+                                       <array name="AdcChannelResolution"/>
+                                       <array name="AdcChannelSampTime"/>
+                                       <setting name="AdcEnablePresampling" value="false"/>
+                                       <setting name="AdcEnableThresholds" value="false"/>
+                                       <array name="AdcThresholdRegister"/>
+                                       <setting name="AdcWdogNotification" value="NULL_PTR"/>
+                                    </struct>
+                                    <struct name="3">
+                                       <setting name="Name" value="AdcChannel_7"/>
+                                       <setting name="AdcLogicalChannelId" value="3"/>
+                                       <setting name="AdcChannelName" value="P6_ChanNum6"/>
+                                       <setting name="AdcChannelId" value="6"/>
+                                       <array name="AdcChannelConvTime"/>
+                                       <array name="AdcChannelLimitCheck"/>
+                                       <array name="AdcChannelHighLimit">
+                                          <setting name="0" value="65535"/>
+                                       </array>
+                                       <array name="AdcChannelLowLimit"/>
+                                       <array name="AdcChannelRangeSelect"/>
+                                       <array name="AdcChannelRefVoltsrcHigh"/>
+                                       <array name="AdcChannelRefVoltsrcLow"/>
+                                       <array name="AdcChannelResolution"/>
+                                       <array name="AdcChannelSampTime"/>
+                                       <setting name="AdcEnablePresampling" value="false"/>
+                                       <setting name="AdcEnableThresholds" value="false"/>
+                                       <array name="AdcThresholdRegister"/>
+                                       <setting name="AdcWdogNotification" value="NULL_PTR"/>
+                                    </struct>
                                  </array>
                                  <array name="AdcGroup">
                                     <struct name="0">
@@ -4606,6 +5080,147 @@
                                        </struct>
                                        <array name="AdcGroupDefinition">
                                           <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_1/AdcChannel_4"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="1">
+                                       <setting name="Name" value="AdcGroup_5"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="5"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_1/AdcChannel_5"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="2">
+                                       <setting name="Name" value="AdcGroup_6"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="6"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_1/AdcChannel_6"/>
+                                       </array>
+                                       <array name="AdcGroupEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="3">
+                                       <setting name="Name" value="AdcGroup_7"/>
+                                       <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
+                                       <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
+                                       <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
+                                       <setting name="AdcGroupId" value="7"/>
+                                       <array name="AdcGroupPriority"/>
+                                       <array name="AdcGroupReplacement"/>
+                                       <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
+                                       <setting name="AdcGroupHwTriggerSource" value="/Adc/Adc/AdcConfigSet/AdcHwTrigger_0"/>
+                                       <array name="AdcHwTrigSignal"/>
+                                       <array name="AdcHwTrigTimer"/>
+                                       <array name="AdcNotification">
+                                          <setting name="0" value="NULL_PTR"/>
+                                       </array>
+                                       <setting name="AdcExtraNotification" value="NULL_PTR"/>
+                                       <setting name="AdcDmaErrorNotification" value="NULL_PTR"/>
+                                       <setting name="AdcStreamingBufferMode" value="ADC_STREAM_BUFFER_LINEAR"/>
+                                       <setting name="AdcEnableOptimizeDmaStreamingGroups" value="false"/>
+                                       <setting name="AdcEnableHalfInterrupt" value="false"/>
+                                       <setting name="AdcStreamingNumSamples" value="1"/>
+                                       <setting name="AdcStreamResultGroup" value="false"/>
+                                       <setting name="AdcEnableChDisableChGroup" value="false"/>
+                                       <setting name="AdcWithoutInterrupts" value="false"/>
+                                       <setting name="AdcWithoutDma" value="false"/>
+                                       <setting name="AdcExtDMAChanEnable" value="false"/>
+                                       <struct name="AdcGroupConversionConfiguration">
+                                          <setting name="Name" value="AdcGroupConversionConfiguration"/>
+                                          <setting name="AdcGroupHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcSamplingDuration0" value="22"/>
+                                          <setting name="AdcSamplingDuration1" value="22"/>
+                                          <setting name="AdcSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <struct name="AdcAlternateGroupConvTimings">
+                                          <setting name="Name" value="AdcAlternateGroupConvTimings"/>
+                                          <setting name="AdcGroupAltHardwareAverageEnable" value="false"/>
+                                          <setting name="AdcGroupAltHardwareAverageSelect" value="SAMPLES_4"/>
+                                          <setting name="AdcAltGroupSamplingDuration0" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration1" value="22"/>
+                                          <setting name="AdcAltGroupSamplingDuration2" value="22"/>
+                                       </struct>
+                                       <array name="AdcGroupDefinition">
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_1/AdcChannel_7"/>
                                        </array>
                                        <array name="AdcGroupEcucPartitionRef"/>
                                     </struct>
@@ -4730,6 +5345,176 @@
                            <setting name="AdcSarEnableTempsenseApi" value="false"/>
                            <setting name="AdcSarPowerOnTempSense" value="false"/>
                            <setting name="AdcSarTempSenseVsupply" value="53"/>
+                        </struct>
+                     </config_set>
+                  </instance>
+                  <instance name="Spi" uuid="ed79ef70-477c-4a27-8297-b86da1434211" type="Spi" type_id="Spi" mode="autosar" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="Spi">
+                        <setting name="Name" value="Spi"/>
+                        <struct name="ConfigTimeSupport" quick_selection="Default">
+                           <setting name="POST_BUILD_VARIANT_USED" value="false"/>
+                           <setting name="IMPLEMENTATION_CONFIG_VARIANT" value="VARIANT-PRE-COMPILE"/>
+                        </struct>
+                        <array name="SpiDemEventParameterRefs"/>
+                        <struct name="SpiDriver">
+                           <setting name="Name" value="SpiDriver"/>
+                           <array name="SpiMaxChannel">
+                              <setting name="0" value="0"/>
+                           </array>
+                           <array name="SpiMaxJob">
+                              <setting name="0" value="0"/>
+                           </array>
+                           <array name="SpiMaxSequence">
+                              <setting name="0" value="0"/>
+                           </array>
+                           <array name="SpiChannel">
+                              <struct name="0">
+                                 <setting name="Name" value="SpiChannel_0"/>
+                                 <setting name="SpiChannelId" value="0"/>
+                                 <setting name="SpiChannelType" value="IB"/>
+                                 <setting name="SpiDataWidth" value="8"/>
+                                 <array name="SpiDefaultData">
+                                    <setting name="0" value="1"/>
+                                 </array>
+                                 <setting name="SpiEbMaxLength" value="1"/>
+                                 <setting name="SpiIbNBuffers" value="4"/>
+                                 <setting name="SpiTransferStart" value="MSB"/>
+                                 <setting name="SpiByteSwapTransfer" value="false"/>
+                                 <array name="SpiChannelHalfDuplexDirection"/>
+                                 <array name="SpiChannelEcucPartitionRef"/>
+                              </struct>
+                           </array>
+                           <array name="SpiExternalDevice">
+                              <struct name="0">
+                                 <setting name="Name" value="SpiExternalDevice_0"/>
+                                 <setting name="SpiBaudrate" value="1000000"/>
+                                 <setting name="SpiUseBaudrateConfig" value="false"/>
+                                 <array name="SpiBaudrateConfigRef"/>
+                                 <setting name="SpiCsIdentifier" value="PCS0"/>
+                                 <setting name="SpiCsPolarity" value="LOW"/>
+                                 <array name="SpiCsSelection">
+                                    <setting name="0" value="CS_VIA_PERIPHERAL_ENGINE"/>
+                                 </array>
+                                 <setting name="SpiDataShiftEdge" value="LEADING"/>
+                                 <setting name="SpiEnableCs" value="true"/>
+                                 <setting name="SpiHwUnit" value="CSIB0"/>
+                                 <setting name="SpiShiftClockIdleLevel" value="HIGH"/>
+                                 <setting name="SpiTimeClk2Cs" value="0.000001"/>
+                                 <setting name="SpiTimeCs2Clk" value="0.000001"/>
+                                 <setting name="SpiTimeCs2Cs" value="0.000001"/>
+                                 <array name="SpiTimeClk2Clk"/>
+                                 <setting name="SpiDeviceHalfDuplexSupport" value="false"/>
+                                 <setting name="SpiTransferWidth" value="TRANSFER_1_BIT"/>
+                                 <setting name="SpiHalfDuplexPinSelect" value="HALF_DUPLEX_SIN"/>
+                                 <setting name="SpiCsBehavior" value="CS_KEEP_ASSERTED"/>
+                                 <setting name="SpiHostRequest" value="DISABLE"/>
+                                 <array name="SpiDeviceEcucPartitionRef"/>
+                              </struct>
+                           </array>
+                           <array name="SpiBaudrateConfig"/>
+                           <array name="SpiJob">
+                              <struct name="0">
+                                 <setting name="Name" value="SpiJob_0"/>
+                                 <array name="SpiJobEndNotification">
+                                    <setting name="0" value="NULL_PTR"/>
+                                 </array>
+                                 <array name="SpiJobStartNotification">
+                                    <setting name="0" value="NULL_PTR"/>
+                                 </array>
+                                 <setting name="SpiJobId" value="0"/>
+                                 <setting name="SpiJobPriority" value="0"/>
+                                 <setting name="SpiDeviceAssignment" value="/Spi/Spi/SpiDriver/SpiExternalDevice_0"/>
+                                 <array name="SpiChannelList">
+                                    <struct name="0">
+                                       <setting name="Name" value="SpiChannelList_0"/>
+                                       <setting name="SpiChannelIndex" value="0"/>
+                                       <setting name="SpiChannelAssignment" value="/Spi/Spi/SpiDriver/SpiChannel_0"/>
+                                    </struct>
+                                 </array>
+                              </struct>
+                           </array>
+                           <array name="SpiSequence">
+                              <struct name="0">
+                                 <setting name="Name" value="SpiSequence_0"/>
+                                 <setting name="SpiInterruptibleSequence" value="false"/>
+                                 <array name="SpiSeqEndNotification">
+                                    <setting name="0" value="NULL_PTR"/>
+                                 </array>
+                                 <setting name="SpiSequenceId" value="0"/>
+                                 <setting name="SpiEnableDmaFastTransfer" value="false"/>
+                                 <setting name="SpiDmaContMemTransferSequenceEnable" value="false"/>
+                                 <array name="SpiJobAssignment">
+                                    <setting name="0" value="/Spi/Spi/SpiDriver/SpiJob_0"/>
+                                 </array>
+                              </struct>
+                           </array>
+                        </struct>
+                        <struct name="SpiGeneral">
+                           <setting name="Name" value="SpiGeneral"/>
+                           <setting name="SpiMultipartitionSupport" value="false"/>
+                           <setting name="SpiCancelApi" value="true"/>
+                           <setting name="SpiChannelBuffersAllowed" value="0"/>
+                           <setting name="SpiDevErrorDetect" value="false"/>
+                           <setting name="SpiHwStatusApi" value="true"/>
+                           <setting name="SpiInterruptibleSeqAllowed" value="false"/>
+                           <setting name="SpiLevelDelivered" value="2"/>
+                           <array name="SpiMainFunctionPeriod">
+                              <setting name="0" value="0.01"/>
+                           </array>
+                           <setting name="SpiSupportConcurrentSyncTransmit" value="false"/>
+                           <setting name="SpiVersionInfoApi" value="true"/>
+                           <setting name="SpiGlobalDmaEnable" value="false"/>
+                           <setting name="SpiTimeoutMethod" value="OSIF_COUNTER_DUMMY"/>
+                           <setting name="SpiTransmitTimeout" value="50000"/>
+                           <array name="SpiEcucPartitionRef"/>
+                           <array name="SpiKernelEcucPartitionRef"/>
+                           <array name="SpiPhyUnit">
+                              <struct name="0">
+                                 <setting name="Name" value="SpiPhyUnit_0"/>
+                                 <setting name="SpiPhyUnitMapping" value="LPSPI_1"/>
+                                 <setting name="SpiPinConfiguration" value="0"/>
+                                 <setting name="SpiSamplePoint" value="0"/>
+                                 <setting name="SpiPhyUnitClockRef" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/McuClockReferencePoint_0"/>
+                                 <array name="SpiPhyUnitAlternateClockRef"/>
+                                 <setting name="SpiPhyUnitMode" value="SPI_MASTER"/>
+                                 <setting name="SpiPhyUnitAsyncUseDma" value="false"/>
+                                 <array name="SpiPhyTxDmaChannel"/>
+                                 <array name="SpiPhyTxCmdDmaChannel"/>
+                                 <array name="SpiPhyRxDmaChannel"/>
+                                 <array name="SpiMaxDmaFastTransfer"/>
+                                 <array name="SpiFlexioTxAndClkChannelsConfig"/>
+                                 <array name="SpiFlexioRxAndCsChannelsConfig"/>
+                              </struct>
+                           </array>
+                        </struct>
+                        <struct name="SpiPublishedInformation" quick_selection="Default">
+                           <setting name="Name" value="SpiPublishedInformation"/>
+                           <setting name="SpiMaxHwUnit" value="0"/>
+                        </struct>
+                        <struct name="SpiAutosarExt" quick_selection="Default">
+                           <setting name="Name" value="SpiAutosarExt"/>
+                           <setting name="SpiEnableUserModeSupport" value="false"/>
+                           <setting name="SpiEnableDmaFastTransferSupport" value="false"/>
+                           <setting name="SpiEnableDmaContMemTransferSupport" value="false"/>
+                           <setting name="SpiHalfDuplexModeSupport" value="false"/>
+                           <setting name="SpiAllowBigSizeCollections" value="false"/>
+                           <setting name="SpiEnableHWUnitAsyncMode" value="false"/>
+                           <setting name="SpiJobStartNotificationEnable" value="false"/>
+                           <setting name="SpiDisableDemReportErrorStatus" value="false"/>
+                           <setting name="SpiUseLegacyEBLength" value="false"/>
+                           <setting name="SpiFlexioEnable" value="false"/>
+                        </struct>
+                        <struct name="CommonPublishedInformation" quick_selection="Default">
+                           <setting name="Name" value="CommonPublishedInformation"/>
+                           <setting name="ModuleId" value="83"/>
+                           <setting name="VendorId" value="43"/>
+                           <array name="VendorApiInfix"/>
+                           <setting name="ArReleaseMajorVersion" value="4"/>
+                           <setting name="ArReleaseMinorVersion" value="9"/>
+                           <setting name="ArReleaseRevisionVersion" value="0"/>
+                           <setting name="SwMajorVersion" value="7"/>
+                           <setting name="SwMinorVersion" value="0"/>
+                           <setting name="SwPatchVersion" value="1"/>
                         </struct>
                      </config_set>
                   </instance>

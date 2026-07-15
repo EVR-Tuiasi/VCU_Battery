@@ -6,7 +6,7 @@
  */
 #include "iso_spi_primitives.h"
 #include "Dio.h"
-#include "Icu.h"
+//#include "Icu.h"
 #include "Mcu.h"
 #include "Mcl.h"
 #include "Platform.h"

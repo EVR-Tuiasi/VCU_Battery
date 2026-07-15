@@ -257,6 +257,60 @@ static const Adc_Ipw_ChannelConfig AdcIpwChannelConfig_1[] =
             0U /* ChannelLowLimit */
         }
 #endif /* (ADC_ENABLE_LIMIT_CHECK == STD_ON) */
+    },
+    /**< @brief Channel logical Id 1 */
+    {
+        NULL_PTR, /* WdgNotification */
+        0U, /* LogicalThresholdId */
+#if (ADC_ENABLE_LIMIT_CHECK == STD_ON)
+        /* ChannelLimitCheckingConfig */
+        {
+            /**< @brief limit check enabled */
+            (boolean)FALSE, /* ChannelLimitCheckEnabled */
+            /**< @brief range for limit check */
+            ADC_RANGE_ALWAYS, /* ChannelRange */
+            /**< @brief high limit value */
+            4095U, /* ChannelHighLimit */
+            /**< @brief low limit value */
+            0U /* ChannelLowLimit */
+        }
+#endif /* (ADC_ENABLE_LIMIT_CHECK == STD_ON) */
+    },
+    /**< @brief Channel logical Id 2 */
+    {
+        NULL_PTR, /* WdgNotification */
+        0U, /* LogicalThresholdId */
+#if (ADC_ENABLE_LIMIT_CHECK == STD_ON)
+        /* ChannelLimitCheckingConfig */
+        {
+            /**< @brief limit check enabled */
+            (boolean)FALSE, /* ChannelLimitCheckEnabled */
+            /**< @brief range for limit check */
+            ADC_RANGE_ALWAYS, /* ChannelRange */
+            /**< @brief high limit value */
+            4095U, /* ChannelHighLimit */
+            /**< @brief low limit value */
+            0U /* ChannelLowLimit */
+        }
+#endif /* (ADC_ENABLE_LIMIT_CHECK == STD_ON) */
+    },
+    /**< @brief Channel logical Id 3 */
+    {
+        NULL_PTR, /* WdgNotification */
+        0U, /* LogicalThresholdId */
+#if (ADC_ENABLE_LIMIT_CHECK == STD_ON)
+        /* ChannelLimitCheckingConfig */
+        {
+            /**< @brief limit check enabled */
+            (boolean)FALSE, /* ChannelLimitCheckEnabled */
+            /**< @brief range for limit check */
+            ADC_RANGE_ALWAYS, /* ChannelRange */
+            /**< @brief high limit value */
+            4095U, /* ChannelHighLimit */
+            /**< @brief low limit value */
+            0U /* ChannelLowLimit */
+        }
+#endif /* (ADC_ENABLE_LIMIT_CHECK == STD_ON) */
     }
 };
 
@@ -302,14 +356,14 @@ const Adc_Ipw_Config AdcIpwCfg =
         /**< @brief number of the maximum hardware units in the current configuration */
         2U, /* AdcMaxHwCfg */
         /**< @brief number of groups per hw unit > */
-        { 1U, 1U }, /* AdcGroups */
+        { 4U, 4U }, /* AdcGroups */
         /**< @brief number of channels per hw unit > */
-        { 4U, 1U }, /* AdcChannels */
+        { 4U, 4U }, /* AdcChannels */
 #if ((defined(ADC_ANY_UNIT_WDG_ISR_USED)) && (defined(ADC_WDG_SUPPORTED)))
         /* ChannelLogicalId */
         {
-            { 3U, 2U, 1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U },
-            { 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U }
+            { 0U, 1U, 2U, 0U, 0U, 0U, 0U, 3U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U },
+            { 0U, 0U, 0U, 0U, 1U, 2U, 3U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U, 0U }
         },
 #endif /* ((defined(ADC_ANY_UNIT_WDG_ISR_USED)) && (defined(ADC_WDG_SUPPORTED))) */
         { ADC_IPW_INVALID_DMA_CHANNEL_ID, ADC_IPW_INVALID_DMA_CHANNEL_ID }, /* AdcDmaChannelLogicId */
@@ -365,6 +419,144 @@ const Adc_Ipw_GroupConfig AdcIpwGroupConfig_1 =
     STD_ON, /* GroupAvgEnableAlternate */
     /**< @brief Alternate Average selection of group */
     ADC_SAR_IP_AVG_32_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 2 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_2 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 3 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_3 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 4 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_4 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 5 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_5 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 6 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_6 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+#endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
+    { 22U, 22U, 22U }, /* ConvTime */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    { ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME, ADC_SAR_IP_DEF_SAMPLE_TIME } /* AlternateConvTime */
+#endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
+};
+
+/**
+* @brief          ADC Ipw Group 7 Config.
+*/
+const Adc_Ipw_GroupConfig AdcIpwGroupConfig_7 =
+{
+#if (STD_ON == ADC_AVERAGING_FUNCTIONALITY_SUPPORT)
+    /**< @brief Main Average enable status of group */
+    STD_OFF, /* GroupAvgEnable */
+    /**< @brief Main Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelect */
+#if (ADC_DUAL_CLOCK_MODE == STD_ON)
+    /**< @brief Alternate Average enable status of group */
+    STD_OFF, /* GroupAvgEnableAlternate */
+    /**< @brief Alternate Average selection of group */
+    ADC_SAR_IP_AVG_4_CONV, /* GroupAvgSelectAlternate */
 #endif /* (ADC_DUAL_CLOCK_MODE == STD_ON) */
 #endif /* ADC_AVERAGING_FUNCTIONALITY_SUPPORT */
     { 22U, 22U, 22U }, /* ConvTime */

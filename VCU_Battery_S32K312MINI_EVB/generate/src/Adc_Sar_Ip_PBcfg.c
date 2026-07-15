@@ -96,7 +96,19 @@ extern "C"{
 static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_0[4] =
 {
     {
-        7U, /* ChanIndex */
+        0U, /* ChanIndex */
+        (boolean)FALSE, /* PresamplingEnable */
+    #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
+        0U, /* WdgThreshRegIndex */
+        (boolean)FALSE, /* WdgNotificationEn */
+    #endif /* (STD_ON == ADC_SAR_IP_WDG_ENABLED) */
+    #if (STD_ON == ADC_SAR_IP_EOC_ENABLED)
+        (boolean)FALSE, /* EndOfConvNotification */
+    #endif /* (STD_ON == ADC_SAR_IP_EOC_ENABLED) */
+        (boolean)FALSE /* EndOfConvDmaEnable */
+    },
+    {
+        1U, /* ChanIndex */
         (boolean)FALSE, /* PresamplingEnable */
     #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
         0U, /* WdgThreshRegIndex */
@@ -120,19 +132,7 @@ static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_0[4] =
         (boolean)FALSE /* EndOfConvDmaEnable */
     },
     {
-        1U, /* ChanIndex */
-        (boolean)FALSE, /* PresamplingEnable */
-    #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
-        0U, /* WdgThreshRegIndex */
-        (boolean)FALSE, /* WdgNotificationEn */
-    #endif /* (STD_ON == ADC_SAR_IP_WDG_ENABLED) */
-    #if (STD_ON == ADC_SAR_IP_EOC_ENABLED)
-        (boolean)FALSE, /* EndOfConvNotification */
-    #endif /* (STD_ON == ADC_SAR_IP_EOC_ENABLED) */
-        (boolean)FALSE /* EndOfConvDmaEnable */
-    },
-    {
-        0U, /* ChanIndex */
+        7U, /* ChanIndex */
         (boolean)FALSE, /* PresamplingEnable */
     #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
         0U, /* WdgThreshRegIndex */
@@ -148,10 +148,46 @@ static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_0[4] =
 /**
 * @brief          ADC SAR Ip List of Channels Configuration for Logical ID 1 corresponding to the ADC1 configuration variant  .
 */
-static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_1[1] =
+static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_1[4] =
 {
     {
         1U, /* ChanIndex */
+        (boolean)FALSE, /* PresamplingEnable */
+    #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
+        0U, /* WdgThreshRegIndex */
+        (boolean)FALSE, /* WdgNotificationEn */
+    #endif /* (STD_ON == ADC_SAR_IP_WDG_ENABLED) */
+    #if (STD_ON == ADC_SAR_IP_EOC_ENABLED)
+        (boolean)FALSE, /* EndOfConvNotification */
+    #endif /* (STD_ON == ADC_SAR_IP_EOC_ENABLED) */
+        (boolean)FALSE /* EndOfConvDmaEnable */
+    },
+    {
+        4U, /* ChanIndex */
+        (boolean)FALSE, /* PresamplingEnable */
+    #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
+        0U, /* WdgThreshRegIndex */
+        (boolean)FALSE, /* WdgNotificationEn */
+    #endif /* (STD_ON == ADC_SAR_IP_WDG_ENABLED) */
+    #if (STD_ON == ADC_SAR_IP_EOC_ENABLED)
+        (boolean)FALSE, /* EndOfConvNotification */
+    #endif /* (STD_ON == ADC_SAR_IP_EOC_ENABLED) */
+        (boolean)FALSE /* EndOfConvDmaEnable */
+    },
+    {
+        5U, /* ChanIndex */
+        (boolean)FALSE, /* PresamplingEnable */
+    #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
+        0U, /* WdgThreshRegIndex */
+        (boolean)FALSE, /* WdgNotificationEn */
+    #endif /* (STD_ON == ADC_SAR_IP_WDG_ENABLED) */
+    #if (STD_ON == ADC_SAR_IP_EOC_ENABLED)
+        (boolean)FALSE, /* EndOfConvNotification */
+    #endif /* (STD_ON == ADC_SAR_IP_EOC_ENABLED) */
+        (boolean)FALSE /* EndOfConvDmaEnable */
+    },
+    {
+        6U, /* ChanIndex */
         (boolean)FALSE, /* PresamplingEnable */
     #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
         0U, /* WdgThreshRegIndex */
@@ -305,7 +341,7 @@ const Adc_Sar_Ip_ConfigType AdcSarIpConfig_1 =
     ADC_SAR_IP_DMA_REQ_CLEAR_ON_ACK, /* DmaClearSource */
     { 0U, 0U, 0U }, /* ChanMaskNormal */
     { 0U, 0U, 0U }, /* ChanMaskInjected */
-    1U, /* NumChannels */
+    4U, /* NumChannels */
     AdcSarIpChansConfig_1, /* ChannelConfigsPtr */
 #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
     0U, /* NumWdgThresholds */
