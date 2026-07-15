@@ -12,8 +12,8 @@
 *   This file contains sample code only. It is not part of the production code deliverables.
 */
 
-#ifndef PEDALS_H
-#define PEDALS_H
+#ifndef USB_MONITORING_H
+#define USB_MONITORING_H
 
 #ifdef __cplusplus
 extern "C"{
@@ -26,84 +26,39 @@ extern "C"{
 * 2) needed interfaces from external units
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
-
 #include "Mcu.h"
-#include "stdint.h"
-#include "Stdbool.h"
 
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
 
-typedef enum{
-    BRAKE,
-	ACCEL
-}Pedal_t;
-
-typedef enum{
-    SENSOR1,
-	SENSOR2
-}Sensor_t;
-
-typedef enum{
-    VOLTAGE,
-	PERCENTAGE
-}PedalValue_t;
-
-typedef enum{
-	PRESSURE_VOLTAGE,
-	BARS
-}BrakePressure_t;
-
-typedef enum{
-	SHORT_TO_GND,
-	SHORT_TO_VCC,
-	OUT_OF_RANGE_OUTPUT,
-	IMPLAUSIBILITY
-}PedalError_t;
-
-typedef struct{
-	uint16_t AcceleratorSensor1Voltage;
-	uint16_t AcceleratorSensor2Voltage;
-	uint8_t AcceleratorSensor1TravelPercentage;
-	uint8_t AcceleratorSensor2TravelPercentage;
-
-	uint16_t BrakeSensor1Voltage;
-	uint16_t BrakeSensor2Voltage;
-	uint8_t BrakeSensor1TravelPercentage;
-	uint8_t BrakeSensor2TravelPercentage;
-
-	uint16_t PressureSensorVoltage;
-	uint8_t PressureSensorBars;
-}PedalsData_t;
-
-typedef struct{
-	/*Status and Errors*/
-	bool Accel_Sensor1_ShortToGnd;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Sensor1_ShortToVcc;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Sensor1_OutOfRangeOutput;                /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Sensor2_ShortToGnd;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Sensor2_ShortToVcc;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Sensor2_OutOfRangeOutput;                /* 1 bit, 0 means safe, 1 means errors */
-    bool Accel_Implausibility;                          /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor1_ShortToGnd;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor1_ShortToVcc;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor1_OutOfRangeOutput;                /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor2_ShortToGnd;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor2_ShortToVcc;                      /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Sensor2_OutOfRangeOutput;                /* 1 bit, 0 means safe, 1 means errors */
-    bool Brake_Implausibility;                          /* 1 bit, 0 means safe, 1 means errors */
-}PedalsErrors_t;
-
-typedef struct{
-	uint16_t start_valid;
-	uint16_t end_valid;
-}SensorLimits;
 
 /*==================================================================================================
 *                                       LOCAL MACROS
 ==================================================================================================*/
+#define SEVEN_SEG_NO_RESPONSE 0
+#define SEVEN_SEG_NUMBER_TOO_LARGE 1
+#define ACCELERATOR_PEDALS_DIFFERENT_OUTPUT 0
+#define TEMPERATURE_TOO_HIGH 0
+#define BMS_NO_RESPONSE 0
+#define BMS_LOW_VOLTAGE 1
+#define BMS_HIGH_CONSUMPTION 2
+#define PROCESSOR_RESET 0
 
+#define ERROR 9
+#define CELL_TEMP 10
+#define CELL_VOLTAGE 11
+#define BMS_VOLTAGE 12
+#define BMS_CURRENT 13
+#define ACCELERATOR_PEDALS 14
+#define BRAKE_PEDAL 15
+#define SEVEN_SEGMENT 16
+#define INVERTERS_RPM 17
+#define INVERTERS_CURRENT 18
+#define INVERTERS_VOLTAGE 19
+#define INVERTERS_PEDALS 20
+#define INVERTERS_CONTROLLER_TEMPERATURE 21
+#define INVERTERS_MOTOR_TEMPERATURE 22
 
 /*==================================================================================================
 *                                      LOCAL CONSTANTS
@@ -124,7 +79,6 @@ typedef struct{
 *                                      GLOBAL VARIABLES
 ==================================================================================================*/
 
-
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
@@ -138,13 +92,22 @@ typedef struct{
 /*==================================================================================================
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
+void USBInit(uint8 UartChannel);
+void USBSendCellTemperature(uint16 CellIndex, sint32 Value);
+void USBSendCellVoltage(uint16 CellIndex, sint32 Value);
+void USBSendAcceleratorPedals(uint16 Value1, uint16 Value2);
+//void USBSendError(uint16 Module, uint8 error);
+void USBSendInverterRPM(uint16 Inverter1rpm, uint16 Inverter2rpm);
+void USBSendInverterVoltage(uint16 Inverter1Voltage, uint16 Inverter2Voltage);
+void USBSendInverterThrottle(uint8 Inverter1Throttle, uint8 Inverter2Throttle);
+void USBSendInverterControllerTemperature(uint8 Inverter1ControllerTemperature, uint8 Inverter2ControllerTemperature);
+void USBSendInverterMotorTemperature(uint8 Inverter1MotorTemperature, uint8 Inverter2MotorTemperature);
+void USBSendInverterCurrent(uint16 Inverter1Current, uint16 Inverter2Current);
+void USBSendBrakePedal(uint16 Value);
+void USBSendBMSCurrent(sint32 Value);
+void USBSendBMSVoltage(sint32 Value);
+uint8 CRC_calculate(uint8 length);
 
-void Pedals_Init(void);
-void Pedals_Test(void);
-boolean Pedals_GetError(Pedal_t PedalSelect, Sensor_t SensorSelect, PedalError_t DesiredValueType);
-uint32_t Pedals_GetData(Pedal_t PedalSelect, Sensor_t SensorSelect, PedalValue_t DesiredValueType);
-uint32_t Pedals_GetPressure(BrakePressure_t ValueType);
-void Pedals_Update(void);
 
 #ifdef __cplusplus
 }
