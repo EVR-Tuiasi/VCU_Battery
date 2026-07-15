@@ -129,6 +129,8 @@ int main(void)
     Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
     Can_43_FLEXCAN_EnableControllerInterrupts(0);
     USBInit(0);
+    CanMessaging_Init();
+    CanMessaging_Test();
     TempSensorInit();
 
     //CanMessaging_Test(); //intra in bucla lui Matei
