@@ -455,19 +455,19 @@ void sendErori(void)
     bufferUART[0] = 100;
     bufferUART[1] = 0x07;
     bufferUART[2] = icBaterie.stateSHUNT;
-    bufferUART[3] = CRC_calculate(4);
+    bufferUART[3] = aCRC_calculate(4);
     Uart_SyncSend(0, bufferUART, 4, 10000000);
 
     bufferUART[0] = 100;
     bufferUART[1] = 0x08;
     bufferUART[2] = icBaterie.stateBMS[0];
-    bufferUART[3] = CRC_calculate(4);
+    bufferUART[3] = aCRC_calculate(4);
     Uart_SyncSend(0, bufferUART, 4, 10000000);
 
     bufferUART[0] = 100;
     bufferUART[1] = 0x09;
     bufferUART[2] = icBaterie.stateBMS[1];
-    bufferUART[3] = CRC_calculate(4);
+    bufferUART[3] = aCRC_calculate(4);
     Uart_SyncSend(0, bufferUART, 4, 10000000);
 }
 
@@ -575,7 +575,7 @@ void sendEroareUnitate(int index)
     bufferUART[0] = 100;
     bufferUART[1] = 0xF8;
     bufferUART[2] = index + 1;
-    bufferUART[3] = CRC_calculate(4);
+    bufferUART[3] = aCRC_calculate(4);
     Uart_SyncSend(0, bufferUART, 4, 10000000);
 }
 

@@ -2218,7 +2218,7 @@ extern "C" {
 *
 * @implements
 */
-#define PORT_RESET_PIN_MODE_API           (STD_OFF)
+#define PORT_RESET_PIN_MODE_API           (STD_ON)
 
 /**
 * @brief Use/remove Port_GetVersionInfo function from the compiled driver
@@ -2271,37 +2271,38 @@ extern "C" {
 #define PortConf_PortPin_T_7 26
 #define PortConf_PortPin_T_8 27
 #define PortConf_PortPin_CAN0_TX 28
-#define PortConf_PortPin_CAN0_RX 29
-#define PortConf_PortPin_G_1 30
-#define PortConf_PortPin_G_2 31
-#define PortConf_PortPin_G_3 32
-#define PortConf_PortPin_G_4 33
-#define PortConf_PortPin_G_5 34
-#define PortConf_PortPin_G_6 35
-#define PortConf_PortPin_G_7 36
-#define PortConf_PortPin_G_8 37
-#define PortConf_PortPin_G_9 38
-#define PortConf_PortPin_G_10 39
-#define PortConf_PortPin_G_11 40
-#define PortConf_PortPin_G_12 41
-#define PortConf_PortPin_G_13 42
-#define PortConf_PortPin_G_14 43
-#define PortConf_PortPin_G_15 44
-#define PortConf_PortPin_G_16 45
-#define PortConf_PortPin_BMS_CS 46
-#define PortConf_PortPin_BMS_MOSI 47
-#define PortConf_PortPin_BMS_MISO 0
-#define PortConf_PortPin_BMS_SCK 16
+#define PortConf_PortPin_G_1 29
+#define PortConf_PortPin_G_2 30
+#define PortConf_PortPin_CAN__ 31
+#define PortConf_PortPin_CAN_STB 32
+#define PortConf_PortPin_G_5 33
+#define PortConf_PortPin_G_6 34
+#define PortConf_PortPin_G_7 35
+#define PortConf_PortPin_G_8 36
+#define PortConf_PortPin_G_9 37
+#define PortConf_PortPin_G_10 38
+#define PortConf_PortPin_G_11 39
+#define PortConf_PortPin_G_12 40
+#define PortConf_PortPin_G_13 41
+#define PortConf_PortPin_G_14 42
+#define PortConf_PortPin_G_15 43
+#define PortConf_PortPin_G_16 44
+#define PortConf_PortPin_BMS_CS 45
+#define PortConf_PortPin_BMS_MOSI 46
+#define PortConf_PortPin_BMS_MISO 47
+#define PortConf_PortPin_BMS_SCK 0
+#define PortConf_PortPin_G_3 16
+#define PortConf_PortPin_G_4 48
 
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)48)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)49)
 
 /**
 * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (92U)
+#define PORT_MAX_UNUSED_PADS_U16    (91U)
 /**
 * @brief Port driver Pre-Compile configuration switch
 */

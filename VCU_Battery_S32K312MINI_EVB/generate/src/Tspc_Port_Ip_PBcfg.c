@@ -161,10 +161,6 @@ const Tspc_Port_Ip_ObeGroupConfig aTspc_InitConfigArr[NUM_OF_OBE_GROUP_CONFIG] =
     },
     {
         .obeGroupSelect = 0,
-        .obeGroupIndex  = 65535
-    },
-    {
-        .obeGroupSelect = 0,
         .obeGroupIndex  = 9
     },
     {
@@ -290,6 +286,14 @@ const Tspc_Port_Ip_ObeGroupConfig aTspc_InitConfigArr[NUM_OF_OBE_GROUP_CONFIG] =
     {
         .obeGroupSelect = 0,
         .obeGroupIndex  = 65535
+    },
+    {
+        .obeGroupSelect = 0,
+        .obeGroupIndex  = 65535
+    },
+    {
+        .obeGroupSelect = 0,
+        .obeGroupIndex  = 15
     },
     {
         .obeGroupSelect = 0,

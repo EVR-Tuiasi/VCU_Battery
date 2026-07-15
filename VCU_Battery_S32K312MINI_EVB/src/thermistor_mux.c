@@ -22,13 +22,13 @@ Thermistors Thermistors_Data;
 //               8    9   10   11   12   13   14   15
 
 uint16 bankselpins[16] = {  //PCR
-    129, 103, 142, 141, 47, 48, 49, 46,
-    144, 143, 102, 79, 7, 45, 15, 16
+    90, 91, 138, 139, 42, 41,  25,  24,
+    15, 16,  65,  64, 55, 54, 135, 149
 };
 
-uint32 bankselpinsid[16] = { //ID-ul lor din
-    19, 20, 17, 18, 8, 10, 6, 7,
-    15, 16, 21, 22, 13, 14, 11, 12
+uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
+    29, 30, 16, 48, 33, 34, 35, 36,
+	37, 38, 39, 40, 41, 42, 43, 44
 };
 
 uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};

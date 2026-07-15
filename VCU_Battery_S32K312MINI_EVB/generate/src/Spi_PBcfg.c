@@ -155,8 +155,7 @@ extern "C"{
 #include "Spi_MemMap.h"
 
 /* Buffers Descriptors for EB Channels and Allocate Buffers for IB Channels */
-static Spi_DataBufferType Spi_BufferTX_SpiChannel_0[4];
-static Spi_DataBufferType Spi_BufferRX_SpiChannel_0[4];
+static Spi_BufferDescriptorType Spi_Buffer_SpiChannel_0;
 
 #if ((SPI_DMA_USED == STD_ON) && \
     ((SPI_LEVEL_DELIVERED == SPI_LEVEL1) || (SPI_LEVEL_DELIVERED == SPI_LEVEL2)))
@@ -171,13 +170,6 @@ static Spi_DataBufferType Spi_BufferRX_SpiChannel_0[4];
 #include "Spi_MemMap.h"
 
 /* Buffers Descriptors for IB Channels */
-/*  Buffers Descriptors for IB Channel SpiChannel_0 */
-static Spi_BufferDescriptorType Spi_Buffer_SpiChannel_0 =
-{
-    (const uint8*)NULL_PTR,
-    Spi_BufferTX_SpiChannel_0,  /* BufferTX */
-    Spi_BufferRX_SpiChannel_0   /* BufferRX */
-};
 
 #define SPI_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Spi_MemMap.h"
@@ -191,7 +183,7 @@ static Spi_BufferDescriptorType Spi_Buffer_SpiChannel_0 =
 /* Channel Configuration for SpiChannel_0 */
 static const Spi_ChannelConfigType Spi_ChannelConfig_SpiChannel_0 =
 {
-        IB,  /* BufferType IB or EB */
+        EB,  /* BufferType IB or EB */
         8U,   /* Frame size */
         (boolean)FALSE, /* Bit order, 1:LSB, 0: MSB */
         (boolean)FALSE, /* Byte Swap */
@@ -202,7 +194,7 @@ static const Spi_ChannelConfigType Spi_ChannelConfig_SpiChannel_0 =
 #endif
 
         (uint32)1U,  /* DefaultTransmitValue (configured) */
-        4U, /* length of buffer */
+        100U, /* length of buffer */
         &Spi_Buffer_SpiChannel_0, /* BufferDescriptor */
         (uint32)SPI_SPURIOUS_ID_U32,  /* User Id */
 #if (SPI_SERIALIZATION_SUPPORT == STD_ON)

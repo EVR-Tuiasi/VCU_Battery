@@ -160,7 +160,7 @@ extern "C"{
 *        (see chapter 7.2.1)
 * @implements SPI_CHANNEL_BUFFERS_ALLOWED_define
 */
-#define SPI_CHANNEL_BUFFERS_ALLOWED           (SPI_USAGE0)
+#define SPI_CHANNEL_BUFFERS_ALLOWED           (SPI_USAGE2)
 /* The LEVEL 0 Simple Synchronous SPI Handler Driver functionalities are selected.*/
 #define SPI_LEVEL0                          0x00u
 

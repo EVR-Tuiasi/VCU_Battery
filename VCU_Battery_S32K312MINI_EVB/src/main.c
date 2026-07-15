@@ -69,7 +69,7 @@ extern Thermistors Thermistors_Data;
 /*==================================================================================================
 *                                       LOCAL FUNCTIONS
 ==================================================================================================*/
-void IntrerupereBTN(void){
+/*void IntrerupereBTN(void){
 
 }
 
@@ -77,7 +77,7 @@ void CAN0_Wake_Up_IRQHandler(void)
 {
 
 }
-
+uint8 CRC_calculate(uint8 length);
 void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
 {
     (void)Controller;
@@ -87,7 +87,7 @@ void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
 void CanIf_ControllerBusOff(uint8_t Controller)
 {
     (void)Controller;
-}
+}*/
 /*==================================================================================================
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
@@ -121,6 +121,7 @@ int main(void)
     Adc_Init(NULL_PTR);
     Uart_Init(NULL_PTR);
     //Icu_Init(NULL_PTR);
+    *((volatile uint32_t *)0xE000E008) |= (1 << 1);
     Spi_Init(NULL_PTR);
     //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
@@ -146,12 +147,13 @@ int main(void)
     	readBieMieSe();
     	readBieMieSeOW();
     	sendAllUart();
+    	CanMessaging_Test();
 
     	// TODO integrat astea in functie de CAN
-    	CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
+    	/*CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
     	CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
     	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
-    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);
+    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);*/
     	for (int i =0;i<24;i++)
     	{
     		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/100 ,i);

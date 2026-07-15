@@ -106,7 +106,7 @@ void USBSendInverterCurrent(uint16 Inverter1Current, uint16 Inverter2Current);
 void USBSendBrakePedal(uint16 Value);
 void USBSendBMSCurrent(sint32 Value);
 void USBSendBMSVoltage(sint32 Value);
-uint8 CRC_calculate(uint8 length);
+uint8 aCRC_calculate(uint8 length);
 
 
 #ifdef __cplusplus
