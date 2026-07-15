@@ -126,11 +126,10 @@ int main(void)
     //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
-    Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
-    Can_43_FLEXCAN_EnableControllerInterrupts(0);
+    //Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
+    //Can_43_FLEXCAN_EnableControllerInterrupts(0);
     USBInit(0);
     CanMessaging_Init();
-    CanMessaging_Test();
     TempSensorInit();
 
     //CanMessaging_Test(); //intra in bucla lui Matei
