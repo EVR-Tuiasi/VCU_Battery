@@ -41,10 +41,10 @@
                <pin_label pin_num="93" pin_signal="PTC27" label="G_2"/>
                <pin_label pin_num="86" pin_signal="PTC21" label="CAN_EN"/>
                <pin_label pin_num="85" pin_signal="PTC20" label="CAN_STB"/>
-               <pin_label pin_num="129" pin_signal="PTB10" label="G_5"/>
-               <pin_label pin_num="130" pin_signal="PTB9" label="G_6"/>
-               <pin_label pin_num="15" pin_signal="PTA25" label="G_7_RAU"/>
-               <pin_label pin_num="14" pin_signal="PTA24" label="G_8_RAU"/>
+               <pin_label pin_num="129" pin_signal="PTB10" label="R_G_5"/>
+               <pin_label pin_num="130" pin_signal="PTB9" label="R_G_6"/>
+               <pin_label pin_num="15" pin_signal="PTA25" label="R_G_7"/>
+               <pin_label pin_num="14" pin_signal="PTA24" label="R_G_8"/>
                <pin_label pin_num="145" pin_signal="PTA15" label="G_9"/>
                <pin_label pin_num="143" pin_signal="PTA16" label="G_10"/>
                <pin_label pin_num="61" pin_signal="PTC1" label="G_11"/>
@@ -61,6 +61,8 @@
                <pin_label pin_num="9" pin_signal="PTE11" label="G_4"/>
                <pin_label pin_num="159" pin_signal="PTA12" label="G_7"/>
                <pin_label pin_num="160" pin_signal="PTA11" label="G_8"/>
+               <pin_label pin_num="142" pin_signal="PTE17" label="G_6"/>
+               <pin_label pin_num="144" pin_signal="PTE18" label="G_5"/>
             </pin_labels>
          </pins_profile>
          <functions_list>
@@ -114,11 +116,6 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="SIUL2" signal="gpio, 123" pin_num="132" pin_signal="PTD27">
-                     <pin_features>
-                        <pin_feature name="direction" value="OUTPUT"/>
-                     </pin_features>
-                  </pin>
-                  <pin peripheral="SIUL2" signal="gpio, 145" pin_num="142" pin_signal="PTE17">
                      <pin_features>
                         <pin_feature name="direction" value="OUTPUT"/>
                      </pin_features>
@@ -277,6 +274,16 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="SIUL2" signal="gpio, 11" pin_num="160" pin_signal="PTA11">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 145" pin_num="142" pin_signal="PTE17">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="SIUL2" signal="gpio, 146" pin_num="144" pin_signal="PTE18">
                      <pin_features>
                         <pin_feature name="direction" value="INPUT"/>
                      </pin_features>
@@ -1531,7 +1538,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="31">
-                                       <setting name="Name" value="G_5"/>
+                                       <setting name="Name" value="R_G_5"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1552,7 +1559,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="32">
-                                       <setting name="Name" value="G_6"/>
+                                       <setting name="Name" value="R_G_6"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1594,7 +1601,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="34">
-                                       <setting name="Name" value="G_8_RAU"/>
+                                       <setting name="Name" value="G9"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1615,7 +1622,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="35">
-                                       <setting name="Name" value="G_9"/>
+                                       <setting name="Name" value="G10"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1636,7 +1643,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="36">
-                                       <setting name="Name" value="G_10"/>
+                                       <setting name="Name" value="G11"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1657,7 +1664,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="37">
-                                       <setting name="Name" value="G_11"/>
+                                       <setting name="Name" value="G12"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1678,7 +1685,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="38">
-                                       <setting name="Name" value="G_12"/>
+                                       <setting name="Name" value="G13"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1699,7 +1706,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="39">
-                                       <setting name="Name" value="G_13"/>
+                                       <setting name="Name" value="G14"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1720,7 +1727,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="40">
-                                       <setting name="Name" value="G_14"/>
+                                       <setting name="Name" value="G15"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1741,7 +1748,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="41">
-                                       <setting name="Name" value="G_15"/>
+                                       <setting name="Name" value="G16"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1930,7 +1937,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="50">
-                                       <setting name="Name" value="G_8"/>
+                                       <setting name="Name" value="G_5"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1943,6 +1950,27 @@
                                        <setting name="PortPinInvertControl" value="false"/>
                                        <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
                                        <setting name="PortPinId" value="51"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                       <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
+                                       <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <setting name="ImcrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>
+                                       <array name="IGFSettings"/>
+                                       <array name="PortPinEcucPartitionRef"/>
+                                    </struct>
+                                    <struct name="51">
+                                       <setting name="Name" value="G6"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="52"/>
                                        <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
                                        <setting name="OBEGroupSelect" value="NO_OBE_GROUP"/>
                                        <setting name="MscrPdacSlot" value="VIRTUAL_WRAPPER_PDAC0"/>

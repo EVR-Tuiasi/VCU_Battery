@@ -22,13 +22,41 @@ Thermistors Thermistors_Data;
 //               8    9   10   11   12   13   14   15
 
 uint16 bankselpins[16] = {  //PCR
-    90, 91, 138, 139, 42, 41,  12,  11,
-    15, 16,  65,  64, 55, 54, 135, 149
+    90,
+91,
+138,
+139,
+145,
+146,
+11,
+12,
+15,
+16,
+65,
+64,
+55,
+54,
+135,
+149
 };
 
 uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
-    29, 30, 16, 48, 33, 34, 49, 50,
-	37, 38, 39, 40, 41, 42, 43, 44
+    28,
+29,
+0,
+16,
+50,
+51,
+49,
+48,
+36,
+37,
+38,
+39,
+40,
+41,
+42,
+43
 };
 
 uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -59,6 +87,7 @@ static void ActivateThermistorBank(uint16 ThermistorBankIndex)
         Thermistors_Data.BankSelectPins[ThermistorBankIndex],
         STD_LOW
     );
+
 }
 
 /**
@@ -128,6 +157,8 @@ void TempSensorInit()
 */
 sint32 GetTemp(uint16 TempSensorIndex)
 {
+	//if (TempSensorIndex==7 || TempSensorIndex==8 ||TempSensorIndex ==9)
+		__asm volatile ("nop");
     ActivateThermistorBank(TempSensorIndex);
 
     for (int i = 0; i < THERMISTORS_PER_BANK; i++)
@@ -151,7 +182,8 @@ sint32 GetTemp(uint16 TempSensorIndex)
             &Thermistors_Data.ThermistorValues[TempSensorIndex][i]
         );
     }
-
+    //if (TempSensorIndex==7 || TempSensorIndex==8 ||TempSensorIndex ==9)
+    	__asm volatile ("nop");
     DeactivateThermistorBank(TempSensorIndex);
 
     return 0;

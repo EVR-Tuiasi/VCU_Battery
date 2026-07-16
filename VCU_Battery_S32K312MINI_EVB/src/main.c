@@ -65,29 +65,10 @@ extern Thermistors Thermistors_Data;
 *                                   LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
 
-
 /*==================================================================================================
 *                                       LOCAL FUNCTIONS
 ==================================================================================================*/
-/*void IntrerupereBTN(void){
 
-}
-
-void CAN0_Wake_Up_IRQHandler(void)
-{
-
-}
-uint8 CRC_calculate(uint8 length);
-void CanIf_ControllerModeIndication(uint8_t Controller, uint8_t ControllerMode)
-{
-    (void)Controller;
-    (void)ControllerMode;
-}
-
-void CanIf_ControllerBusOff(uint8_t Controller)
-{
-    (void)Controller;
-}*/
 /*==================================================================================================
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
@@ -168,6 +149,7 @@ int main(void)
     	    }
 
     	CanMessaging_Update();
+    	for(int delei = 100000;delei>0;delei--);
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
     	    	{

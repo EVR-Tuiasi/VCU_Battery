@@ -427,46 +427,6 @@ const Siul2_Port_Ip_PinSettingsConfig g_pin_mux_InitConfigArr[NUM_OF_CONFIGURED_
     },
     {
         .base                  = IP_SIUL2,
-        .pinPortIdx            = 145,
-        .mux                   = PORT_MUX_AS_GPIO,
-        .safeMode              = PORT_SAFE_MODE_DISABLED,
-        .pullConfig            = PORT_INTERNAL_PULL_NOT_ENABLED,
-        .driveStrength         = PORT_DRIVE_STRENTGTH_NOT_AVAILABLE,
-        .inputFilter           = PORT_INPUT_FILTER_NOT_AVAILABLE,
-        .pullKeep              = PORT_PULL_KEEP_DISABLED,
-        .invert                = PORT_INVERT_DISABLED,
-        .slewRateCtrlSel       = PORT_SLEW_RATE_NOT_AVAILABLE,
-        .inputBuffer           = PORT_INPUT_BUFFER_DISABLED,
-        .outputBuffer          = PORT_OUTPUT_BUFFER_ENABLED,
-        .adcInterleaves        = {
-                                   MUX_MODE_NOT_AVAILABLE,
-                                   MUX_MODE_NOT_AVAILABLE
-                                 },
-        .initValue             = 0,
-        .inputMuxReg           = {
-                                   0
-                                 },
-        .inputMux              = {
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT,
-                                   PORT_INPUT_MUX_NO_INIT
-                                 }
-    },
-    {
-        .base                  = IP_SIUL2,
         .pinPortIdx            = 151,
         .mux                   = PORT_MUX_ALT2,
         .safeMode              = PORT_SAFE_MODE_DISABLED,
@@ -2112,6 +2072,86 @@ const Siul2_Port_Ip_PinSettingsConfig g_pin_mux_InitConfigArr[NUM_OF_CONFIGURED_
         .safeMode              = PORT_SAFE_MODE_DISABLED,
         .pullConfig            = PORT_INTERNAL_PULL_NOT_ENABLED,
         .driveStrength         = PORT_DRIVE_STRENTGTH_DISABLED,
+        .inputFilter           = PORT_INPUT_FILTER_NOT_AVAILABLE,
+        .pullKeep              = PORT_PULL_KEEP_DISABLED,
+        .invert                = PORT_INVERT_DISABLED,
+        .slewRateCtrlSel       = PORT_SLEW_RATE_NOT_AVAILABLE,
+        .inputBuffer           = PORT_INPUT_BUFFER_ENABLED,
+        .outputBuffer          = PORT_OUTPUT_BUFFER_DISABLED,
+        .adcInterleaves        = {
+                                   MUX_MODE_NOT_AVAILABLE,
+                                   MUX_MODE_NOT_AVAILABLE
+                                 },
+        .initValue             = 0,
+        .inputMuxReg           = {
+                                   0
+                                 },
+        .inputMux              = {
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT
+                                 }
+    },
+    {
+        .base                  = IP_SIUL2,
+        .pinPortIdx            = 145,
+        .mux                   = PORT_MUX_AS_GPIO,
+        .safeMode              = PORT_SAFE_MODE_DISABLED,
+        .pullConfig            = PORT_INTERNAL_PULL_NOT_ENABLED,
+        .driveStrength         = PORT_DRIVE_STRENTGTH_NOT_AVAILABLE,
+        .inputFilter           = PORT_INPUT_FILTER_NOT_AVAILABLE,
+        .pullKeep              = PORT_PULL_KEEP_DISABLED,
+        .invert                = PORT_INVERT_DISABLED,
+        .slewRateCtrlSel       = PORT_SLEW_RATE_NOT_AVAILABLE,
+        .inputBuffer           = PORT_INPUT_BUFFER_ENABLED,
+        .outputBuffer          = PORT_OUTPUT_BUFFER_DISABLED,
+        .adcInterleaves        = {
+                                   MUX_MODE_NOT_AVAILABLE,
+                                   MUX_MODE_NOT_AVAILABLE
+                                 },
+        .initValue             = 0,
+        .inputMuxReg           = {
+                                   0
+                                 },
+        .inputMux              = {
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT,
+                                   PORT_INPUT_MUX_NO_INIT
+                                 }
+    },
+    {
+        .base                  = IP_SIUL2,
+        .pinPortIdx            = 146,
+        .mux                   = PORT_MUX_AS_GPIO,
+        .safeMode              = PORT_SAFE_MODE_DISABLED,
+        .pullConfig            = PORT_INTERNAL_PULL_NOT_ENABLED,
+        .driveStrength         = PORT_DRIVE_STRENTGTH_NOT_AVAILABLE,
         .inputFilter           = PORT_INPUT_FILTER_NOT_AVAILABLE,
         .pullKeep              = PORT_PULL_KEEP_DISABLED,
         .invert                = PORT_INVERT_DISABLED,
