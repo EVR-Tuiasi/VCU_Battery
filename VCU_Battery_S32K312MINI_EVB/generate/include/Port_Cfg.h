@@ -2277,8 +2277,8 @@ extern "C" {
 #define PortConf_PortPin_CAN_STB 32
 #define PortConf_PortPin_G_5 33
 #define PortConf_PortPin_G_6 34
-#define PortConf_PortPin_G_7 35
-#define PortConf_PortPin_G_8 36
+#define PortConf_PortPin_G_7_RAU 35
+#define PortConf_PortPin_G_8_RAU 36
 #define PortConf_PortPin_G_9 37
 #define PortConf_PortPin_G_10 38
 #define PortConf_PortPin_G_11 39
@@ -2293,16 +2293,18 @@ extern "C" {
 #define PortConf_PortPin_BMS_SCK 0
 #define PortConf_PortPin_G_3 16
 #define PortConf_PortPin_G_4 48
+#define PortConf_PortPin_G_7 49
+#define PortConf_PortPin_G_8 50
 
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)49)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)51)
 
 /**
 * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (91U)
+#define PORT_MAX_UNUSED_PADS_U16    (89U)
 /**
 * @brief Port driver Pre-Compile configuration switch
 */

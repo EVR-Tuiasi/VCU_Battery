@@ -147,8 +147,7 @@ int main(void)
     	bmsInit();
     	readBieMieSe();
     	readBieMieSeOW();
-    	sendAllUart();
-    	CanMessaging_Test();
+    	//sendAllUart();
 
     	// TODO integrat astea in functie de CAN
     	/*CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
