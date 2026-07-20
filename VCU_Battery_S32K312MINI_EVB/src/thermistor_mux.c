@@ -11,6 +11,7 @@ extern "C" {
 #include "Dio.h"
 #include "Port.h"
 #include "Adc.h"
+#include "Siul2_Port_Ip.h"
 
 /*==================================================================================================
  *                                      LOCAL VARIABLES
@@ -22,14 +23,14 @@ Thermistors Thermistors_Data;
 //               8    9   10   11   12   13   14   15
 
 uint16 bankselpins[16] = {  //PCR
-    90,
+90,
 91,
-138,
-139,
+85,
+85,
 145,
 146,
-11,
-12,
+139,
+138,
 15,
 16,
 65,
@@ -41,22 +42,22 @@ uint16 bankselpins[16] = {  //PCR
 };
 
 uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
-    28,
-29,
-0,
-16,
-50,
-51,
-49,
+30,
+31,
+32,
+33,
 48,
-36,
-37,
+49,
+46,
+47,
 38,
 39,
 40,
 41,
 42,
-43
+43,
+44,
+45
 };
 
 uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -78,15 +79,16 @@ uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};
 */
 static void ActivateThermistorBank(uint16 ThermistorBankIndex)
 {
-    Port_SetPinDirection(
-        Thermistors_Data.BankSelectPinsID[ThermistorBankIndex],
-        PORT_PIN_OUT
-    );
+	Port_SetPinDirection(
+				        Thermistors_Data.BankSelectPinsID[ThermistorBankIndex],
+				        PORT_PIN_OUT
+				    );
 
-    Dio_WriteChannel(
-        Thermistors_Data.BankSelectPins[ThermistorBankIndex],
-        STD_LOW
-    );
+		Dio_WriteChannel(
+				        Thermistors_Data.BankSelectPins[ThermistorBankIndex],
+				        STD_LOW
+				    );
+		//set pins as input_pulldown
 
 }
 
@@ -103,10 +105,10 @@ static void ActivateThermistorBank(uint16 ThermistorBankIndex)
 */
 static void DeactivateThermistorBank(uint16 ThermistorBankIndex)
 {
-    Port_SetPinDirection(
-        Thermistors_Data.BankSelectPinsID[ThermistorBankIndex],
-        PORT_PIN_HIGH_Z
-    );
+	Port_SetPinDirection(
+			Thermistors_Data.BankSelectPinsID[ThermistorBankIndex],
+			PORT_PIN_HIGH_Z
+		);
 }
 
 /*==================================================================================================
@@ -157,8 +159,9 @@ void TempSensorInit()
 */
 sint32 GetTemp(uint16 TempSensorIndex)
 {
-	//if (TempSensorIndex==7 || TempSensorIndex==8 ||TempSensorIndex ==9)
+	if (TempSensorIndex==4 )
 		__asm volatile ("nop");
+	__asm volatile ("nop");
     ActivateThermistorBank(TempSensorIndex);
 
     for (int i = 0; i < THERMISTORS_PER_BANK; i++)
@@ -182,8 +185,9 @@ sint32 GetTemp(uint16 TempSensorIndex)
             &Thermistors_Data.ThermistorValues[TempSensorIndex][i]
         );
     }
-    //if (TempSensorIndex==7 || TempSensorIndex==8 ||TempSensorIndex ==9)
+    if (TempSensorIndex==4)
     	__asm volatile ("nop");
+    __asm volatile ("nop");
     DeactivateThermistorBank(TempSensorIndex);
 
     return 0;

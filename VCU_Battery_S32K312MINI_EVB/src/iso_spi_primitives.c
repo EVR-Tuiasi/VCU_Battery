@@ -89,10 +89,10 @@ void transmisieCMD(void)
 {
 #if 1
     Port_SetPinMode(BMS_CS, PORT_MUX_AS_GPIO);
-    Dio_WriteChannel(81, 0);
+    Dio_WriteChannel(49, 0);
     delei = 30;
     while(delei) { delei--; }
-    Dio_WriteChannel(81, 1);
+    Dio_WriteChannel(49, 1);
     Port_ResetPinMode(BMS_CS);
     delei = 3000;
     while(delei) { delei--; }
@@ -137,10 +137,10 @@ void transmisieWR48(void)
     buffTrimitere[3] = pec % 256;
 #if 1
     Port_SetPinMode(BMS_CS, PORT_MUX_AS_GPIO);
-    Dio_WriteChannel(81, 0);
+    Dio_WriteChannel(49, 0);
     delei = 30;
     while(delei) { delei--; }
-    Dio_WriteChannel(81, 1);
+    Dio_WriteChannel(49, 1);
     Port_ResetPinMode(BMS_CS);
     delei = 3000;
     while(delei) { delei--; }

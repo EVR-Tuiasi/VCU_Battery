@@ -17,7 +17,7 @@
 #define BATTERY_CELLS           24
 #define NUMARUL_DE_MONITOARE    2
 #define NUMARUL_DE_SUNTURI      1
-#define BMS_CS                  45 // ID Pinul de CS -1
+#define BMS_CS                  28 // ID Pinul de CS -1
 
 /* -------------------------------------------------------------------------- */
 /* LIMITE SI PRAGURI                            */

@@ -2272,40 +2272,38 @@ extern "C" {
 #define PortConf_PortPin_T_8 27
 #define PortConf_PortPin_CAN0_TX 28
 #define PortConf_PortPin_G_1 29
-#define PortConf_PortPin_G_2 30
-#define PortConf_PortPin_CAN__ 31
-#define PortConf_PortPin_CAN_STB 32
-#define PortConf_PortPin_R_G_5 33
-#define PortConf_PortPin_R_G_6 34
-#define PortConf_PortPin_G_7_RAU 35
-#define PortConf_PortPin_G9 36
-#define PortConf_PortPin_G10 37
-#define PortConf_PortPin_G11 38
-#define PortConf_PortPin_G12 39
-#define PortConf_PortPin_G13 40
-#define PortConf_PortPin_G14 41
-#define PortConf_PortPin_G15 42
-#define PortConf_PortPin_G16 43
-#define PortConf_PortPin_G_16 44
-#define PortConf_PortPin_BMS_CS 45
-#define PortConf_PortPin_BMS_MOSI 46
-#define PortConf_PortPin_BMS_MISO 47
-#define PortConf_PortPin_BMS_SCK 0
-#define PortConf_PortPin_G_3 16
-#define PortConf_PortPin_G_4 48
-#define PortConf_PortPin_G_7 49
-#define PortConf_PortPin_G_5 50
-#define PortConf_PortPin_G6 51
+#define PortConf_PortPin_G_2 0
+#define PortConf_PortPin_CAN__ 16
+#define PortConf_PortPin_G_01 30
+#define PortConf_PortPin_G02 31
+#define PortConf_PortPin_G03 32
+#define PortConf_PortPin_G04 33
+#define PortConf_PortPin_G05 34
+#define PortConf_PortPin_G06 35
+#define PortConf_PortPin_G07_rau 36
+#define PortConf_PortPin_G08_rau 37
+#define PortConf_PortPin_G09 38
+#define PortConf_PortPin_G10 39
+#define PortConf_PortPin_G11 40
+#define PortConf_PortPin_G12 41
+#define PortConf_PortPin_G13 42
+#define PortConf_PortPin_G14 43
+#define PortConf_PortPin_G15 44
+#define PortConf_PortPin_G16 45
+#define PortConf_PortPin_G_7_ 46
+#define PortConf_PortPin_G_8 47
+#define PortConf_PortPin_G_5_ 48
+#define PortConf_PortPin_G_6_ 49
 
 /**
 * @brief The maximum number of configured pins
 */
-#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)52)
+#define PORT_MAX_CONFIGURED_PADS_U16   ((uint16)50)
 
 /**
 * @brief Number of UnUsed pin array
 */
-#define PORT_MAX_UNUSED_PADS_U16    (88U)
+#define PORT_MAX_UNUSED_PADS_U16    (90U)
 /**
 * @brief Port driver Pre-Compile configuration switch
 */

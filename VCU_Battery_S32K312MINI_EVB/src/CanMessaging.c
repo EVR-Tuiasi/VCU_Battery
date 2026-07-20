@@ -476,12 +476,12 @@ void Can_Receive_Interrupt_COMUNICATII(PduIdType RxPduId, const PduInfoType * Pd
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
 void CanMessaging_Init(void){
-	Dio_WriteChannel(CAN_CHANNEL_EN, STD_HIGH); //CAN0_EN
+	/*Dio_WriteChannel(CAN_CHANNEL_EN, STD_HIGH); //CAN0_EN
 	volatile uint64 i = 1000000;
 	while(i--);
 	Dio_WriteChannel(CAN_CHANNEL_STB_N, STD_HIGH); //CAN0_STB_N
 	i = 1000000;
-	while(i--);
+	while(i--);*/
 	Can_43_FLEXCAN_SetControllerMode(CAN_CONTROLLER_ID, CAN_CS_STARTED);
 	Can_43_FLEXCAN_EnableControllerInterrupts(CAN_CONTROLLER_ID);
 }
