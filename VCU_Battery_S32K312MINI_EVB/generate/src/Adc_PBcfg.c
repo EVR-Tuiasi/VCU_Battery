@@ -132,19 +132,16 @@ extern "C"{
 */
 static const Adc_ChannelType Adc_Group0_Assignment_0[ADC_CFGSET_GROUP_0_CHANNELS] =
 {
-    0U,
-    1U,
-    2U,
-    3U
+    0U
 };
 
 /**
 * @brief          Group Assignments on ADC0 .
 *
 */
-static const Adc_ChannelType Adc_Group2_Assignment_0[ADC_CFGSET_GROUP_2_CHANNELS] =
+static const Adc_ChannelType Adc_Group1_Assignment_0[ADC_CFGSET_GROUP_1_CHANNELS] =
 {
-    2U
+    1U
 };
 
 /**
@@ -153,7 +150,7 @@ static const Adc_ChannelType Adc_Group2_Assignment_0[ADC_CFGSET_GROUP_2_CHANNELS
 */
 static const Adc_ChannelType Adc_Group3_Assignment_0[ADC_CFGSET_GROUP_3_CHANNELS] =
 {
-    3U
+    2U
 };
 
 /**
@@ -169,7 +166,7 @@ static const Adc_ChannelType Adc_Group4_Assignment_0[ADC_CFGSET_GROUP_4_CHANNELS
 * @brief          Group Assignments on ADC1 .
 *
 */
-static const Adc_ChannelType Adc_Group1_Assignment_1[ADC_CFGSET_GROUP_1_CHANNELS] =
+static const Adc_ChannelType Adc_Group2_Assignment_1[ADC_CFGSET_GROUP_2_CHANNELS] =
 {
     0U
 };
@@ -261,7 +258,7 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Number of channels in the group*/
         (Adc_ChannelIndexType)ADC_CFGSET_GROUP_0_CHANNELS, /* AssignedChannelCount */
         /**< @brief Last Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(7)), /* LastCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(0)), /* LastCh */
         /**< @brief First Channel configured */
         (Adc_ChannelType)(ADC_ID_CHANNEL_U8(0)), /* FirstCh */
         /**< @brief Enables or Disables the ADC and DMA interrupts */
@@ -280,7 +277,7 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Enables or disables the usage of limit checking for an ADC group. */
         (boolean)FALSE, /* AdcGroupLimitcheck */
 #endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
-        { { 0x87U, 0x0U, 0x0U } }, /* AssignedChannelMask */
+        { { 0x1U, 0x0U, 0x0U } }, /* AssignedChannelMask */
 #if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
         /**< @brief First position of channel in BCTU channel list or CTU command list. */
         0U, /* CtuTrigListPos */
@@ -289,93 +286,10 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         &AdcIpwGroupConfig_0 /* AdcIpwGroupConfigPtr */
         #endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
     },
-    /**< @brief Group1 -- Logical Unit Id 1 -- Hardware Unit ADC1 */
+    /**< @brief Group1 -- Logical Unit Id 0 -- Hardware Unit ADC0 */
     {
         /**< @brief Index of group */
         1U, /* GroupId */
-        /**< @brief ADC Logical Unit Id that the group belongs to */
-        (Adc_HwUnitType)1, /* AdcLogicalUnitId */
-        /**< @brief Access mode */
-        ADC_ACCESS_MODE_SINGLE, /* AccessMode */
-        /**< @brief Conversion mode */
-        ADC_CONV_MODE_ONESHOT, /* Mode */
-        /**< @brief Conversion type */
-        ADC_CONV_TYPE_NORMAL, /* Type */
-#if (ADC_PRIORITY_IMPLEMENTATION != ADC_PRIORITY_NONE)
-        /**< @brief Priority configured */
-        (Adc_GroupPriorityType)ADC_GROUP_PRIORITY(0), /* Priority */
-#endif /* ADC_PRIORITY_IMPLEMENTATION != ADC_PRIORITY_NONE */
-        /**< @brief Replacement mode */
-        ADC_GROUP_REPL_ABORT_RESTART, /* ReplacementMode */
-        /**< @brief Trigger source configured */
-        ADC_TRIGG_SRC_SW, /* TriggerSource */
-#if (STD_ON == ADC_HW_TRIGGER_API)
-        /**< @brief Hardware trigger source for the group */
-        0U, /* HwTriggerSource */
-        /**< @brief Hardware trigger signal */
-        ADC_HW_TRIG_RISING_EDGE, /* TriggerEdge */
-#endif /* (STD_ON == ADC_HW_TRIGGER_API) */
-#if (STD_ON == ADC_GRP_NOTIF_CAPABILITY)
-        /**< @brief Notification function */
-        NULL_PTR, /* Notification */
-#endif /* (STD_ON == ADC_GRP_NOTIF_CAPABILITY) */
-#if (ADC_ENABLE_INITIAL_NOTIFICATION == STD_ON)
-        /**< @brief Extra notification function */
-        NULL_PTR, /* ExtraNotification */
-#endif /* (ADC_ENABLE_INITIAL_NOTIFICATION == STD_ON) */
-#if defined(ADC_DMA_ERROR_SUPPORTED)
-        /**< @brief DMA error notification function */
-        NULL_PTR, /* DmaErrorNotification */
-#endif /* defined(ADC_DMA_ERROR_SUPPORTED) */
-        /**< @brief Group Streaming Buffer Mode */
-        ADC_STREAM_BUFFER_LINEAR, /* BufferMode */
-#if (ADC_ENABLE_CH_DISABLE_CH_NONAUTO_API == STD_ON)
-        /**< @brief Index of the group with AdcEnableChDisableChGroup enabled */
-        (Adc_GroupType)ADC_ENABLE_CH_DISABLE_CH_INVALID_GROUP_INDEX, /* EnableChDisableChGroupIndex */
-#endif /* (ADC_ENABLE_CH_DISABLE_CH_NONAUTO_API == STD_ON) */
-        /**< @brief Number of streaming samples */
-        (Adc_StreamNumSampleType)ADC_STREAMING_NUM_SAMPLES(1), /* NumSamples */
-#if (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON)
-        /**< @brief Arrange the adc results as multiple sets of group result buffer */
-        (boolean)(FALSE), /* StreamResultGroupMultiSets */
-#endif /* (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON) */
-        /**< @brief Channels assigned to the group*/
-        Adc_Group1_Assignment_1, /* AssignmentPtr */
-        /**< @brief Number of channels in the group*/
-        (Adc_ChannelIndexType)ADC_CFGSET_GROUP_1_CHANNELS, /* AssignedChannelCount */
-        /**< @brief Last Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* LastCh */
-        /**< @brief First Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* FirstCh */
-        /**< @brief Enables or Disables the ADC and DMA interrupts */
-        (uint8)(STD_OFF), /* AdcWithoutInterrupt */
-        /**< @brief Enables or Disables configuring external DMA channel in the group */
-        (uint8)(STD_OFF), /* AdcExtDMAChanEnable */
-        /**< @brief When true, disables completely DMA configuration done by ADC driver for the group */
-        (boolean)(FALSE), /* AdcWithoutDma */
-#if (STD_ON == ADC_OPTIMIZE_DMA_STREAMING_GROUPS)
-        /**< @brief Enables or Disables the ADC optimize DMA streaming groups feature */
-        (boolean)(FALSE), /* AdcOptimizeDmaStream */
-        /**< @brief Enable/disable half interrupt for group with optimize DMA streaming groups */
-        (boolean)(FALSE), /* HalfInterrupt */
-#endif /* (STD_ON == ADC_OPTIMIZE_DMA_STREAMING_GROUPS) */
-#if (ADC_ENABLE_LIMIT_CHECK == STD_ON)
-        /**< @brief Enables or disables the usage of limit checking for an ADC group. */
-        (boolean)FALSE, /* AdcGroupLimitcheck */
-#endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
-        { { 0x2U, 0x0U, 0x0U } }, /* AssignedChannelMask */
-#if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
-        /**< @brief First position of channel in BCTU channel list or CTU command list. */
-        0U, /* CtuTrigListPos */
-#endif /* (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON) */
-#if (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF)
-        &AdcIpwGroupConfig_1 /* AdcIpwGroupConfigPtr */
-        #endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
-    },
-    /**< @brief Group2 -- Logical Unit Id 0 -- Hardware Unit ADC0 */
-    {
-        /**< @brief Index of group */
-        2U, /* GroupId */
         /**< @brief ADC Logical Unit Id that the group belongs to */
         (Adc_HwUnitType)0, /* AdcLogicalUnitId */
         /**< @brief Access mode */
@@ -423,13 +337,13 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         (boolean)(FALSE), /* StreamResultGroupMultiSets */
 #endif /* (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON) */
         /**< @brief Channels assigned to the group*/
-        Adc_Group2_Assignment_0, /* AssignmentPtr */
+        Adc_Group1_Assignment_0, /* AssignmentPtr */
         /**< @brief Number of channels in the group*/
-        (Adc_ChannelIndexType)ADC_CFGSET_GROUP_2_CHANNELS, /* AssignedChannelCount */
+        (Adc_ChannelIndexType)ADC_CFGSET_GROUP_1_CHANNELS, /* AssignedChannelCount */
         /**< @brief Last Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(2)), /* LastCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* LastCh */
         /**< @brief First Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(2)), /* FirstCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* FirstCh */
         /**< @brief Enables or Disables the ADC and DMA interrupts */
         (uint8)(STD_OFF), /* AdcWithoutInterrupt */
         /**< @brief Enables or Disables configuring external DMA channel in the group */
@@ -446,7 +360,90 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Enables or disables the usage of limit checking for an ADC group. */
         (boolean)FALSE, /* AdcGroupLimitcheck */
 #endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
-        { { 0x4U, 0x0U, 0x0U } }, /* AssignedChannelMask */
+        { { 0x2U, 0x0U, 0x0U } }, /* AssignedChannelMask */
+#if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
+        /**< @brief First position of channel in BCTU channel list or CTU command list. */
+        0U, /* CtuTrigListPos */
+#endif /* (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON) */
+#if (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF)
+        &AdcIpwGroupConfig_1 /* AdcIpwGroupConfigPtr */
+        #endif /* (ADC_SET_ADC_CONV_TIME_ONCE == STD_OFF) */
+    },
+    /**< @brief Group2 -- Logical Unit Id 1 -- Hardware Unit ADC1 */
+    {
+        /**< @brief Index of group */
+        2U, /* GroupId */
+        /**< @brief ADC Logical Unit Id that the group belongs to */
+        (Adc_HwUnitType)1, /* AdcLogicalUnitId */
+        /**< @brief Access mode */
+        ADC_ACCESS_MODE_SINGLE, /* AccessMode */
+        /**< @brief Conversion mode */
+        ADC_CONV_MODE_ONESHOT, /* Mode */
+        /**< @brief Conversion type */
+        ADC_CONV_TYPE_NORMAL, /* Type */
+#if (ADC_PRIORITY_IMPLEMENTATION != ADC_PRIORITY_NONE)
+        /**< @brief Priority configured */
+        (Adc_GroupPriorityType)ADC_GROUP_PRIORITY(0), /* Priority */
+#endif /* ADC_PRIORITY_IMPLEMENTATION != ADC_PRIORITY_NONE */
+        /**< @brief Replacement mode */
+        ADC_GROUP_REPL_ABORT_RESTART, /* ReplacementMode */
+        /**< @brief Trigger source configured */
+        ADC_TRIGG_SRC_SW, /* TriggerSource */
+#if (STD_ON == ADC_HW_TRIGGER_API)
+        /**< @brief Hardware trigger source for the group */
+        0U, /* HwTriggerSource */
+        /**< @brief Hardware trigger signal */
+        ADC_HW_TRIG_RISING_EDGE, /* TriggerEdge */
+#endif /* (STD_ON == ADC_HW_TRIGGER_API) */
+#if (STD_ON == ADC_GRP_NOTIF_CAPABILITY)
+        /**< @brief Notification function */
+        NULL_PTR, /* Notification */
+#endif /* (STD_ON == ADC_GRP_NOTIF_CAPABILITY) */
+#if (ADC_ENABLE_INITIAL_NOTIFICATION == STD_ON)
+        /**< @brief Extra notification function */
+        NULL_PTR, /* ExtraNotification */
+#endif /* (ADC_ENABLE_INITIAL_NOTIFICATION == STD_ON) */
+#if defined(ADC_DMA_ERROR_SUPPORTED)
+        /**< @brief DMA error notification function */
+        NULL_PTR, /* DmaErrorNotification */
+#endif /* defined(ADC_DMA_ERROR_SUPPORTED) */
+        /**< @brief Group Streaming Buffer Mode */
+        ADC_STREAM_BUFFER_LINEAR, /* BufferMode */
+#if (ADC_ENABLE_CH_DISABLE_CH_NONAUTO_API == STD_ON)
+        /**< @brief Index of the group with AdcEnableChDisableChGroup enabled */
+        (Adc_GroupType)ADC_ENABLE_CH_DISABLE_CH_INVALID_GROUP_INDEX, /* EnableChDisableChGroupIndex */
+#endif /* (ADC_ENABLE_CH_DISABLE_CH_NONAUTO_API == STD_ON) */
+        /**< @brief Number of streaming samples */
+        (Adc_StreamNumSampleType)ADC_STREAMING_NUM_SAMPLES(1), /* NumSamples */
+#if (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON)
+        /**< @brief Arrange the adc results as multiple sets of group result buffer */
+        (boolean)(FALSE), /* StreamResultGroupMultiSets */
+#endif /* (ADC_ENABLE_GROUP_STREAMING_RESULTS_REORDER == STD_ON) */
+        /**< @brief Channels assigned to the group*/
+        Adc_Group2_Assignment_1, /* AssignmentPtr */
+        /**< @brief Number of channels in the group*/
+        (Adc_ChannelIndexType)ADC_CFGSET_GROUP_2_CHANNELS, /* AssignedChannelCount */
+        /**< @brief Last Channel configured */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* LastCh */
+        /**< @brief First Channel configured */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(1)), /* FirstCh */
+        /**< @brief Enables or Disables the ADC and DMA interrupts */
+        (uint8)(STD_OFF), /* AdcWithoutInterrupt */
+        /**< @brief Enables or Disables configuring external DMA channel in the group */
+        (uint8)(STD_OFF), /* AdcExtDMAChanEnable */
+        /**< @brief When true, disables completely DMA configuration done by ADC driver for the group */
+        (boolean)(FALSE), /* AdcWithoutDma */
+#if (STD_ON == ADC_OPTIMIZE_DMA_STREAMING_GROUPS)
+        /**< @brief Enables or Disables the ADC optimize DMA streaming groups feature */
+        (boolean)(FALSE), /* AdcOptimizeDmaStream */
+        /**< @brief Enable/disable half interrupt for group with optimize DMA streaming groups */
+        (boolean)(FALSE), /* HalfInterrupt */
+#endif /* (STD_ON == ADC_OPTIMIZE_DMA_STREAMING_GROUPS) */
+#if (ADC_ENABLE_LIMIT_CHECK == STD_ON)
+        /**< @brief Enables or disables the usage of limit checking for an ADC group. */
+        (boolean)FALSE, /* AdcGroupLimitcheck */
+#endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
+        { { 0x2U, 0x0U, 0x0U } }, /* AssignedChannelMask */
 #if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
         /**< @brief First position of channel in BCTU channel list or CTU command list. */
         0U, /* CtuTrigListPos */
@@ -510,9 +507,9 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Number of channels in the group*/
         (Adc_ChannelIndexType)ADC_CFGSET_GROUP_3_CHANNELS, /* AssignedChannelCount */
         /**< @brief Last Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(7)), /* LastCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(2)), /* LastCh */
         /**< @brief First Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(7)), /* FirstCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(2)), /* FirstCh */
         /**< @brief Enables or Disables the ADC and DMA interrupts */
         (uint8)(STD_OFF), /* AdcWithoutInterrupt */
         /**< @brief Enables or Disables configuring external DMA channel in the group */
@@ -529,7 +526,7 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Enables or disables the usage of limit checking for an ADC group. */
         (boolean)FALSE, /* AdcGroupLimitcheck */
 #endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
-        { { 0x80U, 0x0U, 0x0U } }, /* AssignedChannelMask */
+        { { 0x4U, 0x0U, 0x0U } }, /* AssignedChannelMask */
 #if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
         /**< @brief First position of channel in BCTU channel list or CTU command list. */
         0U, /* CtuTrigListPos */

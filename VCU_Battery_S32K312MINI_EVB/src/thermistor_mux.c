@@ -322,6 +322,18 @@ void citesteToateADC(void)
 * @pre            ADC values must be available.
 * @post           Temperature matrix is updated.
 */
+void lookUPtemperaturi_vechi(void)
+{
+    for (int i = 0; i < THERMISTOR_BANKS; i++)
+    {
+        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+        {
+            Thermistors_Data.temperaturi[i][j] =
+                temp_lut[Thermistors_Data.ThermistorValues[i][j]];
+        }
+    }
+}
+
 void lookUPtemperaturi(void)
 {
     for (int i = 0; i < THERMISTOR_BANKS; i++)

@@ -1219,7 +1219,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="16">
-                                       <setting name="Name" value="RX_UART01"/>
+                                       <setting name="Name" value="T_1_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1240,7 +1240,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="17">
-                                       <setting name="Name" value="T_1"/>
+                                       <setting name="Name" value="T_2_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1261,7 +1261,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="18">
-                                       <setting name="Name" value="T_2"/>
+                                       <setting name="Name" value="T_3_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1282,7 +1282,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="19">
-                                       <setting name="Name" value="T_3"/>
+                                       <setting name="Name" value="T_4_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1303,7 +1303,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="20">
-                                       <setting name="Name" value="T_4"/>
+                                       <setting name="Name" value="T_5_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1324,7 +1324,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="21">
-                                       <setting name="Name" value="T_5"/>
+                                       <setting name="Name" value="T_6_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1345,7 +1345,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="22">
-                                       <setting name="Name" value="PWM_2"/>
+                                       <setting name="Name" value="T_7_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -1366,7 +1366,7 @@
                                        <array name="PortPinEcucPartitionRef"/>
                                     </struct>
                                     <struct name="23">
-                                       <setting name="Name" value="T_6"/>
+                                       <setting name="Name" value="T_8_"/>
                                        <setting name="PortPinPue" value="false"/>
                                        <setting name="PortPinPus" value="false"/>
                                        <setting name="PortPinSafeMode" value="false"/>
@@ -4817,18 +4817,15 @@
                                        </struct>
                                        <array name="AdcGroupDefinition">
                                           <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_0"/>
-                                          <setting name="1" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_1"/>
-                                          <setting name="2" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_2"/>
-                                          <setting name="3" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_3"/>
                                        </array>
                                        <array name="AdcGroupEcucPartitionRef"/>
                                     </struct>
                                     <struct name="1">
-                                       <setting name="Name" value="AdcGroup_2"/>
+                                       <setting name="Name" value="AdcGroup_1"/>
                                        <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
                                        <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
                                        <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
-                                       <setting name="AdcGroupId" value="2"/>
+                                       <setting name="AdcGroupId" value="1"/>
                                        <array name="AdcGroupPriority"/>
                                        <array name="AdcGroupReplacement"/>
                                        <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>
@@ -4866,7 +4863,7 @@
                                           <setting name="AdcAltGroupSamplingDuration2" value="22"/>
                                        </struct>
                                        <array name="AdcGroupDefinition">
-                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_2"/>
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_1"/>
                                        </array>
                                        <array name="AdcGroupEcucPartitionRef"/>
                                     </struct>
@@ -4913,7 +4910,7 @@
                                           <setting name="AdcAltGroupSamplingDuration2" value="22"/>
                                        </struct>
                                        <array name="AdcGroupDefinition">
-                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_3"/>
+                                          <setting name="0" value="/Adc/Adc/AdcConfigSet/AdcHwUnit_0/AdcChannel_2"/>
                                        </array>
                                        <array name="AdcGroupEcucPartitionRef"/>
                                     </struct>
@@ -5096,11 +5093,11 @@
                                  </array>
                                  <array name="AdcGroup">
                                     <struct name="0">
-                                       <setting name="Name" value="AdcGroup_1"/>
+                                       <setting name="Name" value="AdcGroup_2"/>
                                        <setting name="AdcGroupAccessMode" value="ADC_ACCESS_MODE_SINGLE"/>
                                        <setting name="AdcGroupConversionMode" value="ADC_CONV_MODE_ONESHOT"/>
                                        <setting name="AdcGroupConversionType" value="ADC_CONV_TYPE_NORMAL"/>
-                                       <setting name="AdcGroupId" value="1"/>
+                                       <setting name="AdcGroupId" value="2"/>
                                        <array name="AdcGroupPriority"/>
                                        <array name="AdcGroupReplacement"/>
                                        <setting name="AdcGroupTriggSrc" value="ADC_TRIGG_SRC_SW"/>

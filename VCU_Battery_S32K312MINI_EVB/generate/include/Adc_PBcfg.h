@@ -91,7 +91,7 @@ extern "C"{
 *
 */
 
-#define ADC_CFGSET_GROUP_0_CHANNELS      (4U)
+#define ADC_CFGSET_GROUP_0_CHANNELS      (1U)
 #define ADC_CFGSET_GROUP_1_CHANNELS      (1U)
 #define ADC_CFGSET_GROUP_2_CHANNELS      (1U)
 #define ADC_CFGSET_GROUP_3_CHANNELS      (1U)
