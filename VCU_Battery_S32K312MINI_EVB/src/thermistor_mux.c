@@ -340,8 +340,14 @@ void lookUPtemperaturi(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            Thermistors_Data.temperaturi[i][j] =
-                temp_lut[Thermistors_Data.ThermistorValues[i][j]];
+        	if(Thermistors_Data.ThermistorValues[i][j]<1576)
+        		Thermistors_Data.temperaturi = 15000;
+        	else if (Thermistors_Data.ThermistorValues[i][j]< 4700)
+        		Thermistors_Data.temperaturi = 18560 - 2.25 * Thermistors_Data.ThermistorValues[i][j];
+        	else if (Thermistors_Data.ThermistorValues[i][j]< 14436)
+        		Thermistors_Data.temperaturi = 11780 - 0.81 * Thermistors_Data.ThermistorValues[i][j];
+        	else
+        		Thermistors_Data.temperaturi = 0;
         }
     }
 }
