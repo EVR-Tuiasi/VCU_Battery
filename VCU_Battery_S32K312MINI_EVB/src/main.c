@@ -61,6 +61,7 @@ extern "C" {
 ==================================================================================================*/
 extern struct biemese icBaterie;
 extern Thermistors Thermistors_Data;
+extern uint8 buffPrimire[64];
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
@@ -115,11 +116,23 @@ int main(void)
 
     //CanMessaging_Test(); //intra in bucla lui Matei
 
+
+    /*while(1)
+    {
+        int h=200000;
+        while(h--)
+        	__asm volatile ("nop");
+        BmsReadID();
+    }*/
+
     while(1)
     {
     	//daca am subtensiune pornesc chargeru
 
-
+    	Port_SetPinDirection(50,PORT_PIN_OUT);
+    	Dio_WriteChannel(53,STD_LOW);
+    	Dio_WriteChannel(53,STD_HIGH);
+    	Dio_WriteChannel(53,STD_LOW);
 
     	citesteToateADC();
     	corectieValoriADC();
