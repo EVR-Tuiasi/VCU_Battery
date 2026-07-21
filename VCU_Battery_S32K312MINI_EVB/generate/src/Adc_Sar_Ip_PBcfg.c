@@ -96,7 +96,7 @@ extern "C"{
 static const Adc_Sar_Ip_ChanConfigType AdcSarIpChansConfig_0[4] =
 {
     {
-        0U, /* ChanIndex */
+        33U, /* ChanIndex */
         (boolean)FALSE, /* PresamplingEnable */
     #if (STD_ON == ADC_SAR_IP_WDG_ENABLED)
         0U, /* WdgThreshRegIndex */

@@ -128,11 +128,16 @@ int main(void)
     while(1)
     {
     	//daca am subtensiune pornesc chargeru
-
+    	/* pinu AMS
     	Port_SetPinDirection(50,PORT_PIN_OUT);
     	Dio_WriteChannel(53,STD_LOW);
     	Dio_WriteChannel(53,STD_HIGH);
-    	Dio_WriteChannel(53,STD_LOW);
+    	Dio_WriteChannel(53,STD_LOW);*/
+
+    	Port_SetPinDirection(51,PORT_PIN_OUT);
+    	Dio_WriteChannel(52,STD_LOW);
+    	Dio_WriteChannel(52,STD_HIGH);
+    	Dio_WriteChannel(52,STD_LOW);
 
     	citesteToateADC();
     	corectieValoriADC();

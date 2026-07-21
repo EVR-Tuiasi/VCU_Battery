@@ -258,9 +258,9 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Number of channels in the group*/
         (Adc_ChannelIndexType)ADC_CFGSET_GROUP_0_CHANNELS, /* AssignedChannelCount */
         /**< @brief Last Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(0)), /* LastCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(33)), /* LastCh */
         /**< @brief First Channel configured */
-        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(0)), /* FirstCh */
+        (Adc_ChannelType)(ADC_ID_CHANNEL_U8(33)), /* FirstCh */
         /**< @brief Enables or Disables the ADC and DMA interrupts */
         (uint8)(STD_OFF), /* AdcWithoutInterrupt */
         /**< @brief Enables or Disables configuring external DMA channel in the group */
@@ -277,7 +277,7 @@ static const Adc_GroupConfigurationType Adc_GroupsCfg[] =
         /**< @brief Enables or disables the usage of limit checking for an ADC group. */
         (boolean)FALSE, /* AdcGroupLimitcheck */
 #endif /* (STD_ON == ADC_ENABLE_LIMIT_CHECK) */
-        { { 0x1U, 0x0U, 0x0U } }, /* AssignedChannelMask */
+        { { 0x0U, 0x2U, 0x0U } }, /* AssignedChannelMask */
 #if (ADC_CTU_HW_TRIGGER_OPTIMIZATION == STD_ON)
         /**< @brief First position of channel in BCTU channel list or CTU command list. */
         0U, /* CtuTrigListPos */
