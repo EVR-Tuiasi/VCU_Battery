@@ -114,7 +114,7 @@ int main(void)
     CanMessaging_Init();
     TempSensorInit();
 
-    //CanMessaging_Test(); //intra in bucla lui Matei
+    CanMessaging_Test(); //intra in bucla lui Matei
 
 
     /*while(1)
@@ -132,12 +132,12 @@ int main(void)
     	Port_SetPinDirection(50,PORT_PIN_OUT);
     	Dio_WriteChannel(53,STD_LOW);
     	Dio_WriteChannel(53,STD_HIGH);
-    	Dio_WriteChannel(53,STD_LOW);*/
+    	Dio_WriteChannel(53,STD_LOW);
 
     	Port_SetPinDirection(51,PORT_PIN_OUT);
     	Dio_WriteChannel(52,STD_LOW);
     	Dio_WriteChannel(52,STD_HIGH);
-    	Dio_WriteChannel(52,STD_LOW);
+    	Dio_WriteChannel(52,STD_LOW);*/
 
     	citesteToateADC();
     	corectieValoriADC();
@@ -167,7 +167,7 @@ int main(void)
     	    }
 
     	CanMessaging_Update();
-    	for(int delei = 100000;delei>0;delei--);
+    	for(int delei = 2000000;delei>0;delei--);
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
     	    	{

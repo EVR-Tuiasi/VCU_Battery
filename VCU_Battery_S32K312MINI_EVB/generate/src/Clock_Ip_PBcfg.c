@@ -448,7 +448,7 @@ static const Clock_Ip_DividerConfigType Clock_Ip_DividerConfigurations_0[CLOCK_I
     #if CLOCK_IP_CONFIGURED_DIVIDERS_0_NO > 10U
     {
         FLEXCANA_CLK,                    /* name */
-        2U,                              /* value */
+        1U,                              /* value */
         {
             0U,
         }
@@ -458,7 +458,7 @@ static const Clock_Ip_DividerConfigType Clock_Ip_DividerConfigurations_0[CLOCK_I
     #if CLOCK_IP_CONFIGURED_DIVIDERS_0_NO > 11U
     {
         FLEXCANB_CLK,                    /* name */
-        2U,                              /* value */
+        1U,                              /* value */
         {
             0U,
         }

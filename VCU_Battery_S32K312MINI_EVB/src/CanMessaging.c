@@ -609,7 +609,9 @@ void CanMessaging_Update(void){
 
 	for(uint16_t index = 0; index < THERMISTORS_LINES; index++){
 		CanMessaging_CreateCellTemperatureBuffer(index, bufferCan_BATERIE_TEMPERATURI_CELULE);
+		__asm volatile ("nop");
 		Can_43_FLEXCAN_Write(CAN_HTH_BATERIE_TEMPERATURI_CELULE, &pduInfo_BATERIE_TEMPERATURI_CELULE);
+		__asm volatile ("nop");
 	}
 
 	CanMessaging_CreateBuffer(ID_CAN_BATERIE_2, bufferCan_BATERIE_2);

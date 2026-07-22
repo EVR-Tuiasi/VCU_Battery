@@ -146,7 +146,7 @@ const Flexcan_Ip_ConfigType Flexcan_aCtrlConfigPB[1U]=
         FLEXCAN_NORMAL_MODE,
 #endif
         /* Controller Options .ctrlOptions */
-        (uint32)(FLEXCAN_IP_EACEN_U32),
+        (uint32)( FLEXCAN_IP_BUSOFF_RECOVERY_U32 |FLEXCAN_IP_EACEN_U32),
         /* Can FD RamBlock specified .payload */
         {
             FLEXCAN_PAYLOAD_SIZE_8,
@@ -160,11 +160,11 @@ const Flexcan_Ip_ConfigType Flexcan_aCtrlConfigPB[1U]=
         (boolean)FALSE,
         /* Values for normal baudrate .bitrate */
         {
-            (uint8)4U, /* Prop Seg */
-            (uint8)4U, /* Phase Seg 1 */
-            (uint8)4U, /* Phase Seg 2 */
+            (uint8)2U, /* Prop Seg */
+            (uint8)5U, /* Phase Seg 1 */
+            (uint8)5U, /* Phase Seg 2 */
             (uint16)11U, /* Prescaller */
-            (uint8)0U /* Resync Jump Width */
+            (uint8)3U /* Resync Jump Width */
         },
         /* Values for CBT baudrate .bitrate_cbt */
         {
