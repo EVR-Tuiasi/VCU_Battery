@@ -31,14 +31,14 @@ uint16 bankselpins[16] = {  //PCR
 146,
 139,
 138,
-15,
-16,
 65,
 64,
 55,
 54,
 135,
-149
+149,
+113,
+114
 };
 
 uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
@@ -50,14 +50,14 @@ uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
 49,
 46,
 47,
-38,
-39,
 40,
 41,
 42,
 43,
 44,
-45
+45,
+55,
+56
 };
 
 uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -214,8 +214,8 @@ void corectieValoriADC(void)
     Thermistors_Data.ThermistorValues[12][7] = Thermistors_Data.ThermistorValues[12][6];
     Thermistors_Data.ThermistorValues[12][4] = Thermistors_Data.ThermistorValues[12][3];
 
-    Thermistors_Data.ThermistorValues[14][3] = Thermistors_Data.ThermistorValues[14][1];
-    Thermistors_Data.ThermistorValues[14][2] = Thermistors_Data.ThermistorValues[14][0];
+    //Thermistors_Data.ThermistorValues[14][3] = Thermistors_Data.ThermistorValues[14][1];
+    //Thermistors_Data.ThermistorValues[14][2] = Thermistors_Data.ThermistorValues[14][0];
 }
 
 /**
@@ -340,12 +340,13 @@ void lookUPtemperaturi(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
+        	Thermistors_Data.ThermistorValues[i][j]-=3000;
         	if(Thermistors_Data.ThermistorValues[i][j]<1576)
         		Thermistors_Data.temperaturi[i][j] = 15000;
         	else if (Thermistors_Data.ThermistorValues[i][j]< 4700)
-        		Thermistors_Data.temperaturi[i][j] = 1500+18560 - 2.25 * Thermistors_Data.ThermistorValues[i][j];
+        		Thermistors_Data.temperaturi[i][j] = 18560 - 2.25 * Thermistors_Data.ThermistorValues[i][j];
         	else if (Thermistors_Data.ThermistorValues[i][j]< 14436)
-        		Thermistors_Data.temperaturi[i][j] = 1500+11780 - 0.81 * Thermistors_Data.ThermistorValues[i][j];
+        		Thermistors_Data.temperaturi[i][j] = 11780 - 0.81 * Thermistors_Data.ThermistorValues[i][j];
         	else
         		Thermistors_Data.temperaturi[i][j] = 0;
         }

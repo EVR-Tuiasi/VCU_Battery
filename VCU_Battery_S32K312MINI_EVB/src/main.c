@@ -31,6 +31,8 @@ extern "C" {
 #include "invertor.h"
 #include "CanMessaging.h"
 #include "charger.h"
+#include "UartMessaging.h"
+#include "Messaging.h"
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
@@ -62,6 +64,7 @@ extern "C" {
 extern struct biemese icBaterie;
 extern Thermistors Thermistors_Data;
 extern uint8 buffPrimire[64];
+extern MonitoredValues_t MonitoredValues;
 /*==================================================================================================
 *                                   LOCAL FUNCTION PROTOTYPES
 ==================================================================================================*/
@@ -114,7 +117,8 @@ int main(void)
     CanMessaging_Init();
     TempSensorInit();
 
-    CanMessaging_Test(); //intra in bucla lui Matei
+    //UartMessaging_Test();
+    //CanMessaging_Test(); //intra in bucla lui Matei
 
 
     /*while(1)
@@ -140,33 +144,36 @@ int main(void)
     	Dio_WriteChannel(52,STD_LOW);*/
 
     	citesteToateADC();
-    	corectieValoriADC();
+    	//corectieValoriADC();
     	lookUPtemperaturi();
 
     	bmsInit();
     	readBieMieSe();
-    	readBieMieSeOW();
+    	//readBieMieSeOW();
     	//sendAllUart();
 
     	// TODO integrat astea in functie de CAN
-    	/*CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
-    	CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
-    	CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
-    	CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);*/
+    	//CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
+    	//CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
+    	//CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
+    	//CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);*/
+    	WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+    	WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
     	for (int i =0;i<24;i++)
     	{
-    		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/100 ,i);
+    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
     	}
 
     	for (int i = 0; i < THERMISTOR_BANKS; i++)
     	    {
     	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
     	        {
-    	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
     	        }
     	    }
 
-    	CanMessaging_Update();
+    	//CanMessaging_Update();
+    	UartMessaging_Update();
     	for(int delei = 2000000;delei>0;delei--);
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
