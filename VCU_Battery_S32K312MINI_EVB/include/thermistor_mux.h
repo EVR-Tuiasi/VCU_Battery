@@ -9,7 +9,7 @@ extern "C"{
 #include "Dio.h"
 #include "Adc.h"
 
-#define THERMISTOR_BANKS 14
+#define THERMISTOR_BANKS 16
 #define THERMISTORS_PER_BANK 8
 
 /*==================================================================================================

@@ -52,6 +52,7 @@ extern "C"{
 #define CAN_CHANNEL_EN 	85U
 #define CAN_CHANNEL_STB_N 84U
 
+#define moiDELEI 200000
 /*Takes a uint64_t argument and any xMonitoredValue_t type of argument.*/
 #define ReadDataFromAddressAndWriteInRawBufferCan(rawBufferU64, xMonitoredValue_t_Address) \
 		(rawBufferU64) |= ((((uint64_t)((xMonitoredValue_t_Address)->valueCan) & (~(0xFFFFFFFFFFFFFFFFULL << (xMonitoredValue_t_Address)->nrOfBits))) << (xMonitoredValue_t_Address)->shift))
@@ -476,12 +477,12 @@ void Can_Receive_Interrupt_COMUNICATII(PduIdType RxPduId, const PduInfoType * Pd
 *                                       GLOBAL FUNCTIONS
 ==================================================================================================*/
 void CanMessaging_Init(void){
-	/*Dio_WriteChannel(CAN_CHANNEL_EN, STD_HIGH); //CAN0_EN
+	Dio_WriteChannel(CAN_CHANNEL_EN, STD_HIGH); //CAN0_EN
 	volatile uint64 i = 1000000;
 	while(i--);
 	Dio_WriteChannel(CAN_CHANNEL_STB_N, STD_HIGH); //CAN0_STB_N
 	i = 1000000;
-	while(i--);*/
+	while(i--);
 	Can_43_FLEXCAN_SetControllerMode(CAN_CONTROLLER_ID, CAN_CS_STARTED);
 	Can_43_FLEXCAN_EnableControllerInterrupts(CAN_CONTROLLER_ID);
 }
@@ -580,7 +581,7 @@ void CanMessaging_Test(void){
 }
 
 void CanMessaging_Update(void){
-	CanMessaging_CreateBuffer(ID_CAN_INVERTOR_STANGA, bufferCan_INVERTOR_STANGA);
+	/*CanMessaging_CreateBuffer(ID_CAN_INVERTOR_STANGA, bufferCan_INVERTOR_STANGA);
 	Can_43_FLEXCAN_Write(CAN_HTH_INVERTOR_STANGA, &pduInfo_INVERTOR_STANGA);
 	//Can_43_FLEXCAN_AbortMb(CAN_HTH_INVERTOR_STANGA);
 
@@ -598,30 +599,37 @@ void CanMessaging_Update(void){
 
 	CanMessaging_CreateBuffer(ID_CAN_FRANA, bufferCan_FRANA);
 	Can_43_FLEXCAN_Write(CAN_HTH_FRANA, &pduInfo_FRANA);
-
+	*/
 	CanMessaging_CreateBuffer(ID_CAN_BATERIE, bufferCan_BATERIE);
 	Can_43_FLEXCAN_Write(CAN_HTH_BATERIE, &pduInfo_BATERIE);
+
+	for(volatile int delei = moiDELEI;delei>0;delei--);
 
 	for(uint16_t index = 0; index < CELLS_LINES; index++){
 		CanMessaging_CreateCellVoltageBuffer(index, bufferCan_BATERIE_TENSIUNI_CELULE);
 		Can_43_FLEXCAN_Write(CAN_HTH_BATERIE_TENSIUNI_CELULE, &pduInfo_BATERIE_TENSIUNI_CELULE);
+		for(volatile int delei = moiDELEI;delei>0;delei--);
 	}
 
 	for(uint16_t index = 0; index < THERMISTORS_LINES; index++){
 		CanMessaging_CreateCellTemperatureBuffer(index, bufferCan_BATERIE_TEMPERATURI_CELULE);
 		__asm volatile ("nop");
 		Can_43_FLEXCAN_Write(CAN_HTH_BATERIE_TEMPERATURI_CELULE, &pduInfo_BATERIE_TEMPERATURI_CELULE);
+		for(volatile int delei = moiDELEI;delei>0;delei--);
 		__asm volatile ("nop");
 	}
 
 	CanMessaging_CreateBuffer(ID_CAN_BATERIE_2, bufferCan_BATERIE_2);
 	Can_43_FLEXCAN_Write(CAN_HTH_BATERIE_2, &pduInfo_BATERIE_2);
+	for(int delei = moiDELEI;delei>0;delei--);
 
 	CanMessaging_CreateBuffer(ID_CAN_BATERIE_CHARGER, bufferCan_BATERIE_CHARGER);
 	Can_43_FLEXCAN_Write(CAN_HTH_BATERIE_CHARGER, &pduInfo_BATERIE_CHARGER);
+	for(int delei = moiDELEI;delei>0;delei--);
 
 	CanMessaging_CreateBuffer(ID_CAN_COMUNICATII, bufferCan_COMUNICATII);
 	Can_43_FLEXCAN_Write(CAN_HTH_COMUNICATII, &pduInfo_COMUNICATII);
+	for(int delei = moiDELEI;delei>0;delei--);
 }
 
 uint16_t CanMessaging_ReadCellVoltage(uint16_t index){

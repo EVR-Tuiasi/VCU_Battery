@@ -25,39 +25,39 @@ Thermistors Thermistors_Data;
 uint16 bankselpins[16] = {  //PCR
 90,
 91,
-85,
-85,
+113,
+50,
 145,
 146,
 139,
 138,
+15,
+16,
 65,
 64,
 55,
 54,
 135,
-149,
-113,
-114
+149
 };
 
 uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
-30,
-31,
-32,
-33,
-48,
-49,
-46,
-47,
-40,
-41,
-42,
-43,
-44,
-45,
-55,
-56
+		30,
+		31,
+		55,
+		57,
+		48,
+		49,
+		46,
+		47,
+		38,
+		39,
+		40,
+		41,
+		42,
+		43,
+		44,
+		45
 };
 
 uint16 adcreadchannels[THERMISTORS_PER_BANK] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -159,7 +159,7 @@ void TempSensorInit()
 */
 sint32 GetTemp(uint16 TempSensorIndex)
 {
-	if (TempSensorIndex==4 )
+	if (TempSensorIndex==3 )
 		__asm volatile ("nop");
 	__asm volatile ("nop");
     ActivateThermistorBank(TempSensorIndex);

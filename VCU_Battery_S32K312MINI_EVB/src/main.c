@@ -157,24 +157,28 @@ int main(void)
     	//CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
     	//CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
     	//CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);*/
-    	WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
-    	WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+    	//WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+    	//WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+    	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+    	WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+
     	for (int i =0;i<24;i++)
     	{
-    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+    		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
     	}
 
     	for (int i = 0; i < THERMISTOR_BANKS; i++)
     	    {
     	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
     	        {
-    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+    	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
     	        }
     	    }
 
-    	//CanMessaging_Update();
-    	UartMessaging_Update();
+    	CanMessaging_Update();
     	for(int delei = 2000000;delei>0;delei--);
+    	//UartMessaging_Update();
+
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
     	    	{
