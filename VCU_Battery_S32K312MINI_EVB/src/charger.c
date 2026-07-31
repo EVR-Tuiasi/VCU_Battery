@@ -69,7 +69,7 @@ void setParametriiCharger(uint16_t voltage, uint16_t current)
 void transmiteCharger(void)
 {
     Can_PduType pduCharger;
-    int delayLocal = DELAY_MESAJ_INCARCARE;
+    volatile int delayLocal = DELAY_MESAJ_INCARCARE;
 
     pduCharger.swPduHandle = 0;          /* Software handle */
     pduCharger.length = 8;               /* Data length */

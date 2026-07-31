@@ -160,7 +160,17 @@ int main(void)
     	//WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
     	//WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
     	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
-    	WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+    	if(BmsGetPackCurrent()/100>=0)
+    	{
+    		WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+    		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+    	}
+    	else
+    	{
+    		WriteCanDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+    		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+
+    	}
 
     	for (int i =0;i<24;i++)
     	{
@@ -172,10 +182,14 @@ int main(void)
     	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
     	        {
     	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+    	        	if(Thermistors_Data.temperaturi[i][j]==0)
+    	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
+    	        	else
+    	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
     	        }
     	    }
 
-    	CanMessaging_Update();
+    	//CanMessaging_Update();
     	for(int delei = 2000000;delei>0;delei--);
     	//UartMessaging_Update();
 
