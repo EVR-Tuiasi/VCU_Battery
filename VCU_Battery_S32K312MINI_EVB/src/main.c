@@ -189,14 +189,14 @@ int main(void)
     	        }
     	    }
 
-    	//CanMessaging_Update();
+    	CanMessaging_Update();
     	for(int delei = 2000000;delei>0;delei--);
     	//UartMessaging_Update();
 
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
     	    	{
-    	    		setParametriiCharger(1000,50);//100V cu 5A
+    	    		setParametriiCharger(1000,300);//100V cu 5A
     	    		transmiteCharger();
     	    	}
 

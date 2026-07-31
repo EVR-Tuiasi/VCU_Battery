@@ -80,6 +80,7 @@ void transmiteCharger(void)
 
     while (delayLocal--)
     {
+    	__asm volatile ("nop");
         /* simple delay */
     }
 }
