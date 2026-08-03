@@ -235,10 +235,11 @@ uint16 getMin(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            if (Thermistors_Data.ThermistorValues[i][j] < min)
-            {
-                min = Thermistors_Data.ThermistorValues[i][j];
-            }
+        	if(Thermistors_Data.temperaturi[i][j])
+				if (Thermistors_Data.temperaturi[i][j] < min)
+				{
+					min = Thermistors_Data.temperaturi[i][j];
+				}
         }
     }
 
@@ -262,9 +263,9 @@ uint16 getMax(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            if (Thermistors_Data.ThermistorValues[i][j] > max)
+            if (Thermistors_Data.temperaturi[i][j] > max)
             {
-                max = Thermistors_Data.ThermistorValues[i][j];
+                max = Thermistors_Data.temperaturi[i][j];
             }
         }
     }
@@ -289,7 +290,7 @@ uint16 getMedie(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            medie += Thermistors_Data.ThermistorValues[i][j];
+            medie += Thermistors_Data.temperaturi[i][j];
         }
     }
 
@@ -352,6 +353,8 @@ void lookUPtemperaturi(void)
         }
     }
 }
+
+
 #ifdef __cplusplus
 }
 #endif

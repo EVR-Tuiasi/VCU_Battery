@@ -150,17 +150,19 @@ int main(void)
     	bmsInit();
     	BmsReadConfigB();
     	readBieMieSe();
-    	//readBieMieSeOW();
-    	//sendAllUart();
+    	readBieMieSeOW();
 
     	// TODO integrat astea in functie de CAN
-    	//CanMessaging_SetValue(Can_TSAC_OverallVoltage, (BmsGetPackVoltage()/10));
-    	//CanMessaging_SetValue(Can_TSAC_OverallCurrent, BmsGetPackCurrent()/100);
+
     	//CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
-    	//CanMessaging_SetValue(Can_TSAC_HighestCellVoltage, BmsGetHighestCellVoltage()/1000);*/
-    	//WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
-    	//WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+
+    	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
+    	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
+    	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
+
     	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+
+
     	if(BmsGetPackCurrent()/100>=0)
     	{
     		WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
@@ -176,6 +178,14 @@ int main(void)
     	for (int i =0;i<24;i++)
     	{
     		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+    		if(icBaterie.cellVoltage[i])
+    		{
+    			CanMessaging_SetCellTemperatureErrors(true,i);
+    		}
+    		else
+    		{
+    			CanMessaging_SetCellTemperatureErrors(false,i);
+    		}
     	}
 
     	for (int i = 0; i < THERMISTOR_BANKS; i++)
@@ -190,9 +200,12 @@ int main(void)
     	        }
     	    }
 
+    	WriteCanDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+    	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+    	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+
     	CanMessaging_Update();
     	for(int delei = 2000000;delei>0;delei--);
-    	//UartMessaging_Update();
 
 
     	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul

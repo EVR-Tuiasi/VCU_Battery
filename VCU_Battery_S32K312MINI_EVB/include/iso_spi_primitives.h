@@ -74,10 +74,12 @@ void parametriiADCB(void);
 int BmsGetPackCurrent(void);
 int BmsGetPackVoltage(void);
 int BmsGetHighestCellVoltage(void);
+int BmsGetLowestCellVoltage(void);
 int getCelula(int index);
 int getCurent(void);
 int getVoltagePachet(void);
 bool CFGAok(void);
+int BmsGetOverallCellVoltage(void);
 
 /** --- Comunicatie Low-Level (SPI/isoSPI) --- **/
 void transmisieCMD(void);

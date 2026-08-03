@@ -612,6 +612,30 @@ int BmsGetHighestCellVoltage(void)
     return max;
 }
 
+/**
+* @brief          Identifică cea mai mica tensiune de celulă din pachet.
+*
+* @return         int Tensiunea minima găsită (mV).
+*/
+int BmsGetLowestCellVoltage(void)
+{
+    int min = icBaterie.cellVoltage[0];
+    for (int i = 0; i < BATTERY_CELLS; i++)
+        if(icBaterie.cellVoltage[i] < min)
+            min = icBaterie.cellVoltage[i];
+
+    return min;
+}
+
+
+int BmsGetOverallCellVoltage(void)
+{
+	int medie=0;
+	for (int i = 0; i < BATTERY_CELLS; i++)
+		medie+=(icBaterie.cellVoltage[i]/BATTERY_CELLS);
+
+	return medie;
+}
 /*!<**************************************** BMS Driver APIs definitions ********************************************/
 
 /*!<
