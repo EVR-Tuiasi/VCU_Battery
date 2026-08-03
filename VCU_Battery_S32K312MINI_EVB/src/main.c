@@ -143,6 +143,7 @@ int main(void)
     	Dio_WriteChannel(52,STD_HIGH);
     	Dio_WriteChannel(52,STD_LOW);*/
 
+
     	citesteToateADC();
     	//corectieValoriADC();
     	lookUPtemperaturi();
@@ -181,10 +182,12 @@ int main(void)
     		if(icBaterie.cellVoltage[i])
     		{
     			CanMessaging_SetCellTemperatureErrors(true,i);
+
     		}
     		else
     		{
     			CanMessaging_SetCellTemperatureErrors(false,i);
+    			WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     		}
     	}
 
