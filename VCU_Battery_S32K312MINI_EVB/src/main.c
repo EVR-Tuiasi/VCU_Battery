@@ -148,7 +148,7 @@ int main(void)
     	//corectieValoriADC();
     	lookUPtemperaturi();
 
-    	Bms_RESET();
+    	//Bms_RESET();
     	bmsInit();
     	BmsReadConfigB();
     	muteDischarge();
