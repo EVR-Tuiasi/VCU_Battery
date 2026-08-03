@@ -62,6 +62,7 @@ void bmsInit(void);
 void BmsTest(void);
 void BmsClearFLAGS(void);
 void clearStates(void);
+void Bms_RESET(void);
 
 /** --- Achizitie Date (ADC & Masuratori) --- **/
 void BmsADCV(void);         // Cell Voltage
@@ -69,6 +70,8 @@ void BmsADV(void);          // Auxiliary Voltage
 void BmsADSV_OW(void);      // Open Wire detection
 void parametriiADC(void);
 void parametriiADCB(void);
+void parametriiCFGB(void);
+void parametriiPWM(int nrB);
 
 /** --- Getters (Returneaza valori calculate) --- **/
 int BmsGetPackCurrent(void);
@@ -90,6 +93,8 @@ void BmsReadConfigA(void);
 void BmsReadConfigB(void);
 void BmsReadID(void);
 void BmsSelectReadCommand(uint8 *vector, uint8 id);
+void unMuteDischarge(void);
+void muteDischarge(void);
 
 /** --- Algoritmi si Calcul (PEC) --- **/
 uint16 pec10_calc(bool rx_cmd, int len, uint8 *data);

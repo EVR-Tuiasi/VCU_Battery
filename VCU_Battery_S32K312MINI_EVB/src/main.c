@@ -148,10 +148,15 @@ int main(void)
     	//corectieValoriADC();
     	lookUPtemperaturi();
 
+    	Bms_RESET();
     	bmsInit();
     	BmsReadConfigB();
+    	muteDischarge();
     	readBieMieSe();
     	readBieMieSeOW();
+    	unMuteDischarge();
+    	parametriiCFGB(); //activate discharge
+    	parametriiPWM(8); // numar bitii de 1, 6.6% per bit
 
     	// TODO integrat astea in functie de CAN
 

@@ -179,6 +179,28 @@ void BmsReadConfigA()
 }
 
 /**
+* @brief          oppreste discharge
+*
+* @return         void
+*/
+void muteDischarge()
+{
+    populeazaCMD(0x00, 0x28);
+    transmisieCMD(); // MUTE
+}
+
+/**
+* @brief          porneste discharge
+*
+* @return         void
+*/
+void unMuteDischarge()
+{
+    populeazaCMD(0x00, 0x29);
+    transmisieCMD(); // UNMUTE
+}
+
+/**
 * @brief          Citește registrul de configurație B al BMS-ului.
 *
 * @return         void
@@ -226,6 +248,75 @@ void parametriiADC()
     }
     transmisieWR48();
 }
+
+
+void parametriiCFGB()
+{
+    populeazaCMD(0x00, 0x24); // WRCFGB
+    for(int i = 0; i < NUMARUL_DE_SUNTURI; i++)
+    {
+        buffTrimitere[4 + 8 * i] = 0x0;    // def
+        buffTrimitere[5 + 8 * i] = 0x0;    // def
+        buffTrimitere[6 + 8 * i] = 0x0;    // def
+        buffTrimitere[7 + 8 * i] = 0x0;    // def
+        buffTrimitere[8 + 8 * i] = 0x01;    // def
+        buffTrimitere[9 + 8 * i] = 0xF0;   //
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * i);
+        buffTrimitere[10 + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * i] = dpec % 256;
+    }
+
+    for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
+    {
+        buffTrimitere[4 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x00; // default
+        buffTrimitere[5 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0xF8;    // def
+        buffTrimitere[6 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x7F;    // def
+        buffTrimitere[7 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x00; // def
+        buffTrimitere[8 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0xFF; //1-8 cells discharge
+        buffTrimitere[9 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = 0x0F; //9-12 cells discharge
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * NUMARUL_DE_SUNTURI + 8 * i);
+        buffTrimitere[10 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec % 256;
+    }
+    transmisieWR48();
+}
+
+void parametriiPWM(int nrB)
+{
+	int masca =0;
+	for (int i=0;i<nrB;i++)
+		masca = masca | (1<<i);
+	masca = masca | ((masca<<4)&0xF0);
+
+    populeazaCMD(0x00, 0x20); // WRPWMA
+    for(int i = 0; i < NUMARUL_DE_SUNTURI; i++)
+    {
+        buffTrimitere[4 + 8 * i] = 0x0;    // def
+        buffTrimitere[5 + 8 * i] = 0x0;    // def
+        buffTrimitere[6 + 8 * i] = 0x0;    // def
+        buffTrimitere[7 + 8 * i] = 0x0;    // def
+        buffTrimitere[8 + 8 * i] = 0x0;    // def
+        buffTrimitere[9 + 8 * i] = 0x0;    // not valid
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * i);
+        buffTrimitere[10 + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * i] = dpec % 256;
+    }
+
+    for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
+    {
+        buffTrimitere[4 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca; // default
+        buffTrimitere[5 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca;    // def
+        buffTrimitere[6 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca;    // def
+        buffTrimitere[7 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca; // def
+        buffTrimitere[8 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca; //1-8 cells discharge
+        buffTrimitere[9 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = masca; //9-12 cells discharge
+        dpec = pec10_calc(false, 6U, buffTrimitere + 4 + 8 * NUMARUL_DE_SUNTURI + 8 * i);
+        buffTrimitere[10 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec >> 8;
+        buffTrimitere[11 + 8 * NUMARUL_DE_SUNTURI + 8 * i] = dpec % 256;
+    }
+    transmisieWR48();
+}
+
 
 /**
 * @brief          Șterge flag-urile de eroare/status din BMS.
