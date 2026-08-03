@@ -208,11 +208,16 @@ int main(void)
     	for(int delei = 2000000;delei>0;delei--);
 
 
-    	if(!(BmsGetHighestCellVoltage()>418000)) //la pofta lui Paul
+    	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     	    	{
     	    		setParametriiCharger(1000,300);//100V cu 5A
     	    		transmiteCharger();
+    	    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
     	    	}
+    	else
+    	{
+    		WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
+    	}
 
         __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
         // TODO gasit o metoda mai buna pentru breakpoint artificial
