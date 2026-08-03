@@ -148,6 +148,7 @@ int main(void)
     	lookUPtemperaturi();
 
     	bmsInit();
+    	BmsReadConfigB();
     	readBieMieSe();
     	//readBieMieSeOW();
     	//sendAllUart();
