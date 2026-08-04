@@ -53,3 +53,5 @@ dkms.conf
 
 # debug information files
 *.dwo
+/VCU_Battery_S32K312MINI_EVB/generate
+/VCU_Battery_S32K312MINI_EVB/RTD

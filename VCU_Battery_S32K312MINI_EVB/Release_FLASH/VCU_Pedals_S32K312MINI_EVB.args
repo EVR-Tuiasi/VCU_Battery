@@ -2,8 +2,8 @@
 --entry=Reset_Handler
 -ggdb3
 -T
-"C:/NXP/Workplace/VCU_Pedals_S32K312MINI_EVB/Project_Settings/Linker_Files/linker_flash_s32k312.ld"
--Wl,-Map,"VCU_Pedals_S32K312MINI_EVB.map"
+"C:/NXP/Workplace/VCU_Battery_S32K312MINI_EVB/Project_Settings/Linker_Files/linker_flash_s32k312.ld"
+-Wl,-Map,"VCU_Battery_S32K312MINI_EVB.map"
 -mcpu=cortex-m7
 -mthumb
 -mlittle-endian
