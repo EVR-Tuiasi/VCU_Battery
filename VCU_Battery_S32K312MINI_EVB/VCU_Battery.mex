@@ -671,11 +671,6 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
-            <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
-               <feature name="enabled" evaluation="equal">
-                  <data>true</data>
-               </feature>
-            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="board/Siul2_Port_Ip_Cfg.c" update_enabled="true"/>
@@ -3630,10 +3625,10 @@
                                        <setting name="CanBusLength" value="10"/>
                                        <setting name="CanPropDelayTranceiver" value="150"/>
                                        <setting name="CanTxArbitrationStartDelay" value="12"/>
-                                       <setting name="CanControllerPrescaller" value="12"/>
+                                       <setting name="CanControllerPrescaller" value="3"/>
                                        <setting name="CanControllerPrescallerAlternate" value="10"/>
                                        <setting name="CanControllerBaudRateConfigID" value="0"/>
-                                       <setting name="CanControllerBaudRate" value="250"/>
+                                       <setting name="CanControllerBaudRate" value="1000"/>
                                        <setting name="CanControllerSyncSeg" value="1"/>
                                        <setting name="CanControllerPropSeg" value="5"/>
                                        <setting name="CanControllerSeg1" value="5"/>

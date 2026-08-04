@@ -117,10 +117,10 @@ int main(void)
     //Can_43_FLEXCAN_EnableControllerInterrupts(0);
     USBInit(0);
     CanMessaging_Init();
+    CanMessaging_Test(); //intra in bucla lui Matei
     TempSensorInit();
 
     //UartMessaging_Test();
-    //CanMessaging_Test(); //intra in bucla lui Matei
 
 
     /*while(1)
