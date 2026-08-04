@@ -199,7 +199,7 @@ extern "C"{
 * @brief    GPT_PRECOMPILE_SUPPORT Switch
 * @details  Enable/disable GPT_PRECOMPILE_SUPPORT.
 */
-#define GPT_PRECOMPILE_SUPPORT (STD_OFF)
+#define GPT_PRECOMPILE_SUPPORT (STD_ON)
 /*================================================================================================*/
 /**
 * @brief        Define symbolic names of channels
@@ -267,8 +267,6 @@ typedef uint32 Gpt_ValueType;
 /*==================================================================================================
 *                                GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
-#define GPT_CONFIG_EXT \
-        GPT_CONFIG_PB
 /*==================================================================================================
 *                                    FUNCTION PROTOTYPES
 ==================================================================================================*/

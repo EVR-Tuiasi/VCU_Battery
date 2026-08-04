@@ -28,6 +28,7 @@ extern "C" {
 #include "Can_43_FLEXCAN.h"
 #include "CanIf.h"
 #include "SchM_Can_43_FLEXCAN.h"
+#include "Gpt.h"
 #include "invertor.h"
 #include "CanMessaging.h"
 #include "charger.h"
@@ -111,6 +112,7 @@ int main(void)
     //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
+    Gpt_Init(NULL_PTR);
     //Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
     //Can_43_FLEXCAN_EnableControllerInterrupts(0);
     USBInit(0);
@@ -118,7 +120,7 @@ int main(void)
     TempSensorInit();
 
     //UartMessaging_Test();
-    //CanMessaging_Test(); //intra in bucla lui Matei
+    CanMessaging_Test(); //intra in bucla lui Matei
 
 
     /*while(1)
@@ -153,14 +155,12 @@ int main(void)
     	BmsReadConfigB();
     	muteDischarge();
     	readBieMieSe();
-    	readBieMieSeOW();
+    	//readBieMieSeOW();
     	unMuteDischarge();
     	parametriiCFGB(); //activate discharge
-    	parametriiPWM(8); // numar bitii de 1, 6.6% per bit
+    	parametriiPWM(12); // numar bitii de 1, 6.6% per bit
 
     	// TODO integrat astea in functie de CAN
-
-    	//CanMessaging_SetValue(Can_TSAC_HighestCellTemperature, temp_lut[getMax()]/10);
 
     	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
     	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
@@ -218,7 +218,7 @@ int main(void)
 
     	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     	    	{
-    	    		setParametriiCharger(1000,300);//100V cu 5A
+    	    		setParametriiCharger(1008,300);//100V cu 5A
     	    		transmiteCharger();
     	    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
     	    	}

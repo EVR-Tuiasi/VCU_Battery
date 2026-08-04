@@ -66,7 +66,7 @@ extern "C"{
 #define CAN_PEDALS_TIMEOUT_PERIOD 1U
 #define CAN_INVERTERS_TIMEOUT_PERIOD 5U
 #define CAN_DASHBOARD_TIMEOUT_PERIOD 200U
-#define CAN_BATTERY_TIMEOUT_PERIOD 20U
+#define CAN_BATTERY_TIMEOUT_PERIOD 5U
 #define CAN_COMMUNICATIONS_TIMEOUT_PERIOD 200U
 
 #define CAN_PEDALS_RECEIVE_TIMEOUT_PERIOD 1U
@@ -782,7 +782,7 @@ void Can_Timer_Timeout(void){
 	//receive timeout
 	if(battery_receive_timeout_contor >= CAN_BATTERY_RECEIVE_TIMEOUT_PERIOD){
 		battery_receive_timeout = 1;
-		CanMessaging_ResetBattery();
+		//CanMessaging_ResetBattery();
 	}
 	else{
 		battery_receive_timeout_contor++;

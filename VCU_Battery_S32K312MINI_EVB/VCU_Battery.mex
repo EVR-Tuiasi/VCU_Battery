@@ -3185,6 +3185,13 @@
                                     <setting name="IsrPriority" value="0"/>
                                     <setting name="IsrHandler" value="Adc_Sar_1_Isr"/>
                                  </struct>
+                                 <struct name="8">
+                                    <setting name="Name" value="PlatformIsrConfig_8"/>
+                                    <setting name="IsrName" value="PIT0_IRQn"/>
+                                    <setting name="IsrEnabled" value="true"/>
+                                    <setting name="IsrPriority" value="0"/>
+                                    <setting name="IsrHandler" value="PIT_0_ISR"/>
+                                 </struct>
                               </array>
                               <array name="PlatformNvicEcucPartitionRef"/>
                            </struct>
@@ -5890,7 +5897,7 @@
                         <setting name="Name" value="Gpt"/>
                         <struct name="ConfigTimeSupport">
                            <setting name="POST_BUILD_VARIANT_USED" value="false"/>
-                           <setting name="IMPLEMENTATION_CONFIG_VARIANT" value="VARIANT-POST-BUILD"/>
+                           <setting name="IMPLEMENTATION_CONFIG_VARIANT" value="VARIANT-PRE-COMPILE"/>
                         </struct>
                         <struct name="GptChannelConfigSet">
                            <setting name="Name" value="GptChannelConfigSet"/>
