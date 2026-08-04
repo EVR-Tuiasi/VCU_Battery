@@ -243,7 +243,7 @@ extern "C"{
 /**
 *   @brief      Number Of HardwareObject Config
 */
-#define CAN_43_FLEXCAN_HWOBJECT_CONFIG_COUNT    ((Can_HwHandleType)25U)
+#define CAN_43_FLEXCAN_HWOBJECT_CONFIG_COUNT    ((Can_HwHandleType)26U)
 
 /**
 *   @brief      Symbolic Name generated for Can Controller
@@ -264,19 +264,20 @@ extern "C"{
 #define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_2_RECEIVE    ((Can_HwHandleType)9U)
 #define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_CHARGER_RECEIVE    ((Can_HwHandleType)10U)
 #define Can_43_FLEXCANConf_CanHardwareObject_COMUNICATII_RECEIVE    ((Can_HwHandleType)11U)
-#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOR_STANGA_TRANSMIT    ((Can_HwHandleType)12U)
-#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOR_DREAPTA_TRANSMIT    ((Can_HwHandleType)13U)
-#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOARE_TRANSMIT    ((Can_HwHandleType)14U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BORD_TRANSMIT    ((Can_HwHandleType)15U)
-#define Can_43_FLEXCANConf_CanHardwareObject_ACCELERATIE_TRANSMIT    ((Can_HwHandleType)16U)
-#define Can_43_FLEXCANConf_CanHardwareObject_FRANA_TRANSMIT    ((Can_HwHandleType)17U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TRANSMIT    ((Can_HwHandleType)18U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TENSIUNI_CELULE_TRANSMIT    ((Can_HwHandleType)19U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TEMPERATURI_CELULE_TRANSMIT    ((Can_HwHandleType)20U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_2_TRANSMIT    ((Can_HwHandleType)21U)
-#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_CHARGER_TRANSMIT    ((Can_HwHandleType)22U)
-#define Can_43_FLEXCANConf_CanHardwareObject_COMUNICATII_TRANSMIT    ((Can_HwHandleType)23U)
-#define Can_43_FLEXCANConf_CanHardwareObject_CHARGER_TX    ((Can_HwHandleType)24U)
+#define Can_43_FLEXCANConf_CanHardwareObject_CHARGER_RECEIVE    ((Can_HwHandleType)12U)
+#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOR_STANGA_TRANSMIT    ((Can_HwHandleType)13U)
+#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOR_DREAPTA_TRANSMIT    ((Can_HwHandleType)14U)
+#define Can_43_FLEXCANConf_CanHardwareObject_INVERTOARE_TRANSMIT    ((Can_HwHandleType)15U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BORD_TRANSMIT    ((Can_HwHandleType)16U)
+#define Can_43_FLEXCANConf_CanHardwareObject_ACCELERATIE_TRANSMIT    ((Can_HwHandleType)17U)
+#define Can_43_FLEXCANConf_CanHardwareObject_FRANA_TRANSMIT    ((Can_HwHandleType)18U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TRANSMIT    ((Can_HwHandleType)19U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TENSIUNI_CELULE_TRANSMIT    ((Can_HwHandleType)20U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_TEMPERATURI_CELULE_TRANSMIT    ((Can_HwHandleType)21U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_2_TRANSMIT    ((Can_HwHandleType)22U)
+#define Can_43_FLEXCANConf_CanHardwareObject_BATERIE_CHARGER_TRANSMIT    ((Can_HwHandleType)23U)
+#define Can_43_FLEXCANConf_CanHardwareObject_COMUNICATII_TRANSMIT    ((Can_HwHandleType)24U)
+#define Can_43_FLEXCANConf_CanHardwareObject_CHARGER_TRANSMIT    ((Can_HwHandleType)25U)
 
 /**
 *   @brief      Can Wakeup Polling support

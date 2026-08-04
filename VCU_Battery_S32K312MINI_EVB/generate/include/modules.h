@@ -211,7 +211,7 @@ extern "C" {
 /** 
 * @brief This constant used for other modules to check if GPT is present in the project.   
 */
-#define USE_GPT_MODULE              (STD_OFF)
+#define USE_GPT_MODULE              (STD_ON)
 
 /** 
 * @brief This constant used for other modules to check if I2C is present in the project.   

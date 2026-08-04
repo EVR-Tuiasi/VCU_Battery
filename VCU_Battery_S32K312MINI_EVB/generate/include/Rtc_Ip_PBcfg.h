@@ -1,8 +1,8 @@
 /*==================================================================================================
 *   Project              : RTD AUTOSAR 4.9
 *   Platform             : CORTEXM
-*   Peripheral           : generic
-*   Dependencies         : 
+*   Peripheral           : Stm_Pit_Rtc_Emios
+*   Dependencies         : none
 *
 *   Autosar Version      : 4.9.0
 *   Autosar Revision     : ASR_REL_4_9_REV_0000
@@ -20,19 +20,21 @@
 *   bound by the applicable license terms, then you may not retain, install,
 *   activate or otherwise use the software.
 ==================================================================================================*/
+
+#ifndef RTC_IP_PBCFG_H
+#define RTC_IP_PBCFG_H
+
 /**
-*   @file    CanIf_Cfg.c
-*   @version 7.0.1
+*   @file       Rtc_Ip$SAprefix$_PBcfg.h
 *
-*   @brief   AUTOSAR CanIf - module interface
-*   @details Configuration Structures for PreCompile.
+*   @addtogroup rtc_ip Rtc IPL
 *
-*   @addtogroup CANIF_DRIVER
 *   @{
 */
 
 #ifdef __cplusplus
-extern "C"{
+extern "C"
+{
 #endif
 
 /*==================================================================================================
@@ -41,109 +43,71 @@ extern "C"{
 * 2) needed interfaces from external units
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
-#include "CanIf_Types.h"
-#include "Can_43_FLEXCAN.h"
-#include "CanMessaging.h"
+#include "Rtc_Ip_Types.h"
+
 /*==================================================================================================
 *                              SOURCE FILE VERSION INFORMATION
 ==================================================================================================*/
-#define CANIF_VENDOR_ID_PCCFG_C                   43
-#define CANIF_AR_RELEASE_MAJOR_VERSION_PCCFG_C     4
-#define CANIF_AR_RELEASE_MINOR_VERSION_PCCFG_C     9
-#define CANIF_AR_RELEASE_REVISION_VERSION_PCCFG_C  0
-#define CANIF_SW_MAJOR_VERSION_PCCFG_C             7
-#define CANIF_SW_MINOR_VERSION_PCCFG_C             0
-#define CANIF_SW_PATCH_VERSION_PCCFG_C             1
-
+#define RTC_IP_VENDOR_ID_PBCFG_H                    43
+#define RTC_IP_AR_RELEASE_MAJOR_VERSION_PBCFG_H     4
+#define RTC_IP_AR_RELEASE_MINOR_VERSION_PBCFG_H     9
+#define RTC_IP_AR_RELEASE_REVISION_VERSION_PBCFG_H  0
+#define RTC_IP_SW_MAJOR_VERSION_PBCFG_H             7
+#define RTC_IP_SW_MINOR_VERSION_PBCFG_H             0
+#define RTC_IP_SW_PATCH_VERSION_PBCFG_H             1
 /*==================================================================================================
-*                                     FILE VERSION CHECKS
+                                      FILE VERSION CHECKS
+==================================================================================================*/
+#if (RTC_IP_VENDOR_ID_PBCFG_H != RTC_IP_TYPES_VENDOR_ID)
+    #error "Rtc_Ip_PBcfg.h and Rtc_Ip_Types.h have different vendor ids"
+#endif
+/* Check if this header file and header file are of the same Autosar version */
+#if ((RTC_IP_AR_RELEASE_MAJOR_VERSION_PBCFG_H != RTC_IP_TYPES_AR_RELEASE_MAJOR_VERSION) || \
+     (RTC_IP_AR_RELEASE_MINOR_VERSION_PBCFG_H != RTC_IP_TYPES_AR_RELEASE_MINOR_VERSION) || \
+     (RTC_IP_AR_RELEASE_REVISION_VERSION_PBCFG_H != RTC_IP_TYPES_AR_RELEASE_REVISION_VERSION) \
+    )
+    #error "AutoSar Version Numbers of Rtc_Ip_PBcfg.h and Rtc_Ip_Types.h are different"
+#endif
+/* Check if this header file and header file are of the same Software version */
+#if ((RTC_IP_SW_MAJOR_VERSION_PBCFG_H != RTC_IP_TYPES_SW_MAJOR_VERSION) || \
+     (RTC_IP_SW_MINOR_VERSION_PBCFG_H != RTC_IP_TYPES_SW_MINOR_VERSION) || \
+     (RTC_IP_SW_PATCH_VERSION_PBCFG_H != RTC_IP_TYPES_SW_PATCH_VERSION) \
+    )
+    #error "Software Version Numbers of Rtc_Ip_PBcfg.h and Rtc_Ip_Types.h are different"
+#endif
+/*==================================================================================================
+*                                          CONSTANTS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                                   GLOBAL FUNCTION PROTOTYPES
+*                                      DEFINES AND MACROS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
+*                                             ENUMS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+*                                STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
+
 
 /*==================================================================================================
-*                                      LOCAL CONSTANTS
+*                                GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
-#define CANIF_START_SEC_CONFIG_DATA_UNSPECIFIED
-#include "CanIf_MemMap.h"
+#define GPT_START_SEC_CONFIG_DATA_UNSPECIFIED
+#include "Gpt_MemMap.h"
+#define GPT_STOP_SEC_CONFIG_DATA_UNSPECIFIED
+#include "Gpt_MemMap.h"
 
-/* Here is the configuration related to Can_43_FLEXCAN Driver */
-static const CanIf_CanDrvFuncPtrType Can_43_FLEXCAN_Driver_P2Func = 
-{
-    /* .CanWrite */
-    &Can_43_FLEXCAN_Write
-};
-static const CanIf_CanDrvPCConfigType Can_43_FLEXCAN_Driver_Config =
-{
-    /* .CanDrvId */
-    (uint8)0U,
-    /* .NumCanHoh */
-    (uint8)26U,
-    /* .CanApi */
-    &Can_43_FLEXCAN_Driver_P2Func
-};
-
-static const CanIf_CtrlPCConfigType CanIf_CtrlPCConfig[1U] =
-{
-    {
-        /* .CanIfCtrlId */
-        (uint8)0U,
-        /* .CanCtrlId */
-        (uint8)0U,
-        /* .CanDrvConfigPtr */
-        &Can_43_FLEXCAN_Driver_Config
-    }
-};
-
-/* Here is Dispatch confguration that contains the callback functions provided by upper layer modules of the CanIf  */
-static const CanIf_CallbackNotifULPtrType CanIf_DispatchCfgPtr = 
-{
-#if (CANIF_WAKEUP_SUPPORT == STD_ON)
-    /* .UserValidateWakeupEvent */
-    NULL_PTR,
-#endif /* (CANIF_WAKEUP_SUPPORT == STD_ON) */
-    /* .UserControllerBusOff */
-    NULL_PTR,
-    /* .UserConfirmPnAvailability */
-    NULL_PTR,
-    /* .UserClearTrcvWufFlagIndication */
-    NULL_PTR,
-    /* .UserCheckTrcvWakeFlagIndication */
-    NULL_PTR,
-    /* .UserControllerModeIndication */
-    NULL_PTR,
-    /* .UserTrcvModeIndication */
-    NULL_PTR,
-};
 /*==================================================================================================
-*                                      GLOBAL CONSTANTS
+*                                    FUNCTION PROTOTYPES
 ==================================================================================================*/
-const CanIf_PCConfigType CanIf_PCConfig = 
-{
-    /* .NumOfCtrl */
-    (uint8)1U,
-    /* .CanIfDispatchCfgPtr */
-    &CanIf_DispatchCfgPtr,
-    /* .CanIfCtrlConfigPtr */
-    CanIf_CtrlPCConfig
-};
-
-#define CANIF_STOP_SEC_CONFIG_DATA_UNSPECIFIED
-#include "CanIf_MemMap.h"
 
 #ifdef __cplusplus
 }
 #endif
 
 /** @} */
+#endif /* RTC_IP$SAprefix$PBCFG_H */
 

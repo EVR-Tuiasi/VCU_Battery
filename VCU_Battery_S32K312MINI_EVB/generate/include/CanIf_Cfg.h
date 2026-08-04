@@ -182,6 +182,9 @@ extern "C"{
 /* Symbolic name for CanIfRxPduCfg_COMUNICATII */
 #define CanIfRxPduCfg_COMUNICATII    ((PduIdType)11U)
 
+/* Symbolic name for CanIfRxPduCfg_CHARGER */
+#define CanIfRxPduCfg_CHARGER    ((PduIdType)12U)
+
 #define CANIF_CONFIG_EXT
 
 #ifdef __cplusplus

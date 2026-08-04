@@ -124,7 +124,7 @@ const Flexcan_Ip_ConfigType Flexcan_aCtrlConfigPB[1U]=
     /* Can Hardware Channel FLEXCAN_0 */
     {
         /* Number Of Message Buffer used .max_num_mb */
-        (uint8)25U,
+        (uint8)26U,
         /*Can Hw filter count* .num_id_filters */
         (Flexcan_Ip_RxFifoIdFilterNumType)0U,
         /* Legacy FIFO ENABLED .is_rx_fifo_needed */
@@ -160,10 +160,10 @@ const Flexcan_Ip_ConfigType Flexcan_aCtrlConfigPB[1U]=
         (boolean)FALSE,
         /* Values for normal baudrate .bitrate */
         {
-            (uint8)2U, /* Prop Seg */
-            (uint8)5U, /* Phase Seg 1 */
-            (uint8)5U, /* Phase Seg 2 */
-            (uint16)11U, /* Prescaller */
+            (uint8)6U, /* Prop Seg */
+            (uint8)3U, /* Phase Seg 1 */
+            (uint8)3U, /* Phase Seg 2 */
+            (uint16)2U, /* Prescaller */
             (uint8)3U /* Resync Jump Width */
         },
         /* Values for CBT baudrate .bitrate_cbt */

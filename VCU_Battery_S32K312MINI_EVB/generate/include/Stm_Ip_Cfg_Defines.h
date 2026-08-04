@@ -1,8 +1,8 @@
 /*==================================================================================================
 *   Project              : RTD AUTOSAR 4.9
 *   Platform             : CORTEXM
-*   Peripheral           : generic
-*   Dependencies         : 
+*   Peripheral           : Stm_Pit_Rtc_Emios
+*   Dependencies         : none
 *
 *   Autosar Version      : 4.9.0
 *   Autosar Revision     : ASR_REL_4_9_REV_0000
@@ -20,14 +20,15 @@
 *   bound by the applicable license terms, then you may not retain, install,
 *   activate or otherwise use the software.
 ==================================================================================================*/
+
+#ifndef STM_IP_CFG_DEFINES_H
+#define STM_IP_CFG_DEFINES_H
+
 /**
-*   @file    CanIf_Cfg.c
-*   @version 7.0.1
+*   @file           Stm_Ip_Cfg_Defines.h
 *
-*   @brief   AUTOSAR CanIf - module interface
-*   @details Configuration Structures for PreCompile.
+*   @addtogroup     stm_ip Stm IPL
 *
-*   @addtogroup CANIF_DRIVER
 *   @{
 */
 
@@ -41,109 +42,83 @@ extern "C"{
 * 2) needed interfaces from external units
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
-#include "CanIf_Types.h"
-#include "Can_43_FLEXCAN.h"
-#include "CanMessaging.h"
-/*==================================================================================================
+#include "Std_Types.h"
+#include "S32K312_STM.h"
+
+    /*==================================================================================================
 *                              SOURCE FILE VERSION INFORMATION
 ==================================================================================================*/
-#define CANIF_VENDOR_ID_PCCFG_C                   43
-#define CANIF_AR_RELEASE_MAJOR_VERSION_PCCFG_C     4
-#define CANIF_AR_RELEASE_MINOR_VERSION_PCCFG_C     9
-#define CANIF_AR_RELEASE_REVISION_VERSION_PCCFG_C  0
-#define CANIF_SW_MAJOR_VERSION_PCCFG_C             7
-#define CANIF_SW_MINOR_VERSION_PCCFG_C             0
-#define CANIF_SW_PATCH_VERSION_PCCFG_C             1
+#define STM_IP_DEFINES_VENDOR_ID_CFG                    43
+#define STM_IP_DEFINES_AR_RELEASE_MAJOR_VERSION_CFG     4
+#define STM_IP_DEFINES_AR_RELEASE_MINOR_VERSION_CFG     9
+#define STM_IP_DEFINES_AR_RELEASE_REVISION_VERSION_CFG  0
+#define STM_IP_DEFINES_SW_MAJOR_VERSION_CFG             7
+#define STM_IP_DEFINES_SW_MINOR_VERSION_CFG             0
+#define STM_IP_DEFINES_SW_PATCH_VERSION_CFG             1
 
 /*==================================================================================================
 *                                     FILE VERSION CHECKS
 ==================================================================================================*/
-
+/* Check if header file and Std_Types.h file are of the same Autosar version */
+#ifndef DISABLE_MCAL_INTERMODULE_ASR_CHECK
+    #if ((STM_IP_DEFINES_AR_RELEASE_MAJOR_VERSION_CFG != STD_AR_RELEASE_MAJOR_VERSION) || \
+         (STM_IP_DEFINES_AR_RELEASE_MINOR_VERSION_CFG != STD_AR_RELEASE_MINOR_VERSION))
+    #error "AutoSar Version Numbers of Stm_Ip_Cfg_Defines.h and Std_Types.h are different"
+    #endif
+#endif
 /*==================================================================================================
-*                                   GLOBAL FUNCTION PROTOTYPES
+*                                          CONSTANTS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
+*                                      DEFINES AND MACROS
+==================================================================================================*/
+/**
+* @brief These defines indicate that at least one channel from each module is used in all configurations.
+*/
+#define STM_IP_USED (STD_OFF) 
+/**
+* @brief This define is used to select between interrupt on each channel and source interrupt
+*        on entire module sources hardware implementations.
+*
+*/
+#define STM_GPT_IP_MODULE_SINGLE_INTERRUPT	(STD_ON)
+/**
+ * @brief   This define is STD_ON when on the same platform there are interrupts for all channels in one ISR,
+ *          but also interrupt for each channel separately
+ *
+ */
+#define STM_GPT_IP_MODULE_SINGLE_AND_MULTIPLE_INTERRUPTS    (STD_OFF)
+/**
+* @brief    STM_IP_SET_CLOCK_MODE switch
+* @details  Enable/disable API for Dual Mode support.
+*/
+#define STM_IP_SET_CLOCK_MODE     (STD_OFF)
+/**
+* @{
+* @brief IRQ Defines for each channel used
+*/
+
+/*==================================================================================================
+*                                             ENUMS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                                       LOCAL MACROS
+*                                STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                                      LOCAL CONSTANTS
+*                                GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
-#define CANIF_START_SEC_CONFIG_DATA_UNSPECIFIED
-#include "CanIf_MemMap.h"
 
-/* Here is the configuration related to Can_43_FLEXCAN Driver */
-static const CanIf_CanDrvFuncPtrType Can_43_FLEXCAN_Driver_P2Func = 
-{
-    /* .CanWrite */
-    &Can_43_FLEXCAN_Write
-};
-static const CanIf_CanDrvPCConfigType Can_43_FLEXCAN_Driver_Config =
-{
-    /* .CanDrvId */
-    (uint8)0U,
-    /* .NumCanHoh */
-    (uint8)26U,
-    /* .CanApi */
-    &Can_43_FLEXCAN_Driver_P2Func
-};
-
-static const CanIf_CtrlPCConfigType CanIf_CtrlPCConfig[1U] =
-{
-    {
-        /* .CanIfCtrlId */
-        (uint8)0U,
-        /* .CanCtrlId */
-        (uint8)0U,
-        /* .CanDrvConfigPtr */
-        &Can_43_FLEXCAN_Driver_Config
-    }
-};
-
-/* Here is Dispatch confguration that contains the callback functions provided by upper layer modules of the CanIf  */
-static const CanIf_CallbackNotifULPtrType CanIf_DispatchCfgPtr = 
-{
-#if (CANIF_WAKEUP_SUPPORT == STD_ON)
-    /* .UserValidateWakeupEvent */
-    NULL_PTR,
-#endif /* (CANIF_WAKEUP_SUPPORT == STD_ON) */
-    /* .UserControllerBusOff */
-    NULL_PTR,
-    /* .UserConfirmPnAvailability */
-    NULL_PTR,
-    /* .UserClearTrcvWufFlagIndication */
-    NULL_PTR,
-    /* .UserCheckTrcvWakeFlagIndication */
-    NULL_PTR,
-    /* .UserControllerModeIndication */
-    NULL_PTR,
-    /* .UserTrcvModeIndication */
-    NULL_PTR,
-};
 /*==================================================================================================
-*                                      GLOBAL CONSTANTS
+*                                    FUNCTION PROTOTYPES
 ==================================================================================================*/
-const CanIf_PCConfigType CanIf_PCConfig = 
-{
-    /* .NumOfCtrl */
-    (uint8)1U,
-    /* .CanIfDispatchCfgPtr */
-    &CanIf_DispatchCfgPtr,
-    /* .CanIfCtrlConfigPtr */
-    CanIf_CtrlPCConfig
-};
-
-#define CANIF_STOP_SEC_CONFIG_DATA_UNSPECIFIED
-#include "CanIf_MemMap.h"
 
 #ifdef __cplusplus
 }
 #endif
 
 /** @} */
+#endif  /* STM_IP_CFG_DEFINES_H */
 
