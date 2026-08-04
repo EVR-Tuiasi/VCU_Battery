@@ -1,4 +1,4 @@
-#include "Can_GeneralTypes.h"
+//#include "Can_GeneralTypes.h"
 #include "Can_43_FLEXCAN.h"
 #include "CanIf.h"
 #include "SchM_Can_43_FLEXCAN.h"

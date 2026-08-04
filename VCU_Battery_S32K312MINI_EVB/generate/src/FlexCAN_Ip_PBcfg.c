@@ -160,10 +160,10 @@ const Flexcan_Ip_ConfigType Flexcan_aCtrlConfigPB[1U]=
         (boolean)FALSE,
         /* Values for normal baudrate .bitrate */
         {
-            (uint8)6U, /* Prop Seg */
-            (uint8)3U, /* Phase Seg 1 */
-            (uint8)3U, /* Phase Seg 2 */
-            (uint16)2U, /* Prescaller */
+            (uint8)2U, /* Prop Seg */
+            (uint8)5U, /* Phase Seg 1 */
+            (uint8)5U, /* Phase Seg 2 */
+            (uint16)11U, /* Prescaller */
             (uint8)3U /* Resync Jump Width */
         },
         /* Values for CBT baudrate .bitrate_cbt */

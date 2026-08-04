@@ -120,7 +120,7 @@ int main(void)
     TempSensorInit();
 
     //UartMessaging_Test();
-    CanMessaging_Test(); //intra in bucla lui Matei
+    //CanMessaging_Test(); //intra in bucla lui Matei
 
 
     /*while(1)
@@ -213,12 +213,12 @@ int main(void)
     	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
 
     	CanMessaging_Update();
-    	for(int delei = 2000000;delei>0;delei--);
+    	//for(int delei = 2000000;delei>0;delei--);
 
 
     	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     	    	{
-    	    		setParametriiCharger(1008,300);//100V cu 5A
+    	    		setParametriiCharger(1008,300);//100V cu 30A
     	    		transmiteCharger();
     	    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
     	    	}
