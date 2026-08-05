@@ -35,7 +35,8 @@ extern "C" {
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
-
+#define useUart TRUE
+//Can_43_FLEXCAN_SetBaudrate ( uint8 Controller, uint16 BaudRateConfigID )
 
 /*==================================================================================================
 *                                       LOCAL MACROS
@@ -105,7 +106,7 @@ int main(void)
     Adc_Init(NULL_PTR);
     Uart_Init(NULL_PTR);
     //Icu_Init(NULL_PTR);
-    *((volatile uint32_t *)0xE000E008) |= (1 << 1);
+
     Spi_Init(NULL_PTR);
     //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
@@ -133,6 +134,8 @@ int main(void)
     Port_SetPinDirection(50,PORT_PIN_OUT);
     Dio_WriteChannel(53,flag);
     int state=0;
+    bool flagEroriTemp = false;
+    bool flagEroriCell = false;
     while(1)
     {
 
@@ -165,8 +168,13 @@ int main(void)
     	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
     	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
     	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
-
     	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+
+
+    	WriteUartDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
+    	WriteUartDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
+    	WriteUartDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
+    	WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
 
 
     	if(BmsGetPackCurrent()/100>=0)
@@ -186,13 +194,13 @@ int main(void)
     		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
     		if(icBaterie.cellVoltage[i])
     		{
-    			CanMessaging_SetCellTemperatureErrors(true,i);
+    			CanMessaging_SetCellVoltageErrors(false,i);
 
     		}
     		else
     		{
-    			CanMessaging_SetCellTemperatureErrors(false,i);
-    			WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    			CanMessaging_SetCellVoltageErrors(true,i);
+    			WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
     		}
     	}
 
@@ -202,7 +210,11 @@ int main(void)
     	        {
     	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
     	        	if(Thermistors_Data.temperaturi[i][j]==0)
+    	        	{
     	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
+    	        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+    	        	}
+
     	        	else
     	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
     	        }
@@ -212,21 +224,76 @@ int main(void)
     	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
     	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
 
+
+    	/* UART*/
+    	if(BmsGetPackCurrent()/100>=0)
+    	{
+    		WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+    		WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+    	}
+    	else
+    	{
+    		WriteUartDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+    		WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+
+    	}
+
+    	for (int i =0;i<24;i++)
+    	{
+    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+    		if(icBaterie.cellVoltage[i])
+    		{
+    			UartMessaging_SetCellTemperatureErrors(true,i);
+
+    		}
+    		else
+    		{
+    			UartMessaging_SetCellTemperatureErrors(false,i);
+    			WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    		}
+    	}
+
+    	for (int i = 0; i < THERMISTOR_BANKS; i++)
+    	    {
+    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+    	        {
+    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+    	        	if(Thermistors_Data.temperaturi[i][j]==0)
+    	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
+    	        	else
+    	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
+    	        }
+    	    }
+
+    	WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+    	WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+    	WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+    	/* UART */
+
+
     	CanMessaging_Update();
     	//for(int delei = 2000000;delei>0;delei--);
 
     	//daca am subtensiune pornesc chargeru
+    	/*
     	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     	    	{
     	    		setParametriiCharger(1008,300);//100V cu 30A
     	    		transmiteCharger();
     	    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
+    	    		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
     	    	}
     	else
     	{
     		WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
-    	}
+    		WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
+    	}*/
 
+    	UartMessaging_Update();
+    	flagEroriTemp = false;
+    	flagEroriCell = false;
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
         __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
         // TODO gasit o metoda mai buna pentru breakpoint artificial
     }

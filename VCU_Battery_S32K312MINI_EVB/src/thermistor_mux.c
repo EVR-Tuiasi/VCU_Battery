@@ -25,8 +25,8 @@ Thermistors Thermistors_Data;
 uint16 bankselpins[16] = {  //PCR
 90,
 91,
-113,
-50,
+30,  //PTD17 -> PTD30
+31,   //PTB18 -> PTA31
 145,
 146,
 139,
@@ -44,8 +44,8 @@ uint16 bankselpins[16] = {  //PCR
 uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
 		30,
 		31,
-		55,
-		57,
+		62, //PTD17 -> PTA30
+		63, //PTB18 -> PTA31
 		48,
 		49,
 		46,
