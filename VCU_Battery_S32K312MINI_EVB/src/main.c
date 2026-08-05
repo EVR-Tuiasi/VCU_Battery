@@ -13,13 +13,11 @@ extern "C" {
 #include "Adc.h"
 #include "Mcl.h"
 #include "Dio.h"
-//#include "Icu.h"
 #include "Mcu.h"
 #include "Spi.h"
 #include "Platform.h"
 #include "Port.h"
 #include "CDD_Uart.h"
-//#include "7-segment-display.h"
 #include "thermistor_mux.h"
 #include "iso_spi_primitives.h"
 #include "lut.h"
@@ -117,7 +115,7 @@ int main(void)
     //Can_43_FLEXCAN_EnableControllerInterrupts(0);
     USBInit(0);
     CanMessaging_Init();
-    CanMessaging_Test(); //intra in bucla lui Matei
+    //CanMessaging_Test(); //intra in bucla lui Matei
     TempSensorInit();
 
     //UartMessaging_Test();
@@ -131,19 +129,21 @@ int main(void)
         BmsReadID();
     }*/
 
+    bool flag=false;
+    Port_SetPinDirection(50,PORT_PIN_OUT);
+    Dio_WriteChannel(53,flag);
+    int state=0;
     while(1)
     {
-    	//daca am subtensiune pornesc chargeru
-    	/* pinu AMS
-    	Port_SetPinDirection(50,PORT_PIN_OUT);
-    	Dio_WriteChannel(53,STD_LOW);
-    	Dio_WriteChannel(53,STD_HIGH);
-    	Dio_WriteChannel(53,STD_LOW);
 
-    	Port_SetPinDirection(51,PORT_PIN_OUT);
-    	Dio_WriteChannel(52,STD_LOW);
-    	Dio_WriteChannel(52,STD_HIGH);
-    	Dio_WriteChannel(52,STD_LOW);*/
+    	//pinu AMS
+    	state++;
+    	if(state==2)
+    	{
+    		state=0;
+    		Dio_WriteChannel(53,flag);
+    		flag=!flag;
+    	}
 
 
     	citesteToateADC();
@@ -152,13 +152,13 @@ int main(void)
 
     	//Bms_RESET();
     	bmsInit();
-    	BmsReadConfigB();
-    	muteDischarge();
+    	//BmsReadConfigB();
+    	//muteDischarge();
     	readBieMieSe();
     	//readBieMieSeOW();
-    	unMuteDischarge();
-    	parametriiCFGB(); //activate discharge
-    	parametriiPWM(12); // numar bitii de 1, 6.6% per bit
+    	//unMuteDischarge();
+    	//parametriiCFGB(); //activate discharge
+    	//parametriiPWM(12); // numar bitii de 1, 6.6% per bit
 
     	// TODO integrat astea in functie de CAN
 
@@ -215,7 +215,7 @@ int main(void)
     	CanMessaging_Update();
     	//for(int delei = 2000000;delei>0;delei--);
 
-
+    	//daca am subtensiune pornesc chargeru
     	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     	    	{
     	    		setParametriiCharger(1008,300);//100V cu 30A

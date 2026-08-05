@@ -31,8 +31,8 @@ uint16 bankselpins[16] = {  //PCR
 146,
 139,
 138,
-15,
-16,
+111, //PTA15 -> PTD15
+110, //PTA16  -> PTD14
 65,
 64,
 55,
@@ -50,8 +50,8 @@ uint32 bankselpinsid[16] = { //ID-ul lor din port container minus
 		49,
 		46,
 		47,
-		38,
-		39,
+		58, //PTA15 -> PTD15
+		59, //PTA16 -> PTD14
 		40,
 		41,
 		42,
