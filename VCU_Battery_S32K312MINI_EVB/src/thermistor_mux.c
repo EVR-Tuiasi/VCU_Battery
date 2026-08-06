@@ -12,6 +12,7 @@ extern "C" {
 #include "Port.h"
 #include "Adc.h"
 #include "Siul2_Port_Ip.h"
+#include "BMS_config.h"
 
 /*==================================================================================================
  *                                      LOCAL VARIABLES
@@ -207,15 +208,7 @@ void corectieValoriADC(void)
 {
     // corecteaza valorile aberante, gasite empiric
     // TODO dovedit care exact sunt
-    Thermistors_Data.ThermistorValues[7][0]  = Thermistors_Data.ThermistorValues[7][1];
-    Thermistors_Data.ThermistorValues[6][0]  = Thermistors_Data.ThermistorValues[6][1];
-    Thermistors_Data.ThermistorValues[11][1] = Thermistors_Data.ThermistorValues[11][0];
-    Thermistors_Data.ThermistorValues[13][7] = Thermistors_Data.ThermistorValues[13][6];
-    Thermistors_Data.ThermistorValues[12][7] = Thermistors_Data.ThermistorValues[12][6];
-    Thermistors_Data.ThermistorValues[12][4] = Thermistors_Data.ThermistorValues[12][3];
-
-    //Thermistors_Data.ThermistorValues[14][3] = Thermistors_Data.ThermistorValues[14][1];
-    //Thermistors_Data.ThermistorValues[14][2] = Thermistors_Data.ThermistorValues[14][0];
+	NIMIC
 }
 
 /**
@@ -315,8 +308,8 @@ void citesteToateADC(void)
 }
 
 /**
-* @brief          Converts ADC values to temperature using lookup table.
-* @details        Maps each ADC value to a temperature using temp_lut.
+* @brief          Converts ADC values to temperature using tabel
+* @details        Maps each ADC value to a temperature using tabel
 *
 * @return         void
 *
@@ -335,13 +328,22 @@ void lookUPtemperaturi_vechi(void)
     }
 }
 
+/**
+* @brief          Converts ADC values to temperature using formula
+* @details        Maps each ADC value to a temperature using formula
+*
+* @return         void
+*
+* @pre            ADC values must be available.
+* @post           Temperature matrix is updated.
+*/
 void lookUPtemperaturi(void)
 {
     for (int i = 0; i < THERMISTOR_BANKS; i++)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-        	Thermistors_Data.ThermistorValues[i][j]-=3000;
+        	Thermistors_Data.ThermistorValues[i][j]+= OFFSET_ADC_thermistor;  //offset empiric
         	if(Thermistors_Data.ThermistorValues[i][j]<1576)
         		Thermistors_Data.temperaturi[i][j] = 15000;
         	else if (Thermistors_Data.ThermistorValues[i][j]< 4700)

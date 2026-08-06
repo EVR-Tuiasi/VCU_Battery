@@ -18,25 +18,25 @@ extern "C" {
 #include "Platform.h"
 #include "Port.h"
 #include "CDD_Uart.h"
-#include "thermistor_mux.h"
-#include "iso_spi_primitives.h"
-#include "lut.h"
-#include "usb_monitoring.h"
 #include "Can_GeneralTypes.h"
 #include "Can_43_FLEXCAN.h"
 #include "CanIf.h"
 #include "SchM_Can_43_FLEXCAN.h"
 #include "Gpt.h"
-#include "invertor.h"
+
 #include "CanMessaging.h"
-#include "charger.h"
 #include "UartMessaging.h"
 #include "Messaging.h"
+
+#include "thermistor_mux.h"
+#include "iso_spi_primitives.h"
+#include "lut.h"
+#include "charger.h"
+#include "BMS_config.h"
+#include "ams.h"
 /*==================================================================================================
 *                          LOCAL TYPEDEFS (STRUCTURES, UNIONS, ENUMS)
 ==================================================================================================*/
-#define useUart TRUE
-//Can_43_FLEXCAN_SetBaudrate ( uint8 Controller, uint16 BaudRateConfigID )
 
 /*==================================================================================================
 *                                       LOCAL MACROS
@@ -51,7 +51,7 @@ extern "C" {
 /*==================================================================================================
 *                                      LOCAL VARIABLES
 ==================================================================================================*/
-
+bool stateAMS=false;
 
 /*==================================================================================================
 *                                      GLOBAL CONSTANTS
@@ -94,7 +94,6 @@ int main(void)
     {
         /* Busy wait until the System PLL is locked */
     }
-
     Mcu_DistributePllClock();
 #endif
     Mcu_SetMode(McuModeSettingConf_0);
@@ -105,197 +104,195 @@ int main(void)
     Platform_Init(NULL_PTR);
     Adc_Init(NULL_PTR);
     Uart_Init(NULL_PTR);
-    //Icu_Init(NULL_PTR);
-
     Spi_Init(NULL_PTR);
-    //Icu_EnableNotification(0);
     Can_43_FLEXCAN_Init(NULL_PTR);
     CanIf_Init(NULL_PTR);
     Gpt_Init(NULL_PTR);
-    //Can_43_FLEXCAN_SetControllerMode(0, CAN_CS_STARTED);
-    //Can_43_FLEXCAN_EnableControllerInterrupts(0);
-    USBInit(0);
-    CanMessaging_Init();
-    //CanMessaging_Test(); //intra in bucla lui Matei
-    TempSensorInit();
 
-    //UartMessaging_Test();
-
-
-    /*while(1)
+    if (useCAN_messaging)
     {
-        int h=200000;
-        while(h--)
-        	__asm volatile ("nop");
-        BmsReadID();
-    }*/
+       	CanMessaging_Init();
+       	Can_43_FLEXCAN_SetBaudrate (0, 0); //1 mBaud
+       	//CanMessaging_Test();  //intra in bucla lui Matei
+    }
+    if (useUART_messaging)
+    {
+    	UartMessaging_Init();
+    	//UartMessaging_Test(); //pentru a verifica trimiterea tuturor datelor
+    }
+    if(useCHARGER)
+    {
+    	Can_43_FLEXCAN_SetBaudrate (0, 1); //250 kBaud
+    }
+    TempSensorInit();
+    initAMS();
 
-    bool flag=false;
-    Port_SetPinDirection(50,PORT_PIN_OUT);
-    Dio_WriteChannel(53,flag);
-    int state=0;
-    bool flagEroriTemp = false;
-    bool flagEroriCell = false;
+    int stateErori=0;
     while(1)
     {
-
     	//pinu AMS
-    	state++;
-    	if(state==2)
+    	if(stateErori == numberOfFailsBeforeAMS)
     	{
-    		state=0;
-    		Dio_WriteChannel(53,flag);
-    		flag=!flag;
+    		switchAMSstate(true);
     	}
-
 
     	citesteToateADC();
-    	//corectieValoriADC();
+    	corectieValoriADC();
     	lookUPtemperaturi();
 
-    	//Bms_RESET();
+    	Bms_RESET();
     	bmsInit();
-    	//BmsReadConfigB();
-    	//muteDischarge();
-    	readBieMieSe();
-    	//readBieMieSeOW();
-    	//unMuteDischarge();
-    	//parametriiCFGB(); //activate discharge
-    	//parametriiPWM(12); // numar bitii de 1, 6.6% per bit
 
-    	// TODO integrat astea in functie de CAN
-
-    	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
-    	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
-    	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
-    	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
-
-
-    	WriteUartDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
-    	WriteUartDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
-    	WriteUartDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
-    	WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
-
-
-    	if(BmsGetPackCurrent()/100>=0)
+    	if(useCHARGER)
     	{
-    		WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
-    		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+    		BmsReadConfigB();
+    		muteDischarge();
+    		readBieMieSe();
+    		//readBieMieSeOW(); //dezactivat din considerente HW
+    		unMuteDischarge();
+    		parametriiCFGB(); //activate discharge cu balansare
+    		parametriiPWM(12); // numar bitii de 1, 6.6% per bit
     	}
     	else
     	{
-    		WriteCanDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
-    		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
-
+    		readBieMieSe();
+    		//readBieMieSeOW(); //dezactivat din considerente HW
     	}
 
-    	for (int i =0;i<24;i++)
+    	if (useCAN_messaging)
     	{
-    		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
-    		if(icBaterie.cellVoltage[i])
+        	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
+        	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
+        	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
+        	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+
+        	if(BmsGetPackCurrent()/100>=0)
+        	{
+        		WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+        		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+        	}
+        	else
+        	{
+        		WriteCanDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+        		WriteCanDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+        	}
+
+        	for (int i =0;i<24;i++)
+        	{
+        		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+        		if(icBaterie.cellVoltage[i])
+        		{
+        			CanMessaging_SetCellVoltageErrors(false,i);
+        		}
+        		else
+        		{
+        			CanMessaging_SetCellVoltageErrors(true,i);
+        			WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+        		}
+        	}
+
+        	for (int i = 0; i < THERMISTOR_BANKS; i++)
+        	    {
+        	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+        	        {
+        	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        	        	if(Thermistors_Data.temperaturi[i][j]==0)
+        	        	{
+        	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
+        	        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+        	        	}
+
+        	        	else
+        	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
+        	        }
+        	    }
+
+        	WriteCanDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+        	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+        	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+
+        	WriteCanDataAtAddress(useCHARGER,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
+    	}
+
+    	if (useUART_messaging)
+    	{
+    		WriteUartDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
+    		WriteUartDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
+    		WriteUartDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
+    		WriteUartDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+
+    		if(BmsGetPackCurrent()/100>=0)
+	    	{
+	    		WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+	    		WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+   		    }
+   		    else
+   		    {
+   		    	WriteUartDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
+   		    	WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
+   		    }
+
+    		for (int i =0;i<24;i++)
+   		    	{
+   		    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+   		    		if(icBaterie.cellVoltage[i])
+   		    		{
+   		    			UartMessaging_SetCellTemperatureErrors(true,i);
+    		    	}
+   		    		else
+   		    		{
+   		    			UartMessaging_SetCellTemperatureErrors(false,i);
+   		    			WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+   		    		}
+   		    	}
+    		    	for (int i = 0; i < THERMISTOR_BANKS; i++)
+   		    	    {
+   		    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+   		    	        {
+   		    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+   		    	        	if(Thermistors_Data.temperaturi[i][j]==0)
+   		    	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
+   		    	        	else
+   		    	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
+   		    	        }
+   		    	    }
+   		    WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+  		    WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+   		    WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+
+   		    WriteUartDataAtAddress(useCHARGER,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
+        }
+    	if(useCHARGER)
+    	{
+    		//daca am subtensiune pornesc chargeru
+    		if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
     		{
-    			CanMessaging_SetCellVoltageErrors(false,i);
-
-    		}
-    		else
-    		{
-    			CanMessaging_SetCellVoltageErrors(true,i);
-    			WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
-    		}
-    	}
-
-    	for (int i = 0; i < THERMISTOR_BANKS; i++)
-    	    {
-    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-    	        {
-    	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
-    	        	if(Thermistors_Data.temperaturi[i][j]==0)
-    	        	{
-    	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
-    	        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
-    	        	}
-
-    	        	else
-    	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
-    	        }
-    	    }
-
-    	WriteCanDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
-    	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
-    	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
-
-
-    	/* UART*/
-    	if(BmsGetPackCurrent()/100>=0)
-    	{
-    		WriteUartDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
-    		WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
-    	}
-    	else
-    	{
-    		WriteUartDataAtAddress((BmsGetPackCurrent()/100)*(-1),&MonitoredValues.TsacMonitoredValues.ReportedChargingCurrent);
-    		WriteUartDataAtAddress(0,&MonitoredValues.TsacMonitoredValues.OverallCurrent);
-
-    	}
-
-    	for (int i =0;i<24;i++)
-    	{
-    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
-    		if(icBaterie.cellVoltage[i])
-    		{
-    			UartMessaging_SetCellTemperatureErrors(true,i);
-
-    		}
-    		else
-    		{
-    			UartMessaging_SetCellTemperatureErrors(false,i);
-    			WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    			setParametriiCharger(chargeVoltage,chargeCurrent);//100V cu 30A
+   		    	transmiteCharger();
+   		    	if(useCAN_messaging)
+   		    	{
+   		    		WriteCanDataAtAddress(chargeVoltage,&MonitoredValues.TsacMonitoredValues.DesiredChargingVoltage);
+   		    		WriteCanDataAtAddress(chargeCurrent,&MonitoredValues.TsacMonitoredValues.DesiredChargingVoltage);
+   		    	}
+   		    	if(useUART_messaging)
+   		    	{
+   		    	   	WriteCanDataAtAddress(chargeVoltage,&MonitoredValues.TsacMonitoredValues.DesiredChargingVoltage);
+   		    		WriteCanDataAtAddress(chargeCurrent,&MonitoredValues.TsacMonitoredValues.DesiredChargingVoltage);
+   		    	}
     		}
     	}
+    	NIMIC
 
-    	for (int i = 0; i < THERMISTOR_BANKS; i++)
-    	    {
-    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-    	        {
-    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
-    	        	if(Thermistors_Data.temperaturi[i][j]==0)
-    	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
-    	        	else
-    	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
-    	        }
-    	    }
-
-    	WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
-    	WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
-    	WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
-    	/* UART */
+		if(useUART_messaging)
+			UartMessaging_Update();
+    	if(useCAN_messaging)
+    		CanMessaging_Update();
 
 
-    	CanMessaging_Update();
-    	//for(int delei = 2000000;delei>0;delei--);
-
-    	//daca am subtensiune pornesc chargeru
-    	/*
-    	if(!(BmsGetHighestCellVoltage()>420000)) //la pofta lui Paul
-    	    	{
-    	    		setParametriiCharger(1008,300);//100V cu 30A
-    	    		transmiteCharger();
-    	    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
-    	    		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
-    	    	}
-    	else
-    	{
-    		WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
-    		WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
-    	}*/
-
-    	UartMessaging_Update();
-    	flagEroriTemp = false;
-    	flagEroriCell = false;
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
-        __asm volatile ("nop"); //asta e un breakpoint universal. NU il sterg ca l-am cautat de m-a luat naiba
-        // TODO gasit o metoda mai buna pentru breakpoint artificial
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
     }
 
 

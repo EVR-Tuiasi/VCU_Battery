@@ -6,7 +6,6 @@
  */
 #include "iso_spi_primitives.h"
 #include "Dio.h"
-//#include "Icu.h"
 #include "Mcu.h"
 #include "Mcl.h"
 #include "Platform.h"
@@ -14,7 +13,10 @@
 #include "Spi.h"
 #include "CDD_Uart.h"
 #include "thermistor_mux.h"
-#include "usb_monitoring.h"
+#include "BMS_config.h"
+#include "CanMessaging.h"
+#include "UartMessaging.h"
+#include "Messaging.h"
 
 /*==================================================================================================
  * LOCAL VARIABLES
@@ -34,6 +36,7 @@ uint8 pacheteOW[4]={0x03, 0x05, 0x07, 0x0D};      // RDSVA, RDSVB, RDSVC, RDSVD
 
 volatile int tensiuneMILIvolti1, tensiuneMILIvolti2, tensiuneMILIvolti3;
 extern Thermistors Thermistors_Data;
+extern MonitoredValues_t MonitoredValues;
 
 /*==================================================================================================
  * GLOBAL FUNCTIONS
@@ -384,6 +387,35 @@ void readBieMieSe()
 
         for(int j = 0; j < NUMARUL_DE_MONITOARE; j++)
         {
+        	if(buffPrimire[5 + 8 * j]==0x80) //valoareaDefault
+        	{
+        		if(useCAN_messaging)
+        		{
+        			if(j==0)
+        				WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        			else
+        				WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
+        		}
+        		if(useUART_messaging)
+        		{
+        			if(j==0)
+        				WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        			else
+        				WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
+        		}
+        	}
+
+        	if(buffPrimire[5 + 8 * j]==0xFF) //no comms
+        	{
+        		if(useCAN_messaging)
+       	        {
+       	        	WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+       	        }
+       	        if(useUART_messaging)
+   	        	{
+   	        		WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+   	        	}
+        	}
             icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
             icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 15 * (buffPrimire[7 + 8 * j] * 256 + buffPrimire[6 + 8 * j]) + 150000;
             icBaterie.cellVoltage[j * 12 + 2 + i * 3] = 15 * (buffPrimire[9 + 8 * j] * 256 + buffPrimire[8 * j]) + 150000;
@@ -444,19 +476,16 @@ void readBieMieSeOW()
             if(tensiuneMILIvolti1 > CELULA_STUPID)
             {
                 icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 0;
-                sendEroareUnitate(j * 12 + 0 + i * 3);
                 icBaterie.flagOW[j * 12 + 0 + i * 3] = true;
             }
             if(tensiuneMILIvolti2 > CELULA_STUPID)
             {
                 icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 0;
-                sendEroareUnitate(j * 12 + 1 + i * 3);
                 icBaterie.flagOW[j * 12 + 1 + i * 3] = true;
             }
             if(tensiuneMILIvolti3 > CELULA_STUPID)
             {
                 icBaterie.cellVoltage[j * 12 + 2 + i * 3] = 0;
-                sendEroareUnitate(j * 12 + 2 + i * 3);
                 icBaterie.flagOW[j * 12 + 2 + i * 3] = true;
             }
         }
@@ -468,112 +497,6 @@ void readBieMieSeOW()
 *
 * @return         void
 */
-void sendAllUart()
-{
-    USBSendBMSCurrent(icBaterie.packCurrent);
-    USBSendBMSVoltage(icBaterie.packVoltage);
-
-    for(int i = 0; i < BATTERY_CELLS; i++)
-    {
-        USBSendCellVoltage(i, icBaterie.cellVoltage[i]);
-    }
-
-    for(int i = 0; i < THERMISTOR_BANKS; i++)
-    {
-        for(int j = 0; j < THERMISTORS_PER_BANK; j++)
-        {
-            USBSendCellTemperature(i * 8 + j, Thermistors_Data.temperaturi[i][j]);
-        }
-    }
-}
-
-/**
-* @brief          Verifică limitele de siguranță pentru pachetul de baterii (AMS).
-* @details        Monitorizează depășirile de curent și tensiune totală.
-*
-* @return         void
-*/
-void generateAMS(void)
-{
-    if(icBaterie.packCurrent > CURENT_MAX)
-    {
-        icBaterie.flag = true;
-        icBaterie.stateSHUNT |= 32;
-    }
-    if(icBaterie.packVoltage > TENSIUNE_MAX)
-    {
-        icBaterie.flag = true;
-        icBaterie.stateSHUNT |= 4;
-    }
-    if(icBaterie.packVoltage < TENSIUNE_MIN)
-    {
-        icBaterie.flag = true;
-        icBaterie.stateSHUNT |= 2;
-    }
-}
-
-/**
-* @brief          Verifică limitele de tensiune pentru fiecare celulă în parte.
-* @details        Setează flag-uri de eroare pentru Overvoltage și Undervoltage per celulă.
-*
-* @return         void
-*/
-void generateOW()
-{
-    for(int i = 0; i < BATTERY_CELLS; i++)
-    {
-        if(icBaterie.cellVoltage[i] < UNDERVOLTAGE_CELL)
-        {
-            icBaterie.flag = true;
-            icBaterie.stateBMS[i / 12] |= 8;
-        }
-        else if(icBaterie.cellVoltage[i] > OVERVOLTAGE_CELL)
-        {
-            icBaterie.flag = true;
-            icBaterie.stateBMS[i / 12] |= 4;
-        }
-    }
-}
-
-/**
-* @brief          Trimite stările de eroare către interfața UART.
-* @details        Pachetele includ ID-ul erorii, starea curentă și un CRC pentru validare.
-*
-* @return         void
-*/
-void sendErori(void)
-{
-    bufferUART[0] = 100;
-    bufferUART[1] = 0x07;
-    bufferUART[2] = icBaterie.stateSHUNT;
-    bufferUART[3] = aCRC_calculate(4);
-    Uart_SyncSend(0, bufferUART, 4, 10000000);
-
-    bufferUART[0] = 100;
-    bufferUART[1] = 0x08;
-    bufferUART[2] = icBaterie.stateBMS[0];
-    bufferUART[3] = aCRC_calculate(4);
-    Uart_SyncSend(0, bufferUART, 4, 10000000);
-
-    bufferUART[0] = 100;
-    bufferUART[1] = 0x09;
-    bufferUART[2] = icBaterie.stateBMS[1];
-    bufferUART[3] = aCRC_calculate(4);
-    Uart_SyncSend(0, bufferUART, 4, 10000000);
-}
-
-/**
-* @brief          Resetează flag-urile de stare pentru monitoare și șunturi.
-*
-* @return         void
-*/
-void clearStates()
-{
-    for(int i = 0; i < NUMARUL_DE_MONITOARE; i++)
-        icBaterie.stateBMS[i] = 0;
-    icBaterie.stateSHUNT = 0;
-}
-
 /**
 * @brief          Returnează tensiunea unei anumite celule.
 *
@@ -652,23 +575,8 @@ void bmsInit(void)
     BmsADCV();
     BmsADV();
     flushTX();
-    clearStates();
 }
 
-/**
-* @brief          Trimite o alertă UART pentru o eroare la un anumit modul/index.
-*
-* @param[in]      index: Indexul componentei defecte.
-* @return         void
-*/
-void sendEroareUnitate(int index)
-{
-    bufferUART[0] = 100;
-    bufferUART[1] = 0xF8;
-    bufferUART[2] = index + 1;
-    bufferUART[3] = aCRC_calculate(4);
-    Uart_SyncSend(0, bufferUART, 4, 10000000);
-}
 
 /**
 * @brief          Getter pentru curentul pachetului.
