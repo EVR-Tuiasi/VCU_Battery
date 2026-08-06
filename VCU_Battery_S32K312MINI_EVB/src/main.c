@@ -180,12 +180,13 @@ int main(void)
         	for (int i =0;i<24;i++)
         	{
         		CanMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
-        		if(icBaterie.cellVoltage[i])
+        		if(icBaterie.cellVoltage[i]<overVoltageCelula && icBaterie.cellVoltage[i]>underVoltageCelula)
         		{
         			CanMessaging_SetCellVoltageErrors(false,i);
         		}
         		else
         		{
+        			stateAMS=true;
         			CanMessaging_SetCellVoltageErrors(true,i);
         			WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
         		}
@@ -201,9 +202,13 @@ int main(void)
         	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
         	        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
         	        	}
-
-        	        	else
+        	        	else if(Thermistors_Data.temperaturi[i][j]>underTemperatura && Thermistors_Data.temperaturi[i][j]<overTemperatura)
         	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
+        	        	else
+        	        	{
+        	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
+        	        		stateAMS=true;
+        	        	}
         	        }
         	    }
 
@@ -233,29 +238,39 @@ int main(void)
    		    }
 
     		for (int i =0;i<24;i++)
-   		    	{
-   		    		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
-   		    		if(icBaterie.cellVoltage[i])
-   		    		{
-   		    			UartMessaging_SetCellTemperatureErrors(true,i);
-    		    	}
-   		    		else
-   		    		{
-   		    			UartMessaging_SetCellTemperatureErrors(false,i);
-   		    			WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
-   		    		}
-   		    	}
-    		    	for (int i = 0; i < THERMISTOR_BANKS; i++)
-   		    	    {
-   		    	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-   		    	        {
-   		    	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
-   		    	        	if(Thermistors_Data.temperaturi[i][j]==0)
-   		    	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
-   		    	        	else
-   		    	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
-   		    	        }
-   		    	    }
+    		        	{
+    		        		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+    		        		if(icBaterie.cellVoltage[i]<overVoltageCelula && icBaterie.cellVoltage[i]>underVoltageCelula)
+    		        		{
+    		        			UartMessaging_SetCellVoltageErrors(false,i);
+    		        		}
+    		        		else
+    		        		{
+    		        			stateAMS=true;
+    		        			UartMessaging_SetCellVoltageErrors(true,i);
+    		        			WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+    		        		}
+    		        	}
+
+    		        	for (int i = 0; i < THERMISTOR_BANKS; i++)
+    		        	    {
+    		        	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+    		        	        {
+    		        	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+    		        	        	if(Thermistors_Data.temperaturi[i][j]==0)
+    		        	        	{
+    		        	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
+    		        	        		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+    		        	        	}
+    		        	        	else if(Thermistors_Data.temperaturi[i][j]>underTemperatura && Thermistors_Data.temperaturi[i][j]<overTemperatura)
+    		        	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
+    		        	        	else
+    		        	        	{
+    		        	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
+    		        	        		stateAMS=true;
+    		        	        	}
+    		        	        }
+    		        	    }
    		    WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
   		    WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
    		    WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
@@ -288,7 +303,14 @@ int main(void)
     	if(useCAN_messaging)
     		CanMessaging_Update();
 
-
+    	if(MonitoredValues.TsacMonitoredValues.AmsError.valueCan || MonitoredValues.TsacMonitoredValues.AmsError.valueCan)
+    	{
+    		switchAMSstate(true);
+    	}
+    	else
+    	{
+    		switchAMSstate(false);
+    	}
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
