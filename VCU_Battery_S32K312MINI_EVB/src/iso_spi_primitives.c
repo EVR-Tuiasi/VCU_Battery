@@ -409,11 +409,11 @@ void readBieMieSe()
         	{
         		if(useCAN_messaging)
        	        {
-       	        	WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+       	        	WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
        	        }
        	        if(useUART_messaging)
    	        	{
-   	        		WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+   	        		WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
    	        	}
         	}
             icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
@@ -423,6 +423,28 @@ void readBieMieSe()
 
         if (i == 0)
         {
+        	if(buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE]==0x03)
+        	{
+        		if(useCAN_messaging)
+        		{
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
+        		}
+        		if(useUART_messaging)
+        		{
+        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
+        		}
+        	}
+        	if(buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE]==0xFF)
+        	{
+        		if(useCAN_messaging)
+        		{
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
+        		}
+        	if(useUART_messaging)
+        		{
+        	    	WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
+        		}
+        	}
             icBaterie.packCurrent = ((buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3 + 4 + 8 * NUMARUL_DE_MONITOARE])) * 5;
             if (icBaterie.packCurrent & 0x800000) {
                 icBaterie.packCurrent |= 0xFF000000;
