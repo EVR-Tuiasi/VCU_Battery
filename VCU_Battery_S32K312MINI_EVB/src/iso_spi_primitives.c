@@ -389,32 +389,20 @@ void readBieMieSe()
         {
         	if(buffPrimire[5 + 8 * j]==0x80) //valoareaDefault
         	{
-        		if(useCAN_messaging)
-        		{
-        			if(j==0)
-        				WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
-        			else
-        				WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
-        		}
-        		if(useUART_messaging)
-        		{
-        			if(j==0)
-        				WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
-        			else
-        				WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
-        		}
+        		if(j==0)
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        		else
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
+        		if(j==0)
+        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        		else
+        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
         	}
 
         	if(buffPrimire[5 + 8 * j]==0xFF) //no comms
         	{
-        		if(useCAN_messaging)
-       	        {
-       	        	WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
-       	        }
-       	        if(useUART_messaging)
-   	        	{
-   	        		WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
-   	        	}
+        		WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
+       	        WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         	}
             icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
             icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 15 * (buffPrimire[7 + 8 * j] * 256 + buffPrimire[6 + 8 * j]) + 150000;

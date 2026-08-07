@@ -128,10 +128,6 @@ int main(void)
     initAMS();
 
     int stateErori=0;
-    switchAMSstate(true);
-    switchAMSstate(false);
-    switchAMSstate(true);
-    switchAMSstate(false);
 
     while(1)
     {
@@ -219,19 +215,19 @@ int main(void)
    		    }
 
     		for (int i =0;i<24;i++)
+    		       {
+    		        	UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
+    		        	if(icBaterie.cellVoltage[i]<overVoltageCelula && icBaterie.cellVoltage[i]>underVoltageCelula)
     		        	{
-    		        		UartMessaging_SetCellVoltage(icBaterie.cellVoltage[i]/1000 ,i);
-    		        		if(icBaterie.cellVoltage[i]<overVoltageCelula && icBaterie.cellVoltage[i]>underVoltageCelula)
-    		        		{
-    		        			UartMessaging_SetCellVoltageErrors(false,i);
-    		        		}
-    		        		else
-    		        		{
-    		        			stateAMS=true;
-    		        			UartMessaging_SetCellVoltageErrors(true,i);
-    		        			WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
-    		        		}
+    		        		UartMessaging_SetCellVoltageErrors(false,i);
     		        	}
+    		        	else
+    		        	{
+    		        		stateAMS=true;
+    		        		UartMessaging_SetCellVoltageErrors(true,i);
+    		        		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+    		        	}
+    		        }
    		    WriteUartDataAtAddress(useCHARGER,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
         }
     	if(useCHARGER)
@@ -260,16 +256,29 @@ int main(void)
     	if(useCAN_messaging)
     		CanMessaging_Update();
 
-    	if(MonitoredValues.TsacMonitoredValues.ThermistorsError.valueCan || MonitoredValues.TsacMonitoredValues.AmsError.valueCan)
+    	if(MonitoredValues.TsacMonitoredValues.ThermistorsError.valueCan ||
+    			MonitoredValues.TsacMonitoredValues.AmsError.valueCan ||
+				MonitoredValues.TsacMonitoredValues.Bms0Error.valueCan ||
+				MonitoredValues.TsacMonitoredValues.Bms1Error.valueCan ||
+				MonitoredValues.TsacMonitoredValues.ShuntError.valueCan ||
+				MonitoredValues.TsacMonitoredValues.TransceiverError.valueCan)
     	{
-    		switchAMSstate(true);
+    		stateAMS=true;
+    		switchAMSstate(stateAMS);
     	}
     	else
     	{
-    		switchAMSstate(false);
+    		switchAMSstate(stateAMS);
     	}
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms0Error);
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms0Error);
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms1Error);
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms1Error);
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ShuntError);
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ShuntError);
+    	stateAMS=false;
     }
 
 
