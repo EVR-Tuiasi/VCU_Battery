@@ -128,6 +128,11 @@ int main(void)
     initAMS();
 
     int stateErori=0;
+    switchAMSstate(true);
+    switchAMSstate(false);
+    switchAMSstate(true);
+    switchAMSstate(false);
+
     while(1)
     {
     	//pinu AMS
@@ -192,30 +197,6 @@ int main(void)
         		}
         	}
 
-        	for (int i = 0; i < THERMISTOR_BANKS; i++)
-        	    {
-        	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-        	        {
-        	        	CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
-        	        	if(Thermistors_Data.temperaturi[i][j]==0)
-        	        	{
-        	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
-        	        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
-        	        	}
-        	        	else if(Thermistors_Data.temperaturi[i][j]>underTemperatura && Thermistors_Data.temperaturi[i][j]<overTemperatura)
-        	        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
-        	        	else
-        	        	{
-        	        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
-        	        		stateAMS=true;
-        	        	}
-        	        }
-        	    }
-
-        	WriteCanDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
-        	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
-        	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
-
         	WriteCanDataAtAddress(useCHARGER,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
     	}
 
@@ -251,30 +232,6 @@ int main(void)
     		        			WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
     		        		}
     		        	}
-
-    		        	for (int i = 0; i < THERMISTOR_BANKS; i++)
-    		        	    {
-    		        	        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
-    		        	        {
-    		        	        	UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
-    		        	        	if(Thermistors_Data.temperaturi[i][j]==0)
-    		        	        	{
-    		        	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
-    		        	        		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
-    		        	        	}
-    		        	        	else if(Thermistors_Data.temperaturi[i][j]>underTemperatura && Thermistors_Data.temperaturi[i][j]<overTemperatura)
-    		        	        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
-    		        	        	else
-    		        	        	{
-    		        	        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
-    		        	        		stateAMS=true;
-    		        	        	}
-    		        	        }
-    		        	    }
-   		    WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
-  		    WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
-   		    WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
-
    		    WriteUartDataAtAddress(useCHARGER,&MonitoredValues.TsacMonitoredValues.ChargerStatus);
         }
     	if(useCHARGER)
@@ -303,7 +260,7 @@ int main(void)
     	if(useCAN_messaging)
     		CanMessaging_Update();
 
-    	if(MonitoredValues.TsacMonitoredValues.AmsError.valueCan || MonitoredValues.TsacMonitoredValues.AmsError.valueCan)
+    	if(MonitoredValues.TsacMonitoredValues.ThermistorsError.valueCan || MonitoredValues.TsacMonitoredValues.AmsError.valueCan)
     	{
     		switchAMSstate(true);
     	}
@@ -312,9 +269,7 @@ int main(void)
     		switchAMSstate(false);
     	}
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
-    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
-    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
     }
 
 

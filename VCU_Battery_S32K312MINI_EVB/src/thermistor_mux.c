@@ -13,10 +13,15 @@ extern "C" {
 #include "Adc.h"
 #include "Siul2_Port_Ip.h"
 #include "BMS_config.h"
+#include "Messaging.h"
+#include "CanMessaging.h"
+#include "UartMessaging.h"
 
 /*==================================================================================================
  *                                      LOCAL VARIABLES
  *==================================================================================================*/
+extern MonitoredValues_t MonitoredValues;
+
 
 Thermistors Thermistors_Data;
 
@@ -160,8 +165,6 @@ void TempSensorInit()
 */
 sint32 GetTemp(uint16 TempSensorIndex)
 {
-	if (TempSensorIndex==3 )
-		__asm volatile ("nop");
 	__asm volatile ("nop");
     ActivateThermistorBank(TempSensorIndex);
 
@@ -186,8 +189,6 @@ sint32 GetTemp(uint16 TempSensorIndex)
             &Thermistors_Data.ThermistorValues[TempSensorIndex][i]
         );
     }
-    if (TempSensorIndex==4)
-    	__asm volatile ("nop");
     __asm volatile ("nop");
     DeactivateThermistorBank(TempSensorIndex);
 
@@ -256,7 +257,7 @@ uint16 getMax(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            if (Thermistors_Data.temperaturi[i][j] > max)
+            if (Thermistors_Data.temperaturi[i][j] > max && Thermistors_Data.temperaturi[i][j] < 1500) //ca sa prind termistorii non-error
             {
                 max = Thermistors_Data.temperaturi[i][j];
             }
@@ -339,21 +340,62 @@ void lookUPtemperaturi_vechi(void)
 */
 void lookUPtemperaturi(void)
 {
+	Thermistors_Data.erroredTermistors=0;
+	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+
     for (int i = 0; i < THERMISTOR_BANKS; i++)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
         	Thermistors_Data.ThermistorValues[i][j]+= OFFSET_ADC_thermistor;  //offset empiric
+
         	if(Thermistors_Data.ThermistorValues[i][j]<1576)
+        	{
         		Thermistors_Data.temperaturi[i][j] = 15000;
+        	}
         	else if (Thermistors_Data.ThermistorValues[i][j]< 4700)
+        	{
         		Thermistors_Data.temperaturi[i][j] = 18560 - 2.25 * Thermistors_Data.ThermistorValues[i][j];
+        	}
         	else if (Thermistors_Data.ThermistorValues[i][j]< 14436)
         		Thermistors_Data.temperaturi[i][j] = 11780 - 0.81 * Thermistors_Data.ThermistorValues[i][j];
         	else
+        	{
         		Thermistors_Data.temperaturi[i][j] = 0;
+        	}
+
+        	if(Thermistors_Data.temperaturi[i][j]>underTemperatura && Thermistors_Data.temperaturi[i][j]<overTemperatura)
+        	{
+        		CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        		UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        	}
+        	else
+        	{
+        		Thermistors_Data.erroredTermistors++;
+        		CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        		CanMessaging_SetCellTemperatureErrors(true,i*8+j);
+        		UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        		UartMessaging_SetCellTemperatureErrors(true,i*8+j);
+        	}
         }
     }
+
+
+	WriteCanDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+	WriteCanDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+	WriteCanDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+
+    WriteUartDataAtAddress(getMedie()/10,&MonitoredValues.TsacMonitoredValues.MedianCellTemperature);
+    WriteUartDataAtAddress(getMax()/10,&MonitoredValues.TsacMonitoredValues.HighestCellTemperature);
+    WriteUartDataAtAddress(getMin()/10,&MonitoredValues.TsacMonitoredValues.LowestCellTemperature);
+
+    if(Thermistors_Data.erroredTermistors>=termistorTOLERANCE)
+    {
+    	WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+    	WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.ThermistorsError);
+    }
+
 }
 
 

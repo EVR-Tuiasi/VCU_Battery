@@ -19,6 +19,7 @@ extern "C"{
 typedef struct Thermistors{
 	uint16 temperaturi[THERMISTOR_BANKS][THERMISTORS_PER_BANK]; // Warning la functile Adc pentru setup si read daca folosesc uint32
 	uint16 ThermistorValues[THERMISTOR_BANKS][THERMISTORS_PER_BANK]; // Warning la functile Adc pentru setup si read daca folosesc uint32
+	uint16 erroredTermistors;
 	Dio_ChannelType BankSelectPins[THERMISTOR_BANKS];
 	uint32 BankSelectPinsID[THERMISTOR_BANKS];
 	Adc_GroupType BankReadChannels[THERMISTORS_PER_BANK];
