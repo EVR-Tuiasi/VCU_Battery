@@ -703,11 +703,6 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
-            <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
-               <feature name="enabled" evaluation="equal">
-                  <data>true</data>
-               </feature>
-            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="board/Siul2_Port_Ip_Cfg.c" update_enabled="true"/>
@@ -3744,7 +3739,9 @@
                            <array name="CanApiEnableMbAbort">
                               <setting name="0" value="true"/>
                            </array>
-                           <array name="CanSetBaudrateApi"/>
+                           <array name="CanSetBaudrateApi">
+                              <setting name="0" value="true"/>
+                           </array>
                            <setting name="CanEnableDualClockMode" value="false"/>
                            <array name="CanListenOnlyModeApi"/>
                            <setting name="CanGlobalTimeSupport" value="false"/>

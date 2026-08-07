@@ -21,7 +21,7 @@ extern "C"{
 #define CELLS_NUM 24U
 #define THERMISTORS_NUM 128U
 #define CELLS_LINES 5U
-#define THERMISTORS_LINES 30U
+#define THERMISTORS_LINES 26U
 
 typedef enum{
 	ID_CAN_INVERTOR_STANGA = 	0x00000110,
@@ -183,6 +183,7 @@ typedef struct{
     /* Status and errors */ 
 	BoolMonitoredValue_t IsCarInReverse;                                /* 1 bit, 0 means car is in FORWARD, 1 means car is in REVERSE */
 	BoolMonitoredValue_t IsCarRunning;                                  /* 1 bit, 0 means car is RUNNING (Responding to accelerator pedal), 1 means car is IDLE (NOT responding to accelerator pedal)*/
+	BoolMonitoredValue_t InvertersError;								/* 1 bit, 0 means SAFE, 1 means ERROR */
 }InvertersMonitoredValues_t;
 
 typedef struct{
