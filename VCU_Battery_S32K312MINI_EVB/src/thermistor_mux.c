@@ -257,7 +257,7 @@ uint16 getMax(void)
     {
         for (int j = 0; j < THERMISTORS_PER_BANK; j++)
         {
-            if (Thermistors_Data.temperaturi[i][j] > max && Thermistors_Data.temperaturi[i][j] < 1500) //ca sa prind termistorii non-error
+            if (Thermistors_Data.temperaturi[i][j] > max && Thermistors_Data.temperaturi[i][j] > 1500) //ca sa prind termistorii non-error
             {
                 max = Thermistors_Data.temperaturi[i][j];
             }
@@ -369,6 +369,8 @@ void lookUPtemperaturi(void)
         	{
         		CanMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
         		UartMessaging_SetCellTemperature(Thermistors_Data.temperaturi[i][j]/10,i*8+j);
+        		CanMessaging_SetCellTemperatureErrors(false,i*8+j);
+        		UartMessaging_SetCellTemperatureErrors(false,i*8+j);
         	}
         	else
         	{

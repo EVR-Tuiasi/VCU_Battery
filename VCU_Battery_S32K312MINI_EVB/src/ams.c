@@ -9,5 +9,5 @@ void initAMS(void)
 
 void switchAMSstate(bool state)
 {
-	Dio_WriteChannel(53, !state);
+	Dio_WriteChannel(53, !state);//true = tot ok, false = eroare
 }

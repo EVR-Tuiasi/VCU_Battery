@@ -251,11 +251,6 @@ int main(void)
     	}
     	NIMIC
 
-		if(useUART_messaging)
-			UartMessaging_Update();
-    	if(useCAN_messaging)
-    		CanMessaging_Update();
-
     	if(MonitoredValues.TsacMonitoredValues.ThermistorsError.valueCan ||
     			MonitoredValues.TsacMonitoredValues.AmsError.valueCan ||
 				MonitoredValues.TsacMonitoredValues.Bms0Error.valueCan ||
@@ -265,11 +260,20 @@ int main(void)
     	{
     		stateAMS=true;
     		switchAMSstate(stateAMS);
+    		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+    		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
     	}
     	else
     	{
     		switchAMSstate(stateAMS);
+    		WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
+    		WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	}
+		if(useUART_messaging)
+			UartMessaging_Update();
+    	if(useCAN_messaging)
+    		CanMessaging_Update();
+
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.AmsError);
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms0Error);
