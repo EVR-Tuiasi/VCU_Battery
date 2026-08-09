@@ -391,15 +391,10 @@ void readBieMieSe()
         	{
         		if(j==0)
         			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
-        		else
+        		if(j==1)
         			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
-        		if(j==0)
-        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
-        		else
-        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
         	}
-
-        	if(buffPrimire[5 + 8 * j]==0xFF) //no comms
+        	else if(buffPrimire[5 + 8 * j]==0xFF) //no comms
         	{
         		WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
        	        WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
@@ -411,6 +406,8 @@ void readBieMieSe()
             icBaterie.cellVoltage[j * 12 + 0 + i * 3] = 15 * (buffPrimire[5 + 8 * j] * 256 + buffPrimire[4 + 8 * j]) + 150000;
             icBaterie.cellVoltage[j * 12 + 1 + i * 3] = 15 * (buffPrimire[7 + 8 * j] * 256 + buffPrimire[6 + 8 * j]) + 150000;
             icBaterie.cellVoltage[j * 12 + 2 + i * 3] = 15 * (buffPrimire[9 + 8 * j] * 256 + buffPrimire[8 * j]) + 150000;
+
+
         }
 
         if (i == 0)
@@ -432,16 +429,10 @@ void readBieMieSe()
         		{
         			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         		}
-				else{
-					WriteCanDataAtAddress(false, &MonitoredValues.TsacMonitoredValues.TransceiverError);
-				}
 				if(useUART_messaging)
         		{
         	    	WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         		}
-				else{
-					WriteUartDataAtAddress(false, &MonitoredValues.TsacMonitoredValues.TransceiverError);
-				}
         	}
             icBaterie.packCurrent = ((buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) + (buffPrimire[4 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) + (buffPrimire[3 + 4 + 8 * NUMARUL_DE_MONITOARE])) * 5;
             if (icBaterie.packCurrent & 0x800000) {

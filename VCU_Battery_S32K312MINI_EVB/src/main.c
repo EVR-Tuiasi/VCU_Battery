@@ -127,15 +127,9 @@ int main(void)
     TempSensorInit();
     initAMS();
 
-    int stateErori=0;
-
     while(1)
     {
     	//pinu AMS
-    	if(stateErori == numberOfFailsBeforeAMS)
-    	{
-    		switchAMSstate(true);
-    	}
 
     	citesteToateADC();
     	corectieValoriADC();
@@ -282,6 +276,8 @@ int main(void)
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.Bms1Error);
     	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ShuntError);
     	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.ShuntError);
+    	WriteCanDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.TransceiverError);
+    	WriteUartDataAtAddress(false,&MonitoredValues.TsacMonitoredValues.TransceiverError);
     	stateAMS=false;
     }
 
