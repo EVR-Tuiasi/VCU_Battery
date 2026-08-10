@@ -394,8 +394,19 @@ void readBieMieSe()
         		if(j==1)
         			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
         	}
-        	else if(buffPrimire[5 + 8 * j]==0xFF && buffPrimire[4 + 8 * j]) //no comms
+        	else if(buffPrimire[5 + 8 * j]==0xFF) //no comms
         	{
+        		if(j==0)
+        		{
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms0Error);
+        		}
+        		if(j==1)
+        		{
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
+        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.Bms1Error);
+        		}
+
         		WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
        	        WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         	}
@@ -423,10 +434,12 @@ void readBieMieSe()
         	{
         		if(useCAN_messaging)
         		{
+        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
         			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         		}
 				if(useUART_messaging)
         		{
+					WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
         	    	WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.TransceiverError);
         		}
         	}
