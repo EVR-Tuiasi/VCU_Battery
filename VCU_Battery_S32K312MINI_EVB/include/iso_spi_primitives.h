@@ -75,7 +75,7 @@ void parametriiPWM(int nrB);
 
 /** --- Getters (Returneaza valori calculate) --- **/
 int BmsGetPackCurrent(void);
-int BmsGetPackVoltage(void);
+uint32_t BmsGetPackVoltage(void);
 int BmsGetHighestCellVoltage(void);
 int BmsGetLowestCellVoltage(void);
 int getCelula(int index);

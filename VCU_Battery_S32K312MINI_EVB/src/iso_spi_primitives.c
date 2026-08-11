@@ -600,9 +600,12 @@ int BmsGetPackCurrent(void)
 * @brief          Getter pentru tensiunea pachetului.
 * @return         int Tensiunea pachetului.
 */
-int BmsGetPackVoltage(void)
+uint32_t BmsGetPackVoltage(void)
 {
-    return icBaterie.packVoltage;
+	if (icBaterie.packVoltage<0)
+		return 0u;
+	else
+		return (uint32_t)icBaterie.packVoltage;
 }
 
 /**

@@ -159,7 +159,7 @@ int main(void)
         	WriteCanDataAtAddress(BmsGetHighestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.HighestCellVoltage);
         	WriteCanDataAtAddress(BmsGetLowestCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.LowestCellVoltage);
         	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
-        	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
+        	WriteCanDataAtAddress((uint16_t)(BmsGetPackVoltage()/10u),&MonitoredValues.TsacMonitoredValues.OverallVoltage);
 
         	if(BmsGetLowestCellVoltage()/1000 < subtensiuneAMS)
         	{
