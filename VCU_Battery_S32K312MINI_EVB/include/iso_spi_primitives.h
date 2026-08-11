@@ -29,7 +29,7 @@
 #define UNDERVOLTAGE_CELL       350000   // *100mV => 3.5V
 #define OVERVOLTAGE_CELL        423000   // 4.23V
 
-#define MARELE_DELAY            400000   // Delay loop/comunicatie
+#define MARELE_DELAY            30000   // Delay loop/comunicatie
 
 /* -------------------------------------------------------------------------- */
 /* VALORI DE EROARE (STUPID)                       */
