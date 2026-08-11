@@ -161,6 +161,12 @@ int main(void)
         	WriteCanDataAtAddress(BmsGetOverallCellVoltage()/1000, &MonitoredValues.TsacMonitoredValues.MedianCellVoltage);
         	WriteCanDataAtAddress(BmsGetPackVoltage()/10,&MonitoredValues.TsacMonitoredValues.OverallVoltage);
 
+        	if(BmsGetLowestCellVoltage()/1000 < subtensiuneAMS)
+        	{
+        		WriteUartDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+        		WriteCanDataAtAddress(true,&MonitoredValues.TsacMonitoredValues.AmsError);
+        	}
+
         	if(BmsGetPackCurrent()/100>=0)
         	{
         		WriteCanDataAtAddress(BmsGetPackCurrent()/100,&MonitoredValues.TsacMonitoredValues.OverallCurrent);

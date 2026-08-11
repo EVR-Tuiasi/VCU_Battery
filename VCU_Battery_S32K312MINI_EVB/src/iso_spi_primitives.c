@@ -419,18 +419,7 @@ void readBieMieSe()
 
         if (i == 0)
         {
-        	if(buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE]==0x03)
-        	{
-        		if(useCAN_messaging)
-        		{
-        			WriteCanDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
-        		}
-        		if(useUART_messaging)
-        		{
-        			WriteUartDataAtAddress(true, &MonitoredValues.TsacMonitoredValues.ShuntError);
-        		}
-        	}
-        	if(buffPrimire[5 + 4 + 8 * NUMARUL_DE_MONITOARE]==0xFF)
+        	if(buffPrimire[6 + 4 + 8 * NUMARUL_DE_MONITOARE]==0xFF && buffPrimire[6 + 4 + 8 * NUMARUL_DE_MONITOARE]==0xFF)
         	{
         		if(useCAN_messaging)
         		{
@@ -451,7 +440,7 @@ void readBieMieSe()
             }
         }
         else if (i == 1) {
-            icBaterie.packVoltage = (buffPrimire[2 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) | buffPrimire[4 + 8 * NUMARUL_DE_MONITOARE];
+            icBaterie.packVoltage = (buffPrimire[2 + 4 + 8 * NUMARUL_DE_MONITOARE] << 16) | (buffPrimire[1 + 4 + 8 * NUMARUL_DE_MONITOARE] << 8) | buffPrimire[0 + 4 + 8 * NUMARUL_DE_MONITOARE];
             if (icBaterie.packVoltage & 0x800000) {
                 icBaterie.packVoltage |= 0xFF000000;
             } else {

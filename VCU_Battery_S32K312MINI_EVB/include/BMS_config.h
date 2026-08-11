@@ -15,3 +15,5 @@
 #define overTemperatura 6000 // 60C
 
 #define termistorTOLERANCE 6 // the numeber of termistors that can fail before AMS trigger
+
+#define subtensiuneAMS 250
