@@ -9,7 +9,7 @@
 #define underVoltageCelula 250000 //2,5V cf datasheet
 
 #define chargeVoltage 1008 //100,8V
-#define chargeCurrent 300 //30,0A din max 32A
+#define chargeCurrent 20 //30,0A din max 32A
 
 #define underTemperatura 1000 //10C
 #define overTemperatura 6000 // 60C

@@ -112,17 +112,17 @@ int main(void)
     if (useCAN_messaging)
     {
        	CanMessaging_Init();
-       	Can_43_FLEXCAN_SetBaudrate (0, 0); //1 mBaud
+       	//Can_43_FLEXCAN_SetBaudrate (0, 0); //1 mBaud
        	//CanMessaging_Test();  //intra in bucla lui Matei
     }
     if (useUART_messaging)
     {
-    	UartMessaging_Init();
+    	//UartMessaging_Init();
     	//UartMessaging_Test(); //pentru a verifica trimiterea tuturor datelor
     }
     if(useCHARGER)
     {
-    	Can_43_FLEXCAN_SetBaudrate (0, 1); //250 kBaud
+    	//Can_43_FLEXCAN_SetBaudrate (0, 1); //250 kBaud
     }
     TempSensorInit();
     initAMS();
