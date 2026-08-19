@@ -135,6 +135,8 @@ int main(void)
     	corectieValoriADC();
     	lookUPtemperaturi();
 
+
+
     	Bms_RESET();
     	bmsInit();
 

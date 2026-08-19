@@ -209,6 +209,14 @@ void corectieValoriADC(void)
 {
     // corecteaza valorile aberante, gasite empiric
     // TODO dovedit care exact sunt
+    for (int i = 0; i < THERMISTOR_BANKS; i++)
+    {
+        for (int j = 0; j < THERMISTORS_PER_BANK; j++)
+        {
+        	if(i==1 || i==10)
+				Thermistors_Data.ThermistorValues[i][j]=Thermistors_Data.ThermistorValues[i-1][j];
+        }
+    }
 	NIMIC
 }
 

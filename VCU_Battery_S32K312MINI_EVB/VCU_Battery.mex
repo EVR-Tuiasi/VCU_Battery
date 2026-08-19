@@ -703,11 +703,6 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
-            <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
-               <feature name="enabled" evaluation="equal">
-                  <data>true</data>
-               </feature>
-            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="board/Siul2_Port_Ip_Cfg.c" update_enabled="true"/>
@@ -3784,7 +3779,7 @@
                                  <setting name="CanCpuClockRefAlternate" value="/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_0/McuClockReferencePoint_0"/>
                                  <array name="CanControllerBaudrateConfig">
                                     <struct name="0">
-                                       <setting name="Name" value="CanControllerBaudrateConfig_2"/>
+                                       <setting name="Name" value="CanControllerBaudrateConfig_0"/>
                                        <setting name="CanBaudrateTypeSuport" value="NORMAL_CBT"/>
                                        <setting name="CanAdvancedSetting" value="true"/>
                                        <setting name="CanBusLength" value="10"/>
@@ -3792,44 +3787,8 @@
                                        <setting name="CanTxArbitrationStartDelay" value="12"/>
                                        <setting name="CanControllerPrescaller" value="3"/>
                                        <setting name="CanControllerPrescallerAlternate" value="10"/>
-                                       <setting name="CanControllerBaudRateConfigID" value="2"/>
-                                       <setting name="CanControllerBaudRate" value="1000"/>
-                                       <setting name="CanControllerSyncSeg" value="1"/>
-                                       <setting name="CanControllerPropSeg" value="5"/>
-                                       <setting name="CanControllerSeg1" value="5"/>
-                                       <setting name="CanControllerSeg2" value="6"/>
-                                       <setting name="CanControllerSyncJumpWidth" value="1"/>
-                                       <array name="CanControllerFdBaudrateConfig"/>
-                                    </struct>
-                                    <struct name="1">
-                                       <setting name="Name" value="CanControllerBaudrateConfig_0"/>
-                                       <setting name="CanBaudrateTypeSuport" value="NORMAL_CBT"/>
-                                       <setting name="CanAdvancedSetting" value="true"/>
-                                       <setting name="CanBusLength" value="10"/>
-                                       <setting name="CanPropDelayTranceiver" value="150"/>
-                                       <setting name="CanTxArbitrationStartDelay" value="12"/>
-                                       <setting name="CanControllerPrescaller" value="12"/>
-                                       <setting name="CanControllerPrescallerAlternate" value="10"/>
                                        <setting name="CanControllerBaudRateConfigID" value="0"/>
-                                       <setting name="CanControllerBaudRate" value="250"/>
-                                       <setting name="CanControllerSyncSeg" value="1"/>
-                                       <setting name="CanControllerPropSeg" value="5"/>
-                                       <setting name="CanControllerSeg1" value="5"/>
-                                       <setting name="CanControllerSeg2" value="5"/>
-                                       <setting name="CanControllerSyncJumpWidth" value="1"/>
-                                       <array name="CanControllerFdBaudrateConfig"/>
-                                    </struct>
-                                    <struct name="2">
-                                       <setting name="Name" value="CanControllerBaudrateConfig_1"/>
-                                       <setting name="CanBaudrateTypeSuport" value="NORMAL_CBT"/>
-                                       <setting name="CanAdvancedSetting" value="true"/>
-                                       <setting name="CanBusLength" value="10"/>
-                                       <setting name="CanPropDelayTranceiver" value="150"/>
-                                       <setting name="CanTxArbitrationStartDelay" value="12"/>
-                                       <setting name="CanControllerPrescaller" value="12"/>
-                                       <setting name="CanControllerPrescallerAlternate" value="10"/>
-                                       <setting name="CanControllerBaudRateConfigID" value="1"/>
-                                       <setting name="CanControllerBaudRate" value="250"/>
+                                       <setting name="CanControllerBaudRate" value="1000"/>
                                        <setting name="CanControllerSyncSeg" value="1"/>
                                        <setting name="CanControllerPropSeg" value="5"/>
                                        <setting name="CanControllerSeg1" value="5"/>
